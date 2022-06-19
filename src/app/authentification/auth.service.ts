@@ -12,7 +12,7 @@ import {TokenStorageService} from "./token.service";
 })
 export class AuthService {
 
-  constructor(private readonly http:HttpClient, private readonly tokenStorage : TokenStorageService) { }
+  constructor(private readonly http:HttpService, private readonly tokenStorage : TokenStorageService) { }
 
   /**
    * Permet l'authentification auprès du back-end.
@@ -21,7 +21,7 @@ export class AuthService {
    * @returns true si l'authentification s'est bien déroulée, false sinon.
    */
   login(login: any): Observable<any> {
-    return this.http.post(ApiUrlConst.AUTH + '/login',login);
+    return this.http.post<any>(GenericRequest.buildSendRequest(ApiUrlConst.AUTH + '/login',login));
   }
 
 }
