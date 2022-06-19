@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host --proxy-config ./src/environments/proxy.conf.json",
+    "start": "ng serve --configuration production",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "main" : "myapp.js",
+  "main" : "app.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
