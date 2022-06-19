@@ -2,9 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "../api/services/http/http.service";
 import {ApiUrlConst} from "../../environments/path/api-url-const";
 import {GenericRequest} from "../api/services/http/generic-request.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Vehicule} from "../api/models/Vehicule";
 import {TokenStorageService} from "./token.service";
 
 @Injectable({
