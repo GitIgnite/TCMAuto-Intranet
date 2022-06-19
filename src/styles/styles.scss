@@ -1,0 +1,122 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '/src/styles/variables';
+
+
+//Taille supérieur à 1200 px
+@media (max-width: 75rem) {
+  .body {
+    padding: 0rem 1rem;
+  }
+}
+
+//Taille supérieur à 1200 px
+@media (min-width: 75rem) {
+  .body {
+    padding: 0 1.5rem;
+  }
+}
+
+//Taille supérieur à 1440 px
+@media (min-width: 90rem) {
+  .body {
+    padding: 0 1.5rem;
+  }
+}
+
+html, body { height: 100%; width: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $is-white;}
+
+span > a:hover {
+  color : $primary-color !important;
+  border-bottom: 1px solid $primary-color;
+  border-radius: 33px;
+}
+
+//--------------------------------------------------------------
+//--------------------------- BUTTON ---------------------------
+//--------------------------------------------------------------
+button.mat-flat-button.mat-primary, button.mat-raised-button.mat-primary, button.mat-fab.mat-primary, button.mat-mini-fab.mat-primary {
+  background-color: $primary-color;
+}
+button.mat-primary {
+  background-color: $primary-color;
+}
+
+.mat-raised-button.btn-cancel {
+  margin-right: 15px;
+}
+
+.mat-icon {
+  color: $primary-color;
+}
+
+.mat-icon-button-enable {
+  color: $is-white;
+}
+
+.mat-icon-button-disabled {
+  color: $is-grey;
+}
+
+.mat-radio-group {
+  padding-bottom: 0.375rem;
+  margin: 0.219rem 0rem;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+//--------------------------------------------------------------
+//------------------------- FORM FIELD -------------------------
+//--------------------------------------------------------------
+mat-form-field{
+  color : $primary-color;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label{
+  color: $primary-color;
+}
+.mat-form-field-wrapper {
+  padding-bottom: 0.375rem;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: $primary-color;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: $primary-color;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: $primary-color;
+}
+
+.primary-color {
+  color: $primary-color;
+}
+
+.reset-button {
+  border: solid 1px $primary-color !important;
+  &:hover {
+    background-color: $is-grey-white;
+  }
+}
+mat-paginator {
+  background: none !important;
+}
+
+.header-card {
+  background-color: $primary-color;
+  color: white;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.footer-card {
+  background-color: $primary-color;
+  color: white;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}

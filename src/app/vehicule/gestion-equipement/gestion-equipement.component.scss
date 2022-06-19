@@ -1,0 +1,22 @@
+@import '/src/styles/variables';
+
+.bouton-equipement-group {
+  text-align: center;
+  border-radius: 0;
+}
+
+.mat-button-toggle-checked {
+  background-color: white;
+  border-bottom: solid;
+  border-bottom-color: $primary-color;
+}
+.mat-button-toggle-checked.mat-button-toggle-appearance-standard{
+  color: $primary-color;
+  font-weight: 500;
+}
+.mat-button-toggle-standalone.mat-button-toggle-appearance-standard, .mat-button-toggle-group-appearance-standard {
+  border: none;
+}
+.mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
+  border-left: none;
+}

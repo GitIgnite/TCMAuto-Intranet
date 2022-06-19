@@ -1,0 +1,9 @@
+<div fxLayout="row" class="snack-container d-flex justify-content-between">
+    <div class="d-flex align-items-center">
+        <mat-icon class="mr-1">{{getIcon()}}</mat-icon>
+        <span>{{data.message}}</span>
+    </div>
+    <button mat-button class="d-flex align-items-center" type="button" *ngIf="data.action" (click)="clear()">
+        {{data.action}}
+    </button>
+</div>

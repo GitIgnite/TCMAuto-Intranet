@@ -1,0 +1,42 @@
+@import "/src/styles/variables";
+
+.mat-card-result {
+  background-color: white;
+  border-top: solid 0.2rem $primary-color;
+  border-bottom: solid 0.2rem $primary-color;
+  margin-left: auto;
+  margin-right: auto;
+  width: 98%;
+  padding: 0;
+  &:hover {
+    background-color: $is-grey-white;
+    cursor: pointer;
+  }
+}
+.header-vehicule-card {
+  height: 60%;
+}
+.image-vehicule {
+  width: 100%;
+}
+
+.mat-card-titre {
+  height: 100%;
+  padding: 2rem 1rem;
+}
+
+.titre-vehicule {
+  font-size: 1.2rem;
+  color: $primary-color;
+  font-weight: bold;
+}
+
+.sous-titre-vehicule {
+  font-size: 0.8rem;
+  color: grey;
+}
+.prix-vehicule {
+  font-size: 1.2rem;
+  border: 1px solid $primary-color;
+  padding: 1rem;
+}

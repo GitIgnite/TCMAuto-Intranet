@@ -1,0 +1,103 @@
+@import '/src/styles/variables';
+
+//Taille inférieur à 760 px
+@media (max-width: 47.5rem) {
+  .menu {
+    display: none;
+  }
+  img {
+    height: 3.125rem;
+  }
+}
+
+//Taille inférieur à 320 px
+@media (max-width: 20rem) {
+  img {
+    height: 2.5rem;
+  }
+}
+
+//Taille supérieur à 760 px
+@media (min-width: 47.5rem) {
+  .burger{
+    display: none;
+  }
+  img {
+    height: 3.125rem;
+  }
+}
+
+//Taille supérieur à 1200 px
+@media (min-width: 75rem) {
+  mat-toolbar {
+    padding: 0 1.5rem;
+  }
+}
+
+//Taille supérieur à 1440 px
+@media (min-width: 90rem) {
+  mat-toolbar {
+    padding: 0 1.5rem;
+  }
+}
+
+mat-toolbar {
+
+  background-color: $primary-color;
+  color:$is-white;
+  overflow: hidden;
+
+  .menuList {
+    display: flex;
+    font-size: 1.125rem;
+    align-items: center;
+
+    button {
+      padding: 0rem 0.938rem;
+    }
+  }
+
+  .icon-circle {
+    padding-top: 0.313rem;
+  }
+
+  .icon-circle:hover > button {
+    color: $primary-color;
+  }
+  span {
+    padding: 0rem 0.938rem;
+  }
+
+  button{
+    border: none;
+    color:$is-white;
+  }
+
+  a {
+    cursor: pointer;
+    text-decoration: none;
+    color:$is-white;
+  }
+
+  .icon-Profile-space {
+    flex: 1 1 auto;
+  }
+}
+.logo {
+  padding: 0.375rem 0.375rem 0.375rem;
+  position: relative;
+  align-self: center;
+
+  border-bottom: 2px solid $primary-color;
+  border-left: 2px solid $primary-color;
+  border-radius: 33px;
+}
+
+.logo:hover {
+  border-bottom: 2px solid $is-white;
+  border-left: 2px solid $is-white;
+  border-radius: 33px;
+}
+.mat-icon {
+  color: $is-white;
+}

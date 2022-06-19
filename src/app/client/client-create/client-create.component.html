@@ -1,0 +1,90 @@
+<form class="container" [formGroup]="createClientForm" (ngSubmit)="createClient()">
+  <mat-card class="p-0">
+    <h4 class="col-12 d-flex align-items-center px-2">
+      <span>
+        Création d'un client
+      </span>
+    </h4>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-4 px-4 pb-2">
+      <!-- NOM PRENOM -->
+      <div class="row">
+        <mat-form-field class="col-4">
+          <mat-label>NOM</mat-label>
+          <input matInput formControlName="{{clientFormKeys.NOM}}" type="text" class="text-uppercase">
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>PRÉNOM</mat-label>
+          <input matInput formControlName="{{clientFormKeys.PRENOM}}" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-4" appearance="fill">
+          <mat-label>Date de naissance</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="{{clientFormKeys.DATE_NAISSANCE}}">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <!-- COORDONNEES -->
+      <div class="row">
+        <mat-form-field class="col-6">
+          <mat-label>TÉLÉPHONE</mat-label>
+          <input matInput formControlName="{{clientFormKeys.TELEPHONE}}" type="text" [maxLength]="10">
+          <mat-error *ngIf="createClientForm?.get(clientFormKeys.TELEPHONE)?.hasError('pattern')">
+            {{messageErrorKeys.ERROR_CLIENT_TEL_PATTERN}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <mat-label>EMAIL</mat-label>
+          <input matInput formControlName="{{clientFormKeys.EMAIL}}" type="text" [maxLength]="150">
+          <mat-error *ngIf="createClientForm?.get(clientFormKeys.EMAIL)?.hasError('pattern')">
+            {{messageErrorKeys.ERROR_CLIENT_EMAIL_PATTERN}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- ADRESSE -->
+      <div class="row">
+<!--        TODO : TEST AUTO COMPLETE ADRESSE-->
+<!--        <mat-form-field class="example-full-width" appearance="fill">-->
+<!--          <mat-label>Adresse</mat-label>-->
+<!--          <input type="text" matInput formControlName="{{clientFormKeys.ADRESSE}}" [matAutocomplete]="auto">-->
+<!--          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" (optionSelected)="selectValue($event)">-->
+<!--            <mat-option *ngFor="let option of filteredOptions | async" [value]="option.rue">-->
+<!--              {{option.adresse}}-->
+<!--            </mat-option>-->
+<!--          </mat-autocomplete>-->
+<!--        </mat-form-field>-->
+        <mat-form-field class="col-6">
+          <input matInput formControlName="{{clientFormKeys.ADRESSE}}" placeholder="ADRESSE" type="text" [maxLength]="150">
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <input matInput formControlName="{{clientFormKeys.CODEPOSTAL}}" placeholder="CODE POSTAL" type="text" [maxLength]="5">
+          <mat-error *ngIf="createClientForm?.get(clientFormKeys.CODEPOSTAL)?.hasError('pattern')">
+            {{messageErrorKeys.ERROR_CLIENT_CODEPOSTAL_PATTERN}}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-6">
+          <input matInput formControlName="{{clientFormKeys.VILLE}}" placeholder="VILLE" type="text" class="text-uppercase">
+        </mat-form-field>
+      </div>
+      <div class="button-row col-12 d-flex justify-content-end mb-1 pr-2">
+        <button mat-raised-button
+                color="secondary"
+                type="button"
+                class="d-flex align-items-center btn-cancel" (click)="cancelCreationClient()">
+          Annuler
+        </button>
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                class="d-flex align-items-center"
+                [disabled]="createClientForm?.invalid">
+          Sauvegarder
+          <mat-icon class="button-icon ml-1" [ngClass]="createClientForm?.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</form>

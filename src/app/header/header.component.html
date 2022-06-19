@@ -1,0 +1,90 @@
+<mat-toolbar>
+  <a href="/" class="logo">
+    <img alt="TCM Logo" src="/assets/images/tcmauto.png">
+  </a>
+
+  <nav>
+    <div class="menu">
+      <div class="menuList">
+        <span><a [routerLink]="'/client'">Clients</a></span>
+        <span><a [routerLink]="'/vehicule'">Véhicules</a></span>
+        <span><a href="/">Factures</a></span>
+        <div>
+          <div class="icon-circle">
+            <button mat-icon-button [matMenuTriggerFor]="menuAjout" aria-label="Icon plus">
+              <mat-icon>add_circle_outline</mat-icon>
+              <mat-icon>expand_more</mat-icon>
+            </button>
+          </div>
+
+          <mat-menu class= "menu-ajout" #menuAjout="matMenu" [overlapTrigger]="false">
+            <button mat-menu-item (click)="openCreateClientDialog()">
+              Ajout d'un client
+            </button>
+            <button mat-menu-item (click)="openCreateVehiculeDialog()">
+              Ajout d'un véhicule
+            </button>
+            <button mat-menu-item>
+              Ajout d'une facture
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div>
+    <button mat-icon-button [matMenuTriggerFor]="menu" class="burger" aria-label="Icon burger">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [matMenuTriggerFor]="menuClient">
+        Clients
+      </button>
+      <mat-menu #menuClient="matMenu">
+        <button mat-menu-item>
+          Ajout d'un client
+        </button>
+      </mat-menu>
+      <button mat-menu-item [matMenuTriggerFor]="menuVehicule">
+        Véhicules
+      </button>
+      <mat-menu #menuVehicule="matMenu">
+        <button mat-menu-item>
+          Ajout d'un véhicule
+        </button>
+      </mat-menu>
+      <button mat-menu-item [matMenuTriggerFor]="menuFacture">
+        Factures
+      </button>
+      <mat-menu #menuFacture="matMenu">
+        <button mat-menu-item>
+          Ajout d'une facture
+        </button>
+      </mat-menu>
+    </mat-menu>
+  </div>
+
+
+  <span class="icon-Profile-space"></span>
+  <div>
+    <button mat-icon-button aria-label="Icon person" [matMenuTriggerFor]="menuProfil">
+      <mat-icon>person</mat-icon>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
+
+  <mat-menu class= "menu-profil" #menuProfil="matMenu" [overlapTrigger]="false">
+    <button *ngIf="!this.userConnected?.username" mat-menu-item (click)="login()">
+      Se connecter
+    </button>
+    <button *ngIf="this.userConnected?.username" mat-menu-item >
+      {{ this.userConnected?.username }}
+    </button>
+    <button *ngIf="this.userConnected?.username" mat-menu-item (click)="deconnexion()">
+      Se déconnecter
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
+

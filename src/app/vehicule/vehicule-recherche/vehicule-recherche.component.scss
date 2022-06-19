@@ -1,0 +1,14 @@
+@import '/src/styles/variables';
+
+.tri-button {
+  border : solid 0.01rem $primary-color;
+  border-radius : 0.3rem;
+}
+
+.display-component {
+  visibility: visible;
+}
+
+.hide-component {
+  visibility: hidden;
+}

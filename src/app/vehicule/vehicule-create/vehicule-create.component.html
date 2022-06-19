@@ -1,0 +1,264 @@
+<form class="container" [formGroup]="createVehiculeForm" (ngSubmit)="createVehicule()">
+    <h2>
+        Nouveau véhicule
+    </h2>
+    <mat-dialog-content>
+      <div class="row" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+        <span>Contrat</span>
+        <mat-radio-group name="opContratList" formControlName="{{vehiculeFormKey.CONTRAT}}" aria-label="Select an option">
+          <mat-radio-button *ngFor="let contrat of contratEnum | keyvalue; let i = index" [value]="contrat.value" [checked]="isContratSelected(contrat.value)" name="opContratList" >{{ contrat.value}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Vendeur</mat-label>
+          <mat-select formControlName="{{vehiculeFormKey.VENDEUR}}" placeholder="Selectionner un vendeur">
+            <mat-option *ngFor="let client of clients" [value]="client">
+              <strong>{{(client.nom).toUpperCase()}}</strong> {{client.prenom}}({{client.codePostal}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row" *ngIf="isVehiculeToEdit">
+        <mat-form-field formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Acheteur</mat-label>
+          <mat-select formControlName="{{mandatFormKey.ACHETEUR}}" placeholder="Selectionner un acheteur">
+            <mat-option *ngFor="let client of clients" [value]="client">
+              <strong>{{(client.nom).toUpperCase()}}</strong> {{client.prenom}}({{client.codePostal}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Date de signature du mandat</mat-label>
+          <input matInput formControlName="{{mandatFormKey.DATE_SIGNATURE_MANDAT}}" type="date">
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Lieu de signature du mandat</mat-label>
+          <input matInput formControlName="{{mandatFormKey.LIEU_SIGNATURE}}" type="text">
+        </mat-form-field>
+      </div>
+
+      <div class="row" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+        <mat-form-field class="col-4">
+          <mat-label>Prix de vente du véhicule</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.PRIX_VENTE}}" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>Prix de vente marché constaté</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.PRIX_VENTE_MARCHE}}" type="number">
+        </mat-form-field>
+        <mat-form-field class="col-4">
+          <mat-label>Barème de prix intermédiation</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.BAREME_PRIX_INTERMEDIAIRE}}" type="number">
+        </mat-form-field>
+      </div>
+
+      <div class="row" *ngIf="isVehiculeToEdit" formGroupName="{{vehiculeFormKey.MANDAT}}">
+        <span>Qui est facturé de l'intermédiation</span>
+        <mat-radio-group name="opClientFactureEnum" formControlName="{{mandatFormKey.CLIENT_FACTURE}}" aria-label="Select an option">
+          <mat-radio-button *ngFor="let factureIntermediation of factureIntermediationEnum | keyvalue" [value]="factureIntermediation.value" [checked]="isFactureIntermediationSelected(factureIntermediation.value)" name="opClientFactureEnum" >{{ factureIntermediation.value}}</mat-radio-button>
+        </mat-radio-group>
+      </div>
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Km à l'entrée du véhicule en mandat</mat-label>
+          <input matInput formControlName="{{mandatFormKey.KM_ENTREE_MANDAT}}" type="number">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Origine du mandat</mat-label>
+          <input matInput formControlName="{{mandatFormKey.ORIGINE_MANDAT}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Marques de voiture</mat-label>
+          <mat-select (valueChange)="getModeleByMarque($event)" formControlName="{{vehiculeFormKey.MARQUE_VEHICULE}}">
+            <mat-option *ngFor="let marque of marques" [value]="marque">
+              {{marque.libelle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Modèle</mat-label>
+          <mat-select formControlName="{{vehiculeFormKey.MODELE_VEHICULE}}">
+            <mat-option *ngFor="let modele of modeles" [value]="modele">
+              {{modele.libelle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Version</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.VERSION}}" type="text">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Catégorie</mat-label>
+          <mat-select formControlName="{{vehiculeFormKey.CATEGORIE}}">
+            <mat-option *ngFor="let categorie of categories" [value]="categorie" >
+              {{categorie.libelle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Boîte de vitesse</mat-label>
+          <mat-select formControlName="{{vehiculeFormKey.BOITE_VITESSE}}">
+            <mat-option *ngFor="let boiteVitesse of boiteVitesseEnum | keyvalue" [value]="boiteVitesse.value" >
+              {{boiteVitesse.value}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Nombre de vitesses</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey. NB_VITESSE}}" type="number">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Energie</mat-label>
+          <mat-select formControlName="{{vehiculeFormKey.ENERGIE}}">
+            <mat-option *ngFor="let energie of energies" [value]="energie" >
+              {{energie.libelle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Immatriculation</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.IMMATRICULATION}}" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Numéro de série</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.NUMERO_SERIE}}" type="text">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Km</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.KILOMETRAGE}}" type="number">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Origine du véhicule</mat-label>
+          <mat-select (valueChange)="getModeleByMarque($event)" formControlName="{{vehiculeFormKey.ORIGINE}}">
+            <mat-option *ngFor="let marque of marques" [value]="marque">
+              {{marque.libelle}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Nombre de portes</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.NB_PORTE}}" type="text">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Emission de CO2</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.CO2}}" type="nummber">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Date de mise ne circulation</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.DATE_MISE_CIRCULATION}}" type="date">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Puissance fiscale</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.PUISSANCE_FISCALE}}" type="nummber">
+        </mat-form-field>
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Puissance réelle</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.PUISSANCE_REEL}}" type="nummber">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Couleur intérieur</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.COULEUR_INT}}" type="text">
+        </mat-form-field>
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Couleur intérieur détail</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.COULEUR_INT_DETAIL}}" type="text">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Couleur extérieur</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.COULEUR_EXT}}" type="text">
+        </mat-form-field>
+        <mat-form-field *ngIf="isVehiculeToEdit" class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Couleur extérieur détail</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.COULEUR_EXT_DETAIL}}" type="text">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <!-- FormControlName à ajouter -->
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Nombre de mains</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.NB_MAIN}}" type="number">
+        </mat-form-field>
+        <!-- FormControlName à ajouter -->
+        <mat-form-field class="col-6" formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Nombre de places</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.NB_PLACE}}" type="number">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <!-- FormControlName à ajouter -->
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Type garantie 1</mat-label>
+          <input matInput formControlName="{{mandatFormKey.GARANTIE_1}}" type="text">
+        </mat-form-field>
+        <!-- FormControlName à ajouter -->
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Durée garantie 1</mat-label>
+          <input matInput formControlName="{{mandatFormKey.DUREE_GARANTIE_1}}" type="text">
+        </mat-form-field>
+        <!-- FormControlName à ajouter -->
+        <mat-form-field class="col-4" formGroupName="{{vehiculeFormKey.MANDAT}}">
+          <mat-label>Garantie 2</mat-label>
+          <input matInput formControlName="{{mandatFormKey.GARANTIE_2}}" type="text">
+        </mat-form-field>
+      </div>
+      <div *ngIf="isVehiculeToEdit" class="row">
+        <mat-form-field formGroupName="{{vehiculeFormKey.VEHICULE}}">
+          <mat-label>Pneus</mat-label>
+          <input matInput formControlName="{{vehiculeFormKey.PNEU}}" type="text">
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
+      <button mat-raised-button
+              color="secondary"
+              type="button"
+              class="d-flex align-items-center btn-cancel" (click)="annulerCreationVehicule()">
+        Annuler
+      </button>
+      <button mat-raised-button
+              color="primary"
+              type="submit"
+              class="d-flex align-items-center"
+              [disabled]="createVehiculeForm?.invalid">
+        Sauvegarder
+        <mat-icon class="button-icon ml-1" [ngClass]="createVehiculeForm?.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
+      </button>
+    </mat-dialog-actions>
+</form>

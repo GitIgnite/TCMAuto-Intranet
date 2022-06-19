@@ -1,0 +1,18 @@
+<form [formGroup]="createEquipementForm">
+  <div class="row mt-4">
+    <mat-form-field class="col-3">
+      <mat-select class="col-3" placeholder="Groupe d'équipement"
+        formControlName="{{equipementFormKey.GROUPE_EQUIPEMENT}}">
+        <mat-option *ngFor="let groupeEquipement of groupeEquipements" [value]="groupeEquipement">
+          {{groupeEquipement.libelle}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-7">
+      <input matInput type="text" placeholder="Nom de l'équipement" formControlName="{{equipementFormKey.LIBELLE}}">
+    </mat-form-field>
+    <button class="col-2 BoutonAjoutEquipement" mat-button type="button" (click)="createEquipement()">
+      Ajouter
+    </button>
+  </div>
+</form>

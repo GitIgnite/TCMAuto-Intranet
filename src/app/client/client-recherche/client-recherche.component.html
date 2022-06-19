@@ -1,0 +1,84 @@
+<mat-card class="p-0 mt-4">
+  <h4 class="col-12 d-flex align-items-center px-2">
+    <span>
+      Recherche
+    </span>
+  </h4>
+  <mat-divider></mat-divider>
+  <mat-card-content class="pt-4 px-4 pb-2">
+    <form [formGroup]="rechercheClientForm" (ngSubmit)="getClientsByRecherche()">
+      <div class="row">
+        <div class="col-3">
+          <mat-form-field class="w-100">
+            <mat-label>NOM</mat-label>
+            <input matInput formControlName="{{clientFormKeys.NOM}}" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-3">
+          <mat-form-field class="w-100">
+            <mat-label>PRÉNOM</mat-label>
+            <input matInput formControlName="{{clientFormKeys.PRENOM}}" type="text">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="button-row col-10 d-flex justify-content-end mb-1 pr-2">
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                class="d-flex align-items-center"
+                [disabled]="rechercheClientForm?.invalid">
+          Rechercher
+          <mat-icon class="button-icon ml-1" matSuffix>search</mat-icon>
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+<div >
+  <mat-paginator [length]="length"
+                 [pageSize]="pageSize"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [showFirstLastButtons]="true"
+                 (page)="majPaginatorRecherche($event)">
+  </mat-paginator>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort (matSortChange)="sort($event)">
+    <!-- Nom -->
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+      <td mat-cell *matCellDef="let element"> {{element.nom | uppercase}} {{element.prenom | titlecase}}</td>
+    </ng-container>
+
+    <!-- Numéro téléphone -->
+    <ng-container matColumnDef="telephone">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Telephone </th>
+      <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+    </ng-container>
+    <!-- Email -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- Action -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button aria-label="Modifier" (click) = "editClient(element)">
+          <mat-icon class="button-icon ml-1" matSuffix>edit</mat-icon>
+        </button>
+        <button mat-button (click)="openUpdateNote(element)">
+          <span class="material-icons">sticky_note_2</span>
+        </button>
+        <button mat-icon-button aria-label="Supprimer">
+          <mat-icon class="button-icon ml-1" matSuffix>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+

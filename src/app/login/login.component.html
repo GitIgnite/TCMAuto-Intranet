@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="card card-container">
+    <form class="container" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Login</mat-label>
+            <input matInput formControlName="{{loginFormKey.USERNAME}}" type="text">
+          </mat-form-field>
+        </div>
+        <div class="row">
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input matInput formControlName="{{loginFormKey.PASSWORD}}" type="password">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group">
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                class="d-flex align-items-center"
+                [disabled]="loginForm?.invalid">
+          Se connecter
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

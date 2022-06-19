@@ -1,0 +1,140 @@
+<form class="" [formGroup]="rechercheVehiculeForm">
+  <mat-card class="p-0 mt-4">
+    <h4 class="col-12 d-flex align-items-center px-2">
+      <span>
+        Recherche
+      </span>
+    </h4>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-4 px-4 pb-2">
+      <form [formGroup]="rechercheVehiculeForm" (ngSubmit)="getVehiculesByRecherche()">
+        <div class="row">
+          <mat-form-field class="col-3">
+            <mat-label>Marques de voiture</mat-label>
+            <mat-select formControlName="{{vehiculeFormKey.MARQUE_VEHICULE}}">
+              <mat-option [value]="null">
+                -
+              </mat-option>
+              <mat-option *ngFor="let marque of marques" [value]="marque.id">
+                {{marque.libelle}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Modèles de voiture</mat-label>
+            <mat-select formControlName="{{vehiculeFormKey.MODELE_VEHICULE}}">
+              <mat-option [value]="null">
+                -
+              </mat-option>
+              <mat-option *ngFor="let modele of modeles" [value]="modele.id">
+                {{modele.libelle}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="col-3">
+            <mat-label>Catégorie</mat-label>
+            <mat-select formControlName="{{vehiculeFormKey.CATEGORIE}}">
+              <mat-option [value]="null">
+                -
+              </mat-option>
+              <mat-option *ngFor="let categorie of categories" [value]="categorie.id">
+                {{categorie.libelle}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-3">
+            <mat-label>Energie</mat-label>
+            <mat-select formControlName="{{vehiculeFormKey.ENERGIE}}">
+              <mat-option [value]="null">
+                -
+              </mat-option>
+              <mat-option *ngFor="let energie of energies" [value]="energie.id">
+                {{energie.libelle}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Boîte de vitesse</mat-label>
+            <mat-select formControlName="{{vehiculeFormKey.BOITE_VITESSE}}">
+              <mat-option [value]="null">
+                -
+              </mat-option>
+              <mat-option *ngFor="let boiteVitesse of boiteVitesseEnum | keyvalue" [value]="boiteVitesse">
+                {{boiteVitesse.value}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <mat-form-field class="col-3">
+            <mat-label>Prix minimum</mat-label>
+            <input matInput formControlName="{{vehiculeFormKey.PRIX_MIN}}" type="number">
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Prix maximum</mat-label>
+            <input matInput formControlName="{{vehiculeFormKey.PRIX_MAX}}" type="number">
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Km minimum</mat-label>
+            <input matInput formControlName="{{vehiculeFormKey.KILOMETRAGE_MIN}}" type="number">
+          </mat-form-field>
+          <mat-form-field class="col-3">
+            <mat-label>Km maximum</mat-label>
+            <input matInput formControlName="{{vehiculeFormKey.KILOMETRAGE_MAX}}" type="number">
+          </mat-form-field>
+        </div>
+        <div class="row d-flex justify-content-end mb-1">
+          <div class="col-2">
+            <button mat-raised-button
+                    color="secondary"
+                    class="w-100 reset-button" (click)="reinitialiserChamps()" type="button">
+              Réinitialiser
+              <mat-icon class="" matSuffix>delete</mat-icon>
+            </button>
+          </div>
+          <div class="col-2">
+            <button mat-raised-button
+                    color="primary"
+                    type="submit"
+                    class="w-100">
+              Rechercher
+              <mat-icon class="text-white" matSuffix>search</mat-icon>
+            </button>
+          </div>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</form>
+<div class="">
+  <div class="row m-auto align-items-center">
+    <div class="col-6" [ngClass]="!afficherDetail ? 'display-component': 'hide-component'" matSort (matSortChange)="sort($event)">
+      Tri par :
+      <button class="tri-button">
+        <button class="mat-button" mat-sort-header="prixVente">Prix</button>
+        <button class="mat-button" mat-sort-header="kilometrage">Km</button>
+        <button class="mat-button" mat-sort-header="dateMiseCirculation">Date mise en circulation</button>
+      </button>
+    </div>
+      <mat-paginator [ngClass]="!afficherDetail ? 'display-component': 'hide-component'" class="col-6" [length]="length"
+                     [pageSize]="pageSize"
+                     [pageIndex]="pageIndex"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [showFirstLastButtons]="true"
+                     (page)="majPaginatorRecherche($event)">
+      </mat-paginator>
+  </div>
+
+  <app-resultat-recherche *ngIf="!afficherDetail" [vehicules]=vehicules (afficherDetailEmit)="afficherDetailVehicule($event)">
+  </app-resultat-recherche>
+
+  <app-vehicule-detail *ngIf="afficherDetail" [vehicule]="vehiculeDetail" (cacherDetailEmit)="afficherDetail = false">
+  </app-vehicule-detail>
+</div>
+

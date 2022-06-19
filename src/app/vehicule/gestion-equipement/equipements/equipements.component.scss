@@ -1,0 +1,24 @@
+@import '/src/styles/variables';
+
+
+.mat-button-toggle-checked {
+  background-color: $primary-color;
+  color: $is-white;
+}
+
+mat-button-toggle-group {
+  height: 30px;
+  margin: 2px;
+  border-color: $is-white;
+}
+
+mat-button-toggle {
+  background-color: $is-white;
+  border-radius: 4px;
+  border: solid 1px ;
+}
+
+::ng-deep .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+  line-height: 0px;
+  padding: 12px 10px 10px 10px;
+}

@@ -1,0 +1,42 @@
+export class VehiculeFormKey {
+  public static readonly MODELE_VEHICULE = 'modele';
+  public static readonly MARQUE_VEHICULE = 'marque';
+  public static readonly VENDEUR = 'client';
+  public static readonly PRIX_MIN = 'prixMin';
+  public static readonly PRIX_MAX = 'prixMax';
+  public static readonly PRIX_VENTE = 'prixVente';
+  public static readonly PRIX_VENTE_MARCHE = 'prixVenteMarche';
+  public static readonly BAREME_PRIX_INTERMEDIAIRE = 'baremePrixIntermediation';
+  public static readonly KILOMETRAGE = 'kilometrage';
+  public static readonly KILOMETRAGE_MIN = 'kmMin';
+  public static readonly KILOMETRAGE_MAX = 'kmMax';
+  public static readonly VERSION = 'versionVehicule';
+  public static readonly IMMATRICULATION = 'immatriculation';
+  public static readonly NUMERO_SERIE = 'numeroSerie';
+  public static readonly DATE_MISE_CIRCULATION = 'dateMiseCirculation';
+  public static readonly ANNEE_DEPUIS = 'anneeDepuis';
+  public static readonly ANNEE_JUSQUA = 'anneeJusqua';
+  public static readonly REGION = 'region';
+  public static readonly REFERENCE_ANNONCE = 'referenceAnnonce';
+  public static readonly CONTRAT = 'contrat';
+  public static readonly CATEGORIE = 'categorie';
+  public static readonly BOITE_VITESSE = 'boiteVitesse';
+  public static readonly NB_VITESSE = 'nbVitesse';
+  public static readonly COULEUR_INT = 'couleurInt';
+  public static readonly COULEUR_EXT = 'couleurExt';
+  public static readonly COULEUR_INT_DETAIL = 'couleurIntDetail';
+  public static readonly COULEUR_EXT_DETAIL = 'couleurExtDetail';
+  public static readonly CO2 = 'co2';
+  public static readonly NB_PORTE = 'nbPorte';
+  public static readonly NB_MAIN = 'nbMain';
+  public static readonly PNEU = 'pneu';
+  public static readonly ENERGIE = 'energie';
+  public static readonly ORIGINE = 'Origine';
+  public static readonly PUISSANCE_FISCALE = 'puissanceFiscale';
+  public static readonly PUISSANCE_REEL = 'puissanceReel';
+  public static readonly NB_PLACE = 'nbPlace';
+  public static readonly SEPT_PLACE = 'septPlace';
+  public static readonly VEHICULE = 'vehicule';
+  public static readonly MANDAT = 'mandat';
+
+}

@@ -1,0 +1,7 @@
+<div *ngFor="let groupeEquipement of groupeEquipements">
+  <h4 class="mb-2 mt-3"><strong>{{groupeEquipement.libelle}}</strong></h4>
+  <mat-button-toggle-group *ngFor="let equipement of groupeEquipement.equipements" class="bouton-equipement-liste"
+                           name="EquipementListe" aria-label="EquipementList" multiple>
+    <mat-button-toggle [checked]="this.initEquipementCheck(equipement)" (change)="gestionEquipementDuVehicule($event, equipement)" value={{equipement.id}}>{{equipement.libelle}}</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
