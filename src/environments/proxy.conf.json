@@ -1,6 +1,6 @@
 {
   "/tcmauto": {
-    "target": "http://tcmauto-api.cleverapps.io",
+    "target": "localhost:8080",
     "secure": false,
     "logLevel": "debug"
   }

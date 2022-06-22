@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --open --host 0.0.0.0 --configuration production",
+    "start": "ng build && angular-http-server --path dist/TCMAuto-INTRANET",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
-  "main" : "main.js",
+  "main" : "app.js",
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.0",
