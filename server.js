@@ -7,7 +7,7 @@ const _app_folder = 'dist/TCMAuto-INTRANET';
 
 const app = express();
 
-const port = process.env.PORT || 8081
+const port = process.env.PORT || 8080
 
 // ---- SERVE STATIC FILES ---- //
 console.log("server : "+app)
