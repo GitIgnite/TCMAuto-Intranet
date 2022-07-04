@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve --host --proxy-config ./src/environments/proxy.conf.json",
     "build": "ng build",
     "build-prod": "ng build --prod",
     "watch": "ng build --watch --configuration development",
