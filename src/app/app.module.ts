@@ -35,7 +35,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatSortModule } from "@angular/material/sort";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
-import { DatePipe } from "@angular/common";
+import {DatePipe, HashLocationStrategy, LocationStrategy} from "@angular/common";
 import { VehiculeService } from './api/services/vehicule.service';
 import { GestionEquipementComponent } from './vehicule/gestion-equipement/gestion-equipement.component';
 import { CategorieService } from "./api/services/categorie.service";
@@ -113,7 +113,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatButtonToggleModule,
     MatCardModule
   ],
-    providers: [AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: appearance
   },
