@@ -12,9 +12,10 @@ const port = process.env.PORT || 8080
 console.log("server : "+app)
 console.log("server.server : "+app.server)
 
-app.use('/', express.static(_app_folder));
-
 app.get('/', function (req, res) {
   res.redirect('https://' + req.get('host') + req.url);
 })
+// app.use('/', express.static(_app_folder));
+
+
 app.listen(port, () => { console.log("app is started and listening port : ", process.env.HOST)})
