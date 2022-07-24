@@ -30,8 +30,11 @@ export class VehiculeService {
     return this.http.get(GenericRequest.buildSearchRequest(url, pageIndex, pageSize, vehiculeSearchFormDatas, sort));
   }
 
-  public updateVehicule(id: string, mapUpdate: any): Observable<Vehicule> {
-    const url = `${this.urlVehicule}/${id}`;
-    return this.http.patch<Vehicule>(GenericRequest.buildSendRequest(url,mapUpdate));
+  public updateVehicule(id: string | undefined, mapUpdate: any): Observable<Vehicule> {
+    if(id) {
+      const url = `${this.urlVehicule}/${id}`;
+      return this.http.patch<Vehicule>(GenericRequest.buildSendRequest(url,mapUpdate));
+    }
+    return new Observable<Vehicule>();
   }
 }
