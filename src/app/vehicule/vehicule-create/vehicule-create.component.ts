@@ -42,6 +42,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
   pays : any [] = [];
   factureIntermediationSelected = FactureIntermediationEnum.ACHETEUR;
   contratSelected = ContratEnum.INTERMEDIATION;
+  $editOrSaveObs: Observable<any> = new Subject();
 
   //Enum
   contratEnum = ContratEnum;
@@ -65,6 +66,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if(this.data && this.data.vehicule) {
       this.vehiculeToEdit = this.data.vehicule;
+      console.log("init edit vehicule")
       if(this.vehiculeToEdit && this.vehiculeToEdit.id) {
         this.$mandatObs =  this.mandatService.getMandatByVehicule(this.vehiculeToEdit.id);
       }
@@ -236,7 +238,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
 
   }
 
-  createVehicule(): void {
+  createOrEditVehicule(): void {
     let vehicule : Vehicule = this.createVehiculeForm?.get(VehiculeFormKey.VEHICULE)?.value;
     let mandat: Mandat = this.createVehiculeForm?.get(VehiculeFormKey.MANDAT)?.value;
 
@@ -244,9 +246,12 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
 
     if(this.vehiculeToEdit) {
       vehicule.id = this.vehiculeToEdit.id;
+      mandat.id = this.mandatToEdit.id;
       type = 'EDIT';
+      this.$editOrSaveObs = this.vehiculeService.createVehicule(vehicule);
     } else {
       type = 'SAVE';
+      this.$editOrSaveObs = this.vehiculeService.createVehicule(vehicule);
     }
 
     this.vehiculeService.createVehicule(vehicule).pipe(
