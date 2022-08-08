@@ -114,11 +114,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatButtonToggleModule,
     MatCardModule
   ],
-    providers: [{
-      provide: HTTP_INTERCEPTORS,
-      useClass: APIInterceptor,
-      multi: true,
-    },{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: appearance
   },
