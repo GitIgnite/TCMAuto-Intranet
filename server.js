@@ -1,6 +1,5 @@
 "use strict";
 const express = require("express");
-const compression = require("compression");
 
 // const _port = 4200;
 const _app_folder = 'dist/TCMAuto-INTRANET';
