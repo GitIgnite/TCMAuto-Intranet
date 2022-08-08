@@ -15,6 +15,7 @@ export class AuthInterceptor implements HttpInterceptor {
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token), url: `${environment.backendServer}/${req.url}`});
     }
 
+    console.log('url'+req.url);
     return next.handle(authReq);
   }
 }
