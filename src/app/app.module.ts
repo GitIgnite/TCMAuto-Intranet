@@ -12,7 +12,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list'
 import { ClientComponent } from './client/client.component';
 import { ClientService } from "./api/services/client.service";
-import { HttpClient, HttpClientModule } from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import { VehiculeComponent } from './vehicule/vehicule.component';
 import { ClientRechercheComponent } from './client/client-recherche/client-recherche.component';
 import { MatCardModule } from "@angular/material/card";
@@ -59,6 +59,7 @@ import {authInterceptorProviders} from "./authentification/auth.interceptor";
 import {AuthGuardService} from "./authentification/auth-guard.service";
 import { TelechargementPhotoComponent } from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
 import { ImageService } from './api/services/image.service';
+import {APIInterceptor} from "./api/services/http/api.interceptor";
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -113,7 +114,11 @@ const appearance: MatFormFieldDefaultOptions = {
     MatButtonToggleModule,
     MatCardModule
   ],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
+    providers: [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi: true,
+    },{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: appearance
   },
