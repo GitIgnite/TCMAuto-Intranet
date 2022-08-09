@@ -5,6 +5,7 @@ import { ApiUrlConst } from 'src/environments/path/api-url-const';
 import { FileImage } from '../models/FileImage';
 import { GenericRequest } from './http/generic-request.service';
 import { HttpService } from './http/http.service';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class ImageService {
@@ -15,7 +16,7 @@ export class ImageService {
 
   public upload(fileImage: FileImage): Observable<any>{
     console.log("Service upload image")
-    const url = `${this.urlVehiculePhoto}/upload`
+    let url = `${environment.backendServer}${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
     // var headers = new HttpHeaders()
     //   .set('Content-Type', 'multipart/form-data');
@@ -23,9 +24,8 @@ export class ImageService {
     //   .set('Content-Type', 'multipart/form-data');
     var image: File = fileImage.file;
     file.append('file',image);
-    let url1 = 'http://localhost:8080/tcmauto' + url ;
     // return this.http.post<any>(GenericRequest.buildSendRequest( url, file,null, headers));
-    return this.http.post<any>(url1,file);
+    return this.http.post<any>(url,file);
     // return this.http.post<any>(url,null);
   }
 
