@@ -16,7 +16,7 @@ export class ImageService {
 
   public upload(fileImage: FileImage): Observable<any>{
     console.log("Service upload image")
-    let url = `${environment.backendServer}${this.urlVehiculePhoto}/upload` ;
+    let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
     // var headers = new HttpHeaders()
     //   .set('Content-Type', 'multipart/form-data');
