@@ -18,15 +18,9 @@ export class ImageService {
     console.log("Service upload image")
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
-    // var headers = new HttpHeaders()
-    //   .set('Content-Type', 'multipart/form-data');
-    // var headers = new Map()
-    //   .set('Content-Type', 'multipart/form-data');
     var image: File = fileImage.file;
     file.append('file',image);
-    // return this.http.post<any>(GenericRequest.buildSendRequest( url, file,null, headers));
     return this.http.post<any>(url,file);
-    // return this.http.post<any>(url,null);
   }
 
 }
