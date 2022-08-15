@@ -52,13 +52,14 @@ import { VehiculeEquipementService } from './api/services/vehiculeEquipement.ser
 import {MandatService} from "./api/services/mandat.service";
 import { VariablesGlobales } from './variablesGlobales';
 import { NoteComponent } from './common/component/note/note.component';
-import { VehiculePhotoComponent } from './vehicule/vehicule-photo/vehicule-photo.component';
+import { VehiculeGestionPhotoComponent } from './vehicule/vehicule-photo/vehicule-gestion-photo.component';
 import {DocumentService} from "./api/services/document.service";
 import { LoginComponent } from './login/login.component';
 import {authInterceptorProviders} from "./authentification/auth.interceptor";
 import {AuthGuardService} from "./authentification/auth-guard.service";
 import { TelechargementPhotoComponent } from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
-import { ImageService } from './api/services/image.service';
+import { VehiculePhotoService } from './api/services/vehiculePhoto.service';
+import { OrdonnerPhotoComponent } from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -81,9 +82,10 @@ const appearance: MatFormFieldDefaultOptions = {
     VehiculeDetailComponent,
     VehiculeResultatRechercheComponent,
     NoteComponent,
-    VehiculePhotoComponent,
+    VehiculeGestionPhotoComponent,
     LoginComponent,
-    TelechargementPhotoComponent
+    TelechargementPhotoComponent,
+    OrdonnerPhotoComponent
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatButtonToggleModule,
     MatCardModule
   ],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: appearance
   },

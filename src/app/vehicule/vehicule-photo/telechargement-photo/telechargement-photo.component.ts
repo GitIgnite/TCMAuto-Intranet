@@ -1,8 +1,11 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { Observable } from 'rxjs';
 import { FileImage } from 'src/app/api/models/FileImage';
-import { ImageService } from 'src/app/api/services/image.service';
+import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {MessageKeys} from "../../../common/form/keys/message-keys";
+import {MessageErrorKeys} from "../../../common/form/keys/message-error-keys";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -21,9 +24,12 @@ export class TelechargementPhotoComponent {
   progress = 0;
   message = '';
   fileInfos?: Observable<any>;
+  messageErrorKeys = MessageErrorKeys
+  @Input()
+  vehiculeId :string = '';
 
-
-  constructor(private imageService: ImageService){
+  constructor(private imageService: VehiculePhotoService,
+              private readonly _snackBar: MatSnackBar){
   }
 
   selectFile(event: any): void {
@@ -36,11 +42,9 @@ export class TelechargementPhotoComponent {
     console.log("Uplaod file")
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
-      if (file) {
+      if (file && this.vehiculeId) {
         this.currentFile = file;
-        this.fileImage = new FileImage(this.currentFile, "", 1)
-        this.fileImage.vehiculeId = ""
-        this.imageService.upload(this.fileImage).subscribe(
+        this.imageService.upload(this.currentFile, this.vehiculeId).subscribe(
           (event: any) => {
             if (event.type === HttpEventType.UploadProgress) {
               this.progress = Math.round(100 * event.loaded / event.total);
@@ -59,6 +63,12 @@ export class TelechargementPhotoComponent {
             }
             this.currentFile = undefined;
           });
+      } else {
+        if(!this.vehiculeId) {
+          this._snackBar.open(this.messageErrorKeys.ERREUR_UPLOAD_IMAGE_ID_VEHICULE_NULL, 'Erreur');
+        } else {
+          this._snackBar.open(this.messageErrorKeys.ERREUR_UPLOAD_AUCUNE_IMAGE_SELECTIONNEE, 'Erreur');
+        }
       }
       this.selectedFiles = undefined;
     }

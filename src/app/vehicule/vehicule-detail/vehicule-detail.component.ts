@@ -7,7 +7,7 @@ import {MessageKeys} from "../../common/form/keys/message-keys";
 import {VehiculeCreateComponent} from "../vehicule-create/vehicule-create.component";
 import {NoteComponent} from "../../common/component/note/note.component";
 import {CommonFormKey} from "../../common/form/keys/common-form-key";
-import {VehiculePhotoComponent} from '../vehicule-photo/vehicule-photo.component';
+import {VehiculeGestionPhotoComponent} from '../vehicule-photo/vehicule-gestion-photo.component';
 import {DocumentService} from "../../api/services/document.service";
 import {ClientService} from "../../api/services/client.service";
 import {MatSort, Sort} from "@angular/material/sort";
@@ -87,10 +87,10 @@ export class VehiculeDetailComponent implements OnInit {
   }
 
   openPictureDialog() {
-    return this.dialog.open(VehiculePhotoComponent, {
+    return this.dialog.open(VehiculeGestionPhotoComponent, {
       width: '1000px',
       data: {
-        vehiculeCourrant: this.vehicule
+        vehiculeId: this.vehicule.id
       }
     }).afterClosed();
   }

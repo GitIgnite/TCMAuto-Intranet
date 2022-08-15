@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VehiculePhotoComponent } from './vehicule-photo.component';
+import { OrdonnerPhotoComponent } from './ordonner-photo.component';
 
-describe('VehiculePhotoComponent', () => {
-  let component: VehiculePhotoComponent;
-  let fixture: ComponentFixture<VehiculePhotoComponent>;
+describe('OrdonnerPhotoComponent', () => {
+  let component: OrdonnerPhotoComponent;
+  let fixture: ComponentFixture<OrdonnerPhotoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VehiculePhotoComponent ]
+      declarations: [ OrdonnerPhotoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(VehiculePhotoComponent);
+    fixture = TestBed.createComponent(OrdonnerPhotoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

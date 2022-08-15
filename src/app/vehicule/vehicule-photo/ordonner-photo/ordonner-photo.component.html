@@ -1,0 +1,8 @@
+<mat-card *ngFor="let photo of photos" class="mb-1">
+  <mat-card-header>
+    <mat-card-title>{{photo.ordre}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <img [src]="displayImage(photo.data)" [width]="120" [height]="120"/>
+  </mat-card-content>
+</mat-card>
