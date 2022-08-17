@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {VehiculeFormKey} from 'src/app/common/form/keys/vehicule-form-key';
 import {Marque} from 'src/app/api/models/Marque';
 import {ModeleService} from '../../api/services/modele.service';
@@ -25,7 +25,7 @@ import {BoiteVitesseEnum} from "../../common/enum/VehiculeEnum";
 })
 export class VehiculeRechercheComponent implements OnInit, OnDestroy {
 
-  rechercheVehiculeForm!: FormGroup;
+  rechercheVehiculeForm!: UntypedFormGroup;
   vehiculeFormKey = VehiculeFormKey;
   marques: Marque[] = [];
   modeles: Modele[] = [];
@@ -53,7 +53,7 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
   afficherDetail: boolean = false;
   vehiculeDetail!: Vehicule;
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               private modeleService: ModeleService,
               private categorieService: CategorieService,
               private energieService: EnergieService,

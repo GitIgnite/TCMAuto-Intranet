@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ModeleService} from '../../api/services/modele.service';
 import {VehiculeService} from '../../api/services/vehicule.service';
@@ -28,7 +28,7 @@ import {Observable, Subject} from "rxjs";
 })
 export class VehiculeCreateComponent implements OnInit, AfterViewInit {
 
-  createVehiculeForm! : FormGroup;
+  createVehiculeForm! : UntypedFormGroup;
   vehiculeFormKey = VehiculeFormKey;
   mandatFormKey = MandatFormKey;
   vehiculeToEdit!: Vehicule;
@@ -51,7 +51,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
   $mandatObs: Observable<Mandat> = new Subject();
 
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               private vehiculeService: VehiculeService,
               public dialogRef: MatDialogRef<VehiculeCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
@@ -93,7 +93,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
     })
   }
 
-  buildFormVehicule() : FormGroup {
+  buildFormVehicule() : UntypedFormGroup {
     return this.fb.group( {
          [this.vehiculeFormKey.MODELE_VEHICULE] : [null,[Validators.required]],
          [this.vehiculeFormKey.MARQUE_VEHICULE] : [null,[Validators.required]],
@@ -126,7 +126,7 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
        })
   }
 
-  buildFormMandat() : FormGroup {
+  buildFormMandat() : UntypedFormGroup {
     return this.fb.group( {
       [this.mandatFormKey.ACHETEUR] : [null],
       [this.mandatFormKey.DATE_SIGNATURE_MANDAT] : [null],

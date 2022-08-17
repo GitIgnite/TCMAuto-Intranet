@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Equipement } from 'src/app/api/models/Equipement';
@@ -14,10 +14,10 @@ import { EquipementFormKey } from 'src/app/common/form/keys/equipement-form-key'
 })
 export class EquipementAdditionnelsComponent implements OnInit {
 
-  createEquipementForm!: FormGroup;
+  createEquipementForm!: UntypedFormGroup;
   equipementFormKey = EquipementFormKey;
   groupeEquipements: GroupeEquipement[] = [];
-  constructor(private readonly fb: FormBuilder, private equipementService: EquipementService, public dialogRef: MatDialogRef<EquipementAdditionnelsComponent>, private _snackBar: MatSnackBar) { }
+  constructor(private readonly fb: UntypedFormBuilder, private equipementService: EquipementService, public dialogRef: MatDialogRef<EquipementAdditionnelsComponent>, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.initBuildCreateEquipementForm();

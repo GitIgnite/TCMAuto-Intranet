@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../authentification/auth.service";
 import {TokenStorageService} from "../authentification/token.service";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {LoginFormKey} from "../common/form/keys/login-form-key";
 import {finalize} from "rxjs/operators";
 import {BehaviorSubject} from "rxjs";
@@ -14,7 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  loginForm! : FormGroup;
+  loginForm! : UntypedFormGroup;
   loginFormKey = LoginFormKey;
 
   private readonly loadingSubject = new BehaviorSubject<boolean>(false);
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
-              private readonly fb: FormBuilder,
+              private readonly fb: UntypedFormBuilder,
               private readonly _snackBar: MatSnackBar,
               private readonly router: Router) { }
 
