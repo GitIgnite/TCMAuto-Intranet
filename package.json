@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host --proxy-config ./src/environments/proxy.conf.json",
+    "start": "ng serve server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -23,6 +23,7 @@
     "@angular/router": "^14.1.3",
     "bootstrap": "^5.1.1",
     "git": "^0.1.3",
+    "http-proxy-middleware": "^2.0.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
