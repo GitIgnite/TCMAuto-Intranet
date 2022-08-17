@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
 @Component({
   selector: 'app-ordonner-photo',
@@ -12,7 +13,9 @@ export class OrdonnerPhotoComponent implements OnInit {
 
   @Input()
   public photos: any[] = [];
-  
+
+  displayedColumns: string[] = ['position', 'image'];
+
   ngOnInit(): void {
   }
 
@@ -22,4 +25,7 @@ export class OrdonnerPhotoComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 
+  onDrop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.photos, event.previousIndex, event.currentIndex);
+  }
 }
