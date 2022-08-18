@@ -256,9 +256,9 @@
               color="primary"
               type="submit"
               class="d-flex align-items-center"
-              [disabled]="createVehiculeForm?.invalid">
+              [disabled]="!createVehiculeForm || createVehiculeForm.invalid">
         Sauvegarder
-        <mat-icon class="button-icon ml-1" [ngClass]="createVehiculeForm?.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
+        <mat-icon class="button-icon ml-1" [ngClass]="!createVehiculeForm || createVehiculeForm.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
       </button>
     </mat-dialog-actions>
 </form>

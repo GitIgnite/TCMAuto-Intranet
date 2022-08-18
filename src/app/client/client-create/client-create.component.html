@@ -79,9 +79,9 @@
                 color="primary"
                 type="submit"
                 class="d-flex align-items-center"
-                [disabled]="createClientForm?.invalid">
+                [disabled]="!createClientForm || createClientForm.invalid">
           Sauvegarder
-          <mat-icon class="button-icon ml-1" [ngClass]="createClientForm?.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
+          <mat-icon class="button-icon ml-1" [ngClass]="!createClientForm || createClientForm.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'" matSuffix>save</mat-icon>
         </button>
       </div>
     </mat-card-content>

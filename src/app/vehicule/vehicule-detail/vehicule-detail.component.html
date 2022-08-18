@@ -39,18 +39,18 @@
             </button>
           </div>
         </div>
-        <div class="d-inline-block position-relative col-6 p-0">
+        <div class="d-inline-block position-relative col-6 p-0" *ngIf="vehicule">
           <div class="mat-card-titre text-left container">
             <div class="row justify-content-around">
               <h1
-                class="fw-bold primary-color titre-vehicule col-6 m-0">{{ vehicule?.marque?.libelle }} {{ vehicule?.modele?.libelle }}</h1>
+                class="fw-bold primary-color titre-vehicule col-6 m-0">{{ vehicule.marque?.libelle }} {{ vehicule.modele?.libelle }}</h1>
               <button  mat-raised-button (click)="editVehicule()" type="button" color="primary" class="col-1"> EDIT </button>
             </div>
             <div class="sous-titre-vehicule col-12 mt-2">
-              {{vehicule?.categorie?.libelle}} {{vehicule?.versionVehicule}} {{vehicule?.puissanceFiscale}}<span *ngIf="vehicule?.puissanceFiscale">Ch</span>
+              {{vehicule.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span *ngIf="vehicule.puissanceFiscale">Ch</span>
             </div>
             <div class="row mt-lg-4 text-center fw-bold">
-              <span class="primary-color prix-vehicule col-12">{{ vehicule?.prixVenteMarche }} €</span>
+              <span class="primary-color prix-vehicule col-12">{{ vehicule.prixVenteMarche }} €</span>
             </div>
 
             <div class="container body-info-vehicule-card">
@@ -60,47 +60,47 @@
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Kilométrage</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.kilometrage }} KM</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.kilometrage }} KM</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Année</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.dateMiseCirculation | date :'YYYY' }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.dateMiseCirculation | date :'YYYY' }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Mise en circulation</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.dateMiseCirculation | date :'dd/MM/YYYY' }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.dateMiseCirculation | date :'dd/MM/YYYY' }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Energie</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.energie?.libelle }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.energie?.libelle }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Nombre de portes</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.nbPorte }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.nbPorte }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Puissance fiscale</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.puissanceFiscale }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.puissanceFiscale }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">puissance DIN</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.puissanceReel }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.puissanceReel }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Boite de vitesse</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.boiteVitesse }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.boiteVitesse }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Emission de CO2</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.co2 }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.co2 }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Couleur extérieure</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.couleurExt }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.couleurExt }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">Couleur intérieure</span>
-                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.couleurInt }}</span>
+                <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.couleurInt }}</span>
               </div>
               <div class="row justify-content-around">
                 <span class="col-lg-5 col-md-6 col-sm-12">{{getNombreMain()}}</span>
@@ -109,7 +109,7 @@
 
             <div class="container">
               <h2>Note</h2>
-              <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule?.note }}</span>
+              <span class="col-lg-5 col-md-6 col-sm-12">{{ vehicule.note }}</span>
             </div>
           </div>
         </div>
