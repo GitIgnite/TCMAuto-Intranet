@@ -11,6 +11,7 @@ import {VehiculeGestionPhotoComponent} from '../vehicule-photo/vehicule-gestion-
 import {DocumentService} from "../../api/services/document.service";
 import {ClientService} from "../../api/services/client.service";
 import {MatSort, Sort} from "@angular/material/sort";
+import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -21,16 +22,21 @@ export class VehiculeDetailComponent implements OnInit {
 
   @Output() cacherDetailEmit = new EventEmitter();
   @Input() vehicule!: Vehicule;
+  public photos: any = [];
+
   messageFormKeys = MessageKeys;
 
   constructor(private readonly dialog: MatDialog,
               private readonly _snackBar: MatSnackBar,
               private readonly documentService: DocumentService,
-              private readonly clientService: ClientService) {
+              private readonly clientService: ClientService,
+              private vehiculePhotoService: VehiculePhotoService) {
   }
 
   ngOnInit(): void {
-
+    if(this.vehicule && this.vehicule.id) {
+      this.getPhotosVehicule(this.vehicule.id);
+    }
   }
 
   openEquipementDialog() {
@@ -105,5 +111,11 @@ export class VehiculeDetailComponent implements OnInit {
 
         }
     );
+  }
+
+  getPhotosVehicule(idVehicule:string) {
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
+      this.photos = photos;
+    })
   }
 }
