@@ -5,10 +5,9 @@
   <mat-divider class="mb-1"></mat-divider>
   <div class="bouton-photo-titre">
     <mat-button-toggle-group class="bouton-photo-titre" name="PhotoGroup" value=1
-      (change)="titreSelectionne($event.value)" aria-label="Equipements">
-      <mat-button-toggle value=1>Photos</mat-button-toggle>
-      <mat-button-toggle value=2>Ordonner</mat-button-toggle>
-      <mat-button-toggle value=3>Télécharger</mat-button-toggle>
+      (change)="titreSelectionne($event.value)" aria-label="Photos">
+      <mat-button-toggle value=1>Ordonner</mat-button-toggle>
+      <mat-button-toggle value=2>Télécharger</mat-button-toggle>
     </mat-button-toggle-group>
   </div>
   <mat-divider class="mt-2 mb-2"></mat-divider>
@@ -16,7 +15,7 @@
     <app-ordonner-photo  *ngIf="showOrderPicture" [photos]="photos"></app-ordonner-photo>
   </mat-dialog-content>
   <mat-dialog-content>
-    <app-telechargement-photo  *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>
+    <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>
   </mat-dialog-content>
   <!-- <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
     <button mat-raised-button color="secondary" type="button" class="d-flex align-items-center btn-cancel"

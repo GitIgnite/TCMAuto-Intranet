@@ -10,8 +10,7 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class VehiculeGestionPhotoComponent implements OnInit {
 
-  public showPicture: boolean = true;
-  public showOrderPicture: boolean = false;
+  public showOrderPicture: boolean = true;
   public showAddpicture: boolean = false;
   public image: any;
   public photos: any = [];
@@ -36,9 +35,8 @@ export class VehiculeGestionPhotoComponent implements OnInit {
     })
   }
   titreSelectionne(value: number) {
-    this.showPicture = value == 1 ? true : false;
-    this.showOrderPicture = value == 2 ? true : false;
-    this.showAddpicture = value == 3 ? true : false;
+    this.showOrderPicture = value == 1 ? true : false;
+    this.showAddpicture = value == 2 ? true : false;
   }
 
 }
