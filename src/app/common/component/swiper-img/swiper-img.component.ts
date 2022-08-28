@@ -23,8 +23,7 @@ export class SwiperImgComponent implements OnInit {
       prevEl: '.swiper-button-prev'
     },
     spaceBetween: 40,
-    effect: "fade",
-    virtual:true
+    effect: "fade"
   };
 
   @ViewChild('swiperRef', { static: false }) swiper?: SwiperComponent;
