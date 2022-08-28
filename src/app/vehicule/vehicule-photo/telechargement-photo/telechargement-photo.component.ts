@@ -5,6 +5,7 @@ import { FileImage } from 'src/app/api/models/FileImage';
 import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageErrorKeys} from "../../../common/form/keys/message-error-keys";
+import { MessageKeys } from 'src/app/common/form/keys/message-keys';
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -25,6 +26,7 @@ export class TelechargementPhotoComponent {
   message = '';
   fileInfos?: Observable<any>;
   messageErrorKeys = MessageErrorKeys
+  messageKeys = MessageKeys
   @Input()
   vehiculeId :string = '';
   orderPhoto!: number
@@ -58,7 +60,7 @@ export class TelechargementPhotoComponent {
             (event: any) => {
               if (event.message) {
                 this.progressInfos[idx] = {value: Math.round(100 * event.loaded / event.total)};
-                this._snackBar.open(this.messageErrorKeys.SUCCES_UPLOAD, 'succes', {
+                this._snackBar.open(this.messageKeys.SUCCES_UPLOAD, 'succes', {
                   duration: 1500
                 });
               } else if (event instanceof HttpResponse) {
