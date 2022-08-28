@@ -70,7 +70,7 @@ import {
 } from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
 import {VehiculePhotoService} from './api/services/vehiculePhoto.service';
 import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
-import {DragDropModule} from "@angular/cdk/drag-drop";
+import { GridsterModule } from 'angular-gridster2';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -125,7 +125,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatNativeDateModule,
     MatButtonToggleModule,
     MatCardModule,
-    DragDropModule
+    GridsterModule
   ],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

@@ -1,5 +1,5 @@
-<mat-card *ngFor="let photo of photos" class="mb-1 w-25 card-ordonner-image d-flex">
-  <mat-card-content>
-    <img [src]="displayImage(photo.data)" [width]="200" [height]="160" />
-  </mat-card-content>
-</mat-card>
+<gridster [options]="options">
+  <gridster-item *ngFor="let item of photos" [item]="item" (dragover)="this.setDropId(item.id)">
+    <img [src]="displayImage(item.data)" class="photo" />
+  </gridster-item>
+</gridster>

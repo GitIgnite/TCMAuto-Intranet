@@ -15,7 +15,7 @@
     <app-ordonner-photo  *ngIf="showOrderPicture" [photos]="photos"></app-ordonner-photo>
   </mat-dialog-content>
   <mat-dialog-content>
-    <app-telechargement-photo  *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>
+    <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>
   </mat-dialog-content>
   <!-- <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
     <button mat-raised-button color="secondary" type="button" class="d-flex align-items-center btn-cancel"

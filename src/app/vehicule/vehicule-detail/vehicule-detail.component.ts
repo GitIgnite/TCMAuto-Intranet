@@ -94,7 +94,7 @@ export class VehiculeDetailComponent implements OnInit {
 
   openPictureDialog() {
     return this.dialog.open(VehiculeGestionPhotoComponent, {
-      width: '1000px',
+      width: 'auto',
       data: {
         vehiculeId: this.vehicule.id
       }
