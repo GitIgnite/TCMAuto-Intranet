@@ -1,4 +1,4 @@
-<swiper [config]="config" #swiperRef>
+<swiper class="swiper" [config]="config" #swiperRef>
   <div class="swiper-wrapper">
     <div swiperSlide *ngFor="let image of images" class="swiper-slide div-big-img">
         <img class="big-img"  [src]="displayImage(image.data)" [alt]="" />
@@ -9,7 +9,7 @@
   <div class="swiper-button-prev"></div>
 </swiper>
 <div class="div-small-img">
-  <div *ngFor="let image of images; let i = index" class="div-fix-small-img" >
+  <div *ngFor="let image of images; let i = index" class="div-fix-small-img" [ngClass]="i==selectedIndex ? 'selectedImage': ''">
     <img class="small-img" [src]="displayImage(image.data)" [alt]="" (click)="slideTo(i)"/>
   </div>
 </div>

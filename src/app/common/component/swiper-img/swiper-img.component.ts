@@ -1,6 +1,6 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {SwiperOptions} from "swiper";
 import {DomSanitizer} from "@angular/platform-browser";
+import Swiper, {SwiperOptions} from "swiper";
 import {SwiperComponent} from "swiper/angular";
 
 @Component({
@@ -12,6 +12,8 @@ export class SwiperImgComponent implements OnInit {
 
   @Input()
   public images: any[] = [];
+
+  selectedIndex : number = 0 ;
 
   config: SwiperOptions = {
     pagination: {
@@ -26,7 +28,7 @@ export class SwiperImgComponent implements OnInit {
     effect: "fade"
   };
 
-  @ViewChild('swiperRef', { static: false }) swiper?: SwiperComponent;
+  @ViewChild('swiperRef', { static: false }) swiper?: any;
 
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -40,8 +42,9 @@ export class SwiperImgComponent implements OnInit {
 
   slideTo(index: number) {
     console.log("Slide To : " + index);
-    if(this.swiper && this.swiper.swiperRef) {
-      this.swiper.swiperRef.slideTo(index - 1, 0);
+    if(this.swiper) {
+      this.selectedIndex = index;
+      this.swiper.swiper.slideTo(index, 0)
     }
   }
 }
