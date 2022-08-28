@@ -12,7 +12,7 @@
   </div>
   <mat-divider class="mt-2 mb-2"></mat-divider>
   <mat-dialog-content>
-    <app-ordonner-photo  *ngIf="showOrderPicture" [photos]="photos"></app-ordonner-photo>
+    <app-ordonner-photo  *ngIf="showOrderPicture" [vehiculeId]="vehiculeId"></app-ordonner-photo>
   </mat-dialog-content>
   <mat-dialog-content>
     <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>

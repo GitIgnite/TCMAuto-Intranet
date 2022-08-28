@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import { CompactType, DisplayGrid, GridsterConfig, GridType } from 'angular-gridster2';
+import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
 
 @Component({
   selector: 'app-ordonner-photo',
@@ -9,10 +10,12 @@ import { CompactType, DisplayGrid, GridsterConfig, GridType } from 'angular-grid
 })
 export class OrdonnerPhotoComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer) { }
+  constructor(private sanitizer: DomSanitizer, private vehiculePhotoService: VehiculePhotoService) { }
+
+  photos: any[] = [];
 
   @Input()
-  public photos: any[] = [];
+  vehiculeId :string = '';
 
   dropId!: string;
 
@@ -36,6 +39,13 @@ export class OrdonnerPhotoComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.getPhotosVehicule(this.vehiculeId);
+  }
+
+  getPhotosVehicule(idVehicule:string) {
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
+      this.photos = photos;
+    })
   }
 
   displayImage(imageByteArray: any) {

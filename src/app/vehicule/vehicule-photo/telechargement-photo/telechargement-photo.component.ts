@@ -1,10 +1,9 @@
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import {Component, Input, OnInit} from '@angular/core';
-import { NEVER, Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
+import {Component, Input} from '@angular/core';
+import { Observable } from 'rxjs';
 import { FileImage } from 'src/app/api/models/FileImage';
 import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {MessageKeys} from "../../../common/form/keys/message-keys";
 import {MessageErrorKeys} from "../../../common/form/keys/message-error-keys";
 
 class ImageSnippet {
@@ -59,6 +58,9 @@ export class TelechargementPhotoComponent {
             (event: any) => {
               if (event.message) {
                 this.progressInfos[idx] = {value: Math.round(100 * event.loaded / event.total)};
+                this._snackBar.open(this.messageErrorKeys.SUCCES_UPLOAD, 'succes', {
+                  duration: 1500
+                });
               } else if (event instanceof HttpResponse) {
                 this.message = event.body.message;
                 //this.imageService.getPhotoByIdVehicule(this.vehiculeId)
