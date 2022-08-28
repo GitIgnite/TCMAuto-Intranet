@@ -17,8 +17,8 @@
     <div class="header-vehicule-card">
       <div class="row">
         <div class="d-inline-block position-relative col-6 p-0">
-          <img class="image-vehicule w-100" alt="TCM voiture" src="/assets/images/voiture.png">
-          <div class="barre-icone">
+          <!--          <img class="image-vehicule w-100" alt="TCM voiture" src="/assets/images/voiture.png">-->
+           <div class="barre-icone">
             <button mat-button class="bouton-icone" (click)="openEquipementDialog()">
               <span class="material-icons">
                 car_repair
@@ -38,6 +38,7 @@
               </span>
             </button>
           </div>
+          <app-swiper-img [images]="photos"> </app-swiper-img>
         </div>
         <div class="d-inline-block position-relative col-6 p-0" *ngIf="vehicule">
           <div class="mat-card-titre text-left container">

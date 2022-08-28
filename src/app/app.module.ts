@@ -71,6 +71,9 @@ import {
 import {VehiculePhotoService} from './api/services/vehiculePhoto.service';
 import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {SwiperModule} from "swiper/angular";
+import { SwiperImgComponent } from './common/component/swiper-img/swiper-img.component';
+import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -96,7 +99,8 @@ const appearance: MatFormFieldDefaultOptions = {
     VehiculeGestionPhotoComponent,
     LoginComponent,
     TelechargementPhotoComponent,
-    OrdonnerPhotoComponent
+    OrdonnerPhotoComponent,
+    SwiperImgComponent
   ],
   imports: [
     BrowserModule,
@@ -125,7 +129,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatNativeDateModule,
     MatButtonToggleModule,
     MatCardModule,
-    DragDropModule
+    NgxUsefulSwiperModule
   ],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,

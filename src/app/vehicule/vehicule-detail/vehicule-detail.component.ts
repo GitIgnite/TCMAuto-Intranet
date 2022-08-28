@@ -12,6 +12,7 @@ import {DocumentService} from "../../api/services/document.service";
 import {ClientService} from "../../api/services/client.service";
 import {MatSort, Sort} from "@angular/material/sort";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
+import Swiper from "swiper";
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -84,7 +85,7 @@ export class VehiculeDetailComponent implements OnInit {
         clientOrVehicule : CommonFormKey.VEHICULE,
         clientOrVehiculeObject: this.vehicule
       }
-    }).afterClosed().subscribe(result => {
+    }).afterClosed().subscribe((result: any) => {
       if(result && result.object) {
         this.vehicule = result.object;
         this._snackBar.open(this.messageFormKeys.NOTE_VEHICULE, 'OK');
@@ -118,4 +119,5 @@ export class VehiculeDetailComponent implements OnInit {
       this.photos = photos;
     })
   }
+
 }
