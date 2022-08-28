@@ -70,14 +70,11 @@ import {
 } from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
 import {VehiculePhotoService} from './api/services/vehiculePhoto.service';
 import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
-<<<<<<< HEAD
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {SwiperModule} from "swiper/angular";
 import { SwiperImgComponent } from './common/component/swiper-img/swiper-img.component';
 import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
-=======
 import { GridsterModule } from 'angular-gridster2';
->>>>>>> 475d2307f0773acf4bf683e0d33f49ee860b2357
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -134,7 +131,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatButtonToggleModule,
     MatCardModule,
     NgxUsefulSwiperModule,
-    GridsterModule
+    GridsterModule,
   ],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
