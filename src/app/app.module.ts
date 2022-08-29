@@ -70,8 +70,6 @@ import {
 } from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
 import {VehiculePhotoService} from './api/services/vehiculePhoto.service';
 import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
-import {DragDropModule} from "@angular/cdk/drag-drop";
-import {SwiperModule} from "swiper/angular";
 import { SwiperImgComponent } from './common/component/swiper-img/swiper-img.component';
 import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
 import { GridsterModule } from 'angular-gridster2';

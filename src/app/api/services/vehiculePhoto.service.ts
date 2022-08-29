@@ -28,11 +28,11 @@ export class VehiculePhotoService {
     return this.httpCustom.get(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
   }
 
-  public updateVehicule(id: string | undefined, mapUpdate: any): Observable<VehiculePhoto> {
-    if(id) {
-      const url = `${this.urlVehiculePhoto}/${id}`;
-      return this.http.patch<VehiculePhoto>(GenericRequest.buildSendRequest(url,mapUpdate));
-    }
-    return new Observable<VehiculePhoto>();
-  }
+  // public updateVehicule(id: string | undefined, mapUpdate: any): Observable<VehiculePhoto> {
+  //   if(id) {
+  //     const url = `${this.urlVehiculePhoto}/${id}`;
+  //     return this.http.patch<VehiculePhoto>(GenericRequest.buildSendRequest(url,mapUpdate));
+  //   }
+  //   return new Observable<VehiculePhoto>();
+  // }
 }
