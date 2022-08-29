@@ -12,7 +12,7 @@ export class VehiculePhotoService {
 
   private readonly urlVehiculePhoto = ApiUrlConst.VEHICULE_PHOTO;
 
-  constructor(private http: HttpClient, private httpCustom: HttpService) {}
+  constructor(private http: HttpClient, private readonly httpCustom: HttpService) {}
 
   public upload(image: File, vehiculeId: string): Observable<any>{
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
@@ -28,11 +28,11 @@ export class VehiculePhotoService {
     return this.httpCustom.get(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
   }
 
-  // public updateVehicule(id: string | undefined, mapUpdate: any): Observable<VehiculePhoto> {
-  //   if(id) {
-  //     const url = `${this.urlVehiculePhoto}/${id}`;
-  //     return this.http.patch<VehiculePhoto>(GenericRequest.buildSendRequest(url,mapUpdate));
-  //   }
-  //   return new Observable<VehiculePhoto>();
-  // }
+  public updateVehicule(id: string, orderNumberPhoto: number): Observable<any> {
+    if(id) {
+      const url = `${this.urlVehiculePhoto}/${id}`;
+      return this.httpCustom.patch<any>(GenericRequest.buildSendRequest(url,orderNumberPhoto));
+    }
+    return new Observable<any>();
+  }
 }
