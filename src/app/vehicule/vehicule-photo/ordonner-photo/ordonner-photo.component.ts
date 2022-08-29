@@ -54,8 +54,9 @@ export class OrdonnerPhotoComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 
-  setDropId(dropId: string): void {
-    this.dropId = dropId;
+  setDropId(item: any): void {
+    console.log("setDropId: "+  item.nom + ", "+ item.ordre)
+    this.dropId = item.id;
   }
 
 }

@@ -14,12 +14,12 @@ export class VehiculePhotoService {
 
   constructor(private http: HttpClient, private readonly httpCustom: HttpService) {}
 
-  public upload(image: File, vehiculeId: string): Observable<any>{
+  public upload(image: File, vehiculeId: string, orderNumberPhoto: number): Observable<any>{
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
     file.append('file',image);
     let param: HttpParams = new HttpParams()
-      .set('vehiculeId', vehiculeId);
+      .set('vehiculeId', vehiculeId).set('orderNumberPhoto', orderNumberPhoto);
     return this.http.post<any>(url,file,{params:param});
   }
 
