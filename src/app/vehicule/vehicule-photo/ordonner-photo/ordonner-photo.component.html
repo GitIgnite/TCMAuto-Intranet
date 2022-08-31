@@ -1,5 +1,5 @@
 <gridster [options]="options">
-  <gridster-item *ngFor="let item of photos" [item]="item" (dragover)="this.setDropId(item)">
+  <gridster-item *ngFor="let item of photos" [item]="item" (dragover)="this.setDropId(item)" (itemChange)="checkChange($event)">
     <img [src]="displayImage(item.data)" class="photo" />
   </gridster-item>
 </gridster>
