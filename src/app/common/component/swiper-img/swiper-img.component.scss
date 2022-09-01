@@ -28,10 +28,13 @@ swiper {
   position:relative;
   width: 171px;
   min-height: 118px;
+  cursor: pointer;
 }
+
 .selectedImage{
   opacity:0.5;
 }
+
 //.swipper-full-screen {
 //  position: absolute;
 //  left: 0;

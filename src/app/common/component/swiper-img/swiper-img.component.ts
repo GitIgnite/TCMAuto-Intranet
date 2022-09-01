@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import Swiper, {SwiperOptions} from "swiper";
 import {SwiperComponent} from "swiper/angular";
@@ -18,14 +18,14 @@ export class SwiperImgComponent implements OnInit {
   config: SwiperOptions = {
     pagination: {
       el: '.swiper-pagination',
-      clickable: true
+      clickable: false
     },
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev'
     },
     spaceBetween: 40,
-    effect: "fade"
+    effect: "fade",
   };
 
   @ViewChild('swiperRef', { static: false }) swiper?: any;
@@ -40,6 +40,14 @@ export class SwiperImgComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 
+  next() {
+    this.selectedIndex = this.selectedIndex + 1;
+  }
+
+  previous() {
+    this.selectedIndex = this.selectedIndex - 1;
+  }
+
   slideTo(index: number) {
     console.log("Slide To : " + index);
     if(this.swiper) {
@@ -47,4 +55,5 @@ export class SwiperImgComponent implements OnInit {
       this.swiper.swiper.slideTo(index, 0)
     }
   }
+
 }
