@@ -47,8 +47,10 @@ export class TelechargementPhotoComponent {
   }
 
   uploadFiles(): void {
+    console.log("upload")
     for (let i = 0; i < this.selectedFiles.length; i++) {
-      this.upload(i, this.selectedFiles[i]);
+
+      this.upload(i+1, this.selectedFiles[i]);
     }
 
     console.log("Upload file after for");

@@ -17,7 +17,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
 
   dropId!: string;
   photos: any[] = [];
-  photoListEnBase: any[] = [];
+  photoListEnBase = new Map<string, number>();
 
   options: GridsterConfig = {
     draggable: {
@@ -44,33 +44,30 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.photos.forEach((photo) => {
-      this.photoListEnBase.forEach(photoEnBase => {
-        if(photo.id == photoEnBase.id && photo.ordre != photoEnBase.ordre) {
+      this.photoListEnBase.forEach((value, key) => {
+        if(photo.id == key && photo.ordre != value) {
           console.log("cette element doit être sauvegarder !!")
+          this.vehiculePhotoService.updateVehicule(key, value)
         }
       })
      })
-    //this.vehiculePhotoService.updateVehicule()
   }
 
   getPhotosVehicule(idVehicule:string) {
-    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
-      this.photos = photos;
-      this.photoListEnBase = photos
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photoById => {
+
+      photoById.forEach((photoId: any) => {
+        this.photoListEnBase.set(photoId.id ,photoId.ordre);
+      })
+
+      this.photos = photoById;
       this.photos = this.photos.sort((a,b) => a.ordre - b.ordre);
-      console.log("tri du tableau : " + this.photos)
     })
   }
 
   displayImage(imageByteArray: any) {
     let objectURL = 'data:image/png;base64,' + imageByteArray;
-   // console.log("Test conversion des images")
     return this.sanitizer.bypassSecurityTrustUrl(objectURL);
-  }
-
-  setDropId(item: any): void {
-    console.log("setDropId: "+  item.nom + ", "+ item.ordre)
-    this.dropId = item.id;
   }
 
   checkChange(event: any) {
