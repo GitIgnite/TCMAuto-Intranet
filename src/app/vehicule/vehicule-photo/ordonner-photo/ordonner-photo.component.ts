@@ -77,13 +77,14 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
 
   changeOrderPhotoAfterSwap(idItem1: string, newOrderItem1: number, idItem2: string, newOrderItem2: number) {
     if(this.photos) {
-      var itemPhoto1 = this.photos.find(value => value.id === idItem1)
-      var indexItemPhoto1 = this.photos.indexOf(itemPhoto1);
-      this.photos[indexItemPhoto1].ordre = newOrderItem1;
-
-      var itemPhoto2 = this.photos.find(value => value.id === idItem2)
-      var indexItemPhoto2 = this.photos.indexOf(itemPhoto2);
-      this.photos[indexItemPhoto2].ordre = newOrderItem2;
+      this.updateItem(idItem1, newOrderItem1);
+      this.updateItem(idItem2, newOrderItem2);
     }
+  }
+
+  updateItem(idItem: string, newOrderItem: number) {
+    var itemPhoto = this.photos.find(value => value.id === idItem)
+      var indexItemPhoto = this.photos.indexOf(itemPhoto);
+      this.photos[indexItemPhoto].ordre = newOrderItem;
   }
 }
