@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import { CompactType, DisplayGrid, GridsterConfig, GridType } from 'angular-gridster2';
 import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
@@ -8,16 +8,16 @@ import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service
   templateUrl: './ordonner-photo.component.html',
   styleUrls: ['./ordonner-photo.component.scss']
 })
-export class OrdonnerPhotoComponent implements OnInit {
+export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
 
-  constructor(private sanitizer: DomSanitizer, private vehiculePhotoService: VehiculePhotoService) { }
-
-  photos: any[] = [];
+  constructor( private sanitizer: DomSanitizer, private vehiculePhotoService: VehiculePhotoService) { }
 
   @Input()
   vehiculeId :string = '';
 
   dropId!: string;
+  photos: any[] = [];
+  photoListEnBase = new Map<string, number>();
 
   options: GridsterConfig = {
     draggable: {
@@ -42,20 +42,48 @@ export class OrdonnerPhotoComponent implements OnInit {
     this.getPhotosVehicule(this.vehiculeId);
   }
 
+  ngOnDestroy(): void {
+    this.photos.forEach((photo) => {
+      this.photoListEnBase.forEach((value, key) => {
+        if(photo.id == key && photo.ordre != value) {
+          this.vehiculePhotoService.updateVehiculePhoto(key, photo.ordre).subscribe({ })
+        }
+      })
+     })
+  }
+
   getPhotosVehicule(idVehicule:string) {
-    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
-      this.photos = photos;
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photoById => {
+
+      photoById.forEach((photoId: any) => {
+        this.photoListEnBase.set(photoId.id ,photoId.ordre);
+      })
+
+      this.photos = photoById;
+      this.photos = this.photos.sort((a,b) => a.ordre - b.ordre);
     })
   }
 
   displayImage(imageByteArray: any) {
     let objectURL = 'data:image/png;base64,' + imageByteArray;
-    console.log("Test conversion des images")
     return this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 
-  setDropId(dropId: string): void {
-    this.dropId = dropId;
+  checkChange(event: any) {
+    if(event.itemComponent.drag.swap) {
+      this.changeOrderPhotoAfterSwap(event.item.id, event.itemComponent.drag.swap.swapedItem.item.ordre, event.itemComponent.drag.swap.swapedItem.item.id, event.item.ordre)
+    }
   }
 
+  changeOrderPhotoAfterSwap(idItem1: string, newOrderItem1: number, idItem2: string, newOrderItem2: number) {
+    if(this.photos) {
+      var itemPhoto1 = this.photos.find(value => value.id === idItem1)
+      var indexItemPhoto1 = this.photos.indexOf(itemPhoto1);
+      this.photos[indexItemPhoto1].ordre = newOrderItem1;
+
+      var itemPhoto2 = this.photos.find(value => value.id === idItem2)
+      var indexItemPhoto2 = this.photos.indexOf(itemPhoto2);
+      this.photos[indexItemPhoto2].ordre = newOrderItem2;
+    }
+  }
 }

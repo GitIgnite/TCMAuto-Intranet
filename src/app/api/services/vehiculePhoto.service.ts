@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiUrlConst} from 'src/environments/path/api-url-const';
@@ -14,12 +14,12 @@ export class VehiculePhotoService {
 
   constructor(private http: HttpClient, private readonly httpCustom: HttpService) {}
 
-  public upload(image: File, vehiculeId: string): Observable<any>{
+  public upload(image: File, vehiculeId: string, orderNumberPhoto: number): Observable<any>{
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
     file.append('file',image);
     let param: HttpParams = new HttpParams()
-      .set('vehiculeId', vehiculeId);
+      .set('vehiculeId', vehiculeId).set('orderNumberPhoto', orderNumberPhoto);
     return this.http.post<any>(url,file,{params:param});
   }
 
@@ -28,10 +28,10 @@ export class VehiculePhotoService {
     return this.httpCustom.get(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
   }
 
-  public updateVehicule(id: string, orderNumberPhoto: number): Observable<any> {
+  public updateVehiculePhoto(id: string, orderNumberPhoto: number): Observable<any> {
     if(id) {
       const url = `${this.urlVehiculePhoto}/${id}`;
-      return this.httpCustom.patch<any>(GenericRequest.buildSendRequest(url,orderNumberPhoto));
+      return this.httpCustom.post<any>(GenericRequest.buildSendRequest(url,undefined, {'orderNumberPhoto':orderNumberPhoto}));
     }
     return new Observable<any>();
   }

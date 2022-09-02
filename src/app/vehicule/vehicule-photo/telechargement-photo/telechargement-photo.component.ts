@@ -19,23 +19,26 @@ class ImageSnippet {
 
 export class TelechargementPhotoComponent {
 
-  selectedFiles!: FileList;
-  currentFile?: File;
-  fileImage!: FileImage;
-  progressInfos: any[] = [];
-  message = '';
-  fileInfos?: Observable<any>;
-  messageErrorKeys = MessageErrorKeys
-  messageKeys = MessageKeys
   @Input()
   vehiculeId :string = '';
-  orderPhoto!: number
+
+  selectedFiles!: FileList;
+  photoLenght: number = 0;
+  progressInfos: any[] = [];
+  photos: any[] = [];
+  message = '';
+  messageErrorKeys = MessageErrorKeys
+  messageKeys = MessageKeys
 
   constructor(private imageService: VehiculePhotoService,
-              private readonly _snackBar: MatSnackBar){
+              private readonly _snackBar: MatSnackBar, private vehiculePhotoService: VehiculePhotoService){
   }
 
   ngOnInit(): void {
+    this.vehiculePhotoService.getPhotoByIdVehicule(this.vehiculeId).subscribe(photos => {
+      this.photos = photos;
+      this.photoLenght = photos.length;
+    })
   }
 
   selectFiles(event: any): void {
@@ -44,8 +47,10 @@ export class TelechargementPhotoComponent {
   }
 
   uploadFiles(): void {
+    console.log("upload")
     for (let i = 0; i < this.selectedFiles.length; i++) {
-      this.upload(i, this.selectedFiles[i]);
+
+      this.upload(i+1, this.selectedFiles[i]);
     }
 
     console.log("Upload file after for");
@@ -56,7 +61,7 @@ export class TelechargementPhotoComponent {
     if (this.selectedFiles) {
       this.progressInfos[idx] = { value: 0, fileName: file.name };
         if (file && this.vehiculeId) {
-          this.imageService.upload(file, this.vehiculeId).subscribe(
+          this.imageService.upload(file, this.vehiculeId, this.photoLenght+idx).subscribe(
             (event: any) => {
               if (event.message) {
                 this.progressInfos[idx] = {value: Math.round(100 * event.loaded / event.total)};
