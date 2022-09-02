@@ -1,4 +1,4 @@
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {ApiUrlConst} from 'src/environments/path/api-url-const';
@@ -28,10 +28,10 @@ export class VehiculePhotoService {
     return this.httpCustom.get(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
   }
 
-  public updateVehicule(id: string, orderNumberPhoto: number): Observable<any> {
+  public updateVehiculePhoto(id: string, orderNumberPhoto: number): Observable<any> {
     if(id) {
       const url = `${this.urlVehiculePhoto}/${id}`;
-      return this.httpCustom.patch<any>(GenericRequest.buildSendRequest(url,orderNumberPhoto));
+      return this.httpCustom.post<any>(GenericRequest.buildSendRequest(url,undefined, {'orderNumberPhoto':orderNumberPhoto}));
     }
     return new Observable<any>();
   }

@@ -46,8 +46,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
     this.photos.forEach((photo) => {
       this.photoListEnBase.forEach((value, key) => {
         if(photo.id == key && photo.ordre != value) {
-          console.log("cette element doit être sauvegarder !!")
-          this.vehiculePhotoService.updateVehicule(key, value)
+          this.vehiculePhotoService.updateVehiculePhoto(key, photo.ordre).subscribe({ })
         }
       })
      })
