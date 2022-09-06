@@ -21,19 +21,12 @@ export class VehiculeGestionPhotoComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("ouverture popup gestion photo")
-    if(this.data && this.data.vehiculeId) {
+    if(this.data && this.data.photos) {
       this.vehiculeId = this.data.vehiculeId;
-      this.getPhotosVehicule(this.vehiculeId);
-      // Recherche de la liste des images
-      // Recherche de l'ordre des images
+      this.photos = this.data.photos;
     }
   }
 
-  getPhotosVehicule(idVehicule:string) {
-    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
-      this.photos = photos;
-    })
-  }
   titreSelectionne(value: number) {
     this.showOrderPicture = value == 1 ? true : false;
     this.showAddpicture = value == 2 ? true : false;

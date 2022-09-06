@@ -13,6 +13,7 @@ import {ClientService} from "../../api/services/client.service";
 import {MatSort, Sort} from "@angular/material/sort";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 import Swiper from "swiper";
+import { VehiculePhoto } from 'src/app/api/models/vehiculePhoto';
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -35,7 +36,7 @@ export class VehiculeDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.vehicule && this.vehicule.id) {
+    if (this.vehicule && this.vehicule.id) {
       this.getPhotosVehicule(this.vehicule.id);
     }
   }
@@ -68,9 +69,9 @@ export class VehiculeDetailComponent implements OnInit {
     let nbMain = "";
     if (this.vehicule && this.vehicule.nbMain) {
       if (this.vehicule.nbMain > 1) {
-        nbMain = this.vehicule.nbMain+"ème main";
+        nbMain = this.vehicule.nbMain + "ème main";
       } else {
-        nbMain = this.vehicule.nbMain+"ère main";
+        nbMain = this.vehicule.nbMain + "ère main";
       }
     }
 
@@ -82,11 +83,11 @@ export class VehiculeDetailComponent implements OnInit {
       width: '1000px',
       disableClose: false,
       data: {
-        clientOrVehicule : CommonFormKey.VEHICULE,
+        clientOrVehicule: CommonFormKey.VEHICULE,
         clientOrVehiculeObject: this.vehicule
       }
     }).afterClosed().subscribe((result: any) => {
-      if(result && result.object) {
+      if (result && result.object) {
         this.vehicule = result.object;
         this._snackBar.open(this.messageFormKeys.NOTE_VEHICULE, 'OK');
       }
@@ -97,6 +98,7 @@ export class VehiculeDetailComponent implements OnInit {
     return this.dialog.open(VehiculeGestionPhotoComponent, {
       width: 'auto',
       data: {
+        photos: this.photos,
         vehiculeId: this.vehicule.id
       }
     }).afterClosed();
@@ -106,16 +108,22 @@ export class VehiculeDetailComponent implements OnInit {
     // this.documentService.generateContratPdf(this.vehicule?.id);
     this.documentService.generateContratPdf(this.vehicule?.id).subscribe(
       (response) => {
-        let file = new Blob([response], { type: 'application/pdf' });
+        let file = new Blob([response], {type: 'application/pdf'});
         var fileURL = URL.createObjectURL(file);
         window.open(fileURL);
 
-        }
+      }
     );
   }
 
-  getPhotosVehicule(idVehicule:string) {
-    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe(photos => {
+  getPhotosVehicule(idVehicule: string) {
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photos: VehiculePhoto[]) => {
+      console.log("getPhotos");
+
+      photos.forEach((photo: VehiculePhoto) => {
+        console.log("Convert image");
+        this.vehiculePhotoService.convertImgToUrl(photo);
+      });
       this.photos = photos;
     })
   }

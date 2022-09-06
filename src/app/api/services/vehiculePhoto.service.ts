@@ -6,13 +6,14 @@ import {environment} from "../../../environments/environment";
 import {HttpService} from "./http/http.service";
 import {GenericRequest} from "./http/generic-request.service";
 import { VehiculePhoto } from '../models/vehiculePhoto';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Injectable()
 export class VehiculePhotoService {
 
   private readonly urlVehiculePhoto = ApiUrlConst.VEHICULE_PHOTO;
 
-  constructor(private http: HttpClient, private readonly httpCustom: HttpService) {}
+  constructor(private http: HttpClient, private readonly httpCustom: HttpService, private sanitizer: DomSanitizer) {}
 
   public upload(image: File, vehiculeId: string, orderNumberPhoto: number): Observable<any>{
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
@@ -25,7 +26,7 @@ export class VehiculePhotoService {
 
   public getPhotoByIdVehicule(idVehicule: string) : Observable<any>{
     let url = `${this.urlVehiculePhoto}/all` ;
-    return this.httpCustom.get(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
+    return this.httpCustom.get<VehiculePhoto[]>(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
   }
 
   public updateVehiculePhoto(id: string, orderNumberPhoto: number): Observable<any> {
@@ -34,5 +35,14 @@ export class VehiculePhotoService {
       return this.httpCustom.post<any>(GenericRequest.buildSendRequest(url,undefined, {'orderNumberPhoto':orderNumberPhoto}));
     }
     return new Observable<any>();
+  }
+
+  /**
+   * Converti l'image en Url pour être lu dans une balise Img
+   * @param photo
+   */
+  public convertImgToUrl(photo: VehiculePhoto) {
+    let objectURL = 'data:image/png;base64,' + photo.data;
+    photo.url = this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 }

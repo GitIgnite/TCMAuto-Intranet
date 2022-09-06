@@ -2,6 +2,7 @@ import {Component, Input, OnInit, SimpleChange, SimpleChanges, ViewChild} from '
 import {DomSanitizer} from "@angular/platform-browser";
 import Swiper, {SwiperOptions} from "swiper";
 import {SwiperComponent} from "swiper/angular";
+import {VehiculePhoto} from "../../../api/models/vehiculePhoto";
 
 @Component({
   selector: 'app-swiper-img',
@@ -11,7 +12,7 @@ import {SwiperComponent} from "swiper/angular";
 export class SwiperImgComponent implements OnInit {
 
   @Input()
-  public images: any[] = [];
+  public images: VehiculePhoto[] = [];
 
   selectedIndex : number = 0 ;
 
@@ -33,11 +34,6 @@ export class SwiperImgComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-  }
-
-  displayImage(imageByteArray: any) {
-    let objectURL = 'data:image/png;base64,' + imageByteArray;
-    return this.sanitizer.bypassSecurityTrustUrl(objectURL);
   }
 
   next() {
