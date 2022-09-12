@@ -31,6 +31,7 @@ export class VehiculePhotoService {
 
   public updateVehiculePhoto(id: string, orderNumberPhoto: number): Observable<any> {
     if(id) {
+      console.log("test update")
       const url = `${this.urlVehiculePhoto}/${id}`;
       return this.httpCustom.post<any>(GenericRequest.buildSendRequest(url,undefined, {'orderNumberPhoto':orderNumberPhoto}));
     }

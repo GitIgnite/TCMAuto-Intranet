@@ -18,7 +18,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   vehiculeId: string = '';
 
   dropId!: string;
-  photos: VehiculePhoto[] = [];
+  photos: any[] = [];
   photoListEnBase = new Map<string, number>();
 
   options: GridsterConfig = {
@@ -45,6 +45,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    console.log("Ng on destroyyyyyyy")
     this.photos.forEach((photo) => {
       this.photoListEnBase.forEach((value, key) => {
         if (photo.ordre && photo.id == key && photo.ordre != value) {
@@ -55,7 +56,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   }
 
   getPhotosVehicule(idVehicule: string) {
-    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photoById: VehiculePhoto[]) => {
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photoById: any[]) => {
 
       photoById.forEach((photo: VehiculePhoto) => this.vehiculePhotoService.convertImgToUrl(photo));
 
