@@ -45,7 +45,6 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log("Ng on destroyyyyyyy")
     this.photos.forEach((photo) => {
       this.photoListEnBase.forEach((value, key) => {
         if (photo.ordre && photo.id == key && photo.ordre != value) {

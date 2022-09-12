@@ -4,7 +4,7 @@
       <div class="row">
         <div class="d-inline-block position-relative col-6 p-0">
           <img *ngIf="vehicule && vehicule.vehiculePhotos && vehicule.vehiculePhotos[0]" class="image-vehicule"  [src]="vehicule.vehiculePhotos[0].url" [alt]="" />
-          <img *ngIf="!vehicule || !vehicule.vehiculePhotos || !vehicule.vehiculePhotos[0]" class="image-vehicule"  src="assets/images/pas-image.png" [alt]="" />
+          <img *ngIf="!vehicule || !vehicule.vehiculePhotos || !vehicule.vehiculePhotos[0]" class="image-vehicule w-100"  src="assets/images/pas-image.png" [alt]="" />
         </div>
         <div class="d-inline-block position-relative col-6 p-0">
           <div class="mat-card-titre text-left container">
