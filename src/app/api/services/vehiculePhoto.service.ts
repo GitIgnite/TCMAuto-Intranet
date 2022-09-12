@@ -42,7 +42,9 @@ export class VehiculePhotoService {
    * @param photo
    */
   public convertImgToUrl(photo: VehiculePhoto) {
-    let objectURL = 'data:image/png;base64,' + photo.data;
-    photo.url = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+    if(photo && photo.data) {
+      let objectURL = 'data:image/png;base64,' + photo.data;
+      photo.url = this.sanitizer.bypassSecurityTrustUrl(objectURL);
+    }
   }
 }

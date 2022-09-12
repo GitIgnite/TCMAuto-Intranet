@@ -3,7 +3,8 @@
     <div class="container header-vehicule-card">
       <div class="row">
         <div class="d-inline-block position-relative col-6 p-0">
-          <img class="image-vehicule" alt="TCM voiture" src="/assets/images/voiture.png">
+          <img *ngIf="vehicule && vehicule.vehiculePhotos && vehicule.vehiculePhotos[0]" class="image-vehicule"  [src]="vehicule.vehiculePhotos[0].url" [alt]="" />
+          <img *ngIf="!vehicule || !vehicule.vehiculePhotos || !vehicule.vehiculePhotos[0]" class="image-vehicule"  src="assets/images/pas-image.png" [alt]="" />
         </div>
         <div class="d-inline-block position-relative col-6 p-0">
           <div class="mat-card-titre text-left container">

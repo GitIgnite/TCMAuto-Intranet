@@ -17,6 +17,7 @@ import {CategorieService} from "../../api/services/categorie.service";
 import {Energie} from "../../api/models/Energie";
 import {EnergieService} from "../../api/services/energie.service";
 import {BoiteVitesseEnum} from "../../common/enum/VehiculeEnum";
+import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 
 @Component({
   selector: 'app-vehicule-recherche',
@@ -59,7 +60,8 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
               private energieService: EnergieService,
               private vehiculeService: VehiculeService,
               private readonly dialog: MatDialog,
-              private readonly _snackBar: MatSnackBar) {
+              private readonly _snackBar: MatSnackBar,
+              private readonly vehiculePhotoService: VehiculePhotoService) {
   }
 
   ngOnInit(): void {
@@ -109,6 +111,13 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
 
     this.vehiculeService.getVehiculeByRecherche(vehiculeSearchFormData, this.sortBy, this.pageSize, this.pageIndex).pipe().subscribe(data => {
       this.vehicules = data.content;
+      this.vehicules.forEach((vehicule:Vehicule) => {
+        console.log("Test first image")
+        if(vehicule.vehiculePhotos) {
+          this.vehiculePhotoService.convertImgToUrl(vehicule.vehiculePhotos[0]);
+        }
+      })
+
       if(!this.paginator) {
         this.paginator = data.pageable;
       }

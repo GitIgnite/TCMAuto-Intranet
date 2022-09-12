@@ -118,7 +118,6 @@ export class VehiculeDetailComponent implements OnInit {
 
   getPhotosVehicule(idVehicule: string) {
     this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photos: VehiculePhoto[]) => {
-      console.log("getPhotos");
 
       photos.forEach((photo: VehiculePhoto) => {
         console.log("Convert image");

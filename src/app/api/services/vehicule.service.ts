@@ -6,6 +6,7 @@ import {HttpService} from "./http/http.service";
 import {GenericRequest} from "./http/generic-request.service";
 import {Sort} from "@angular/material/sort";
 import {HttpParams} from "@angular/common/http";
+import {VehiculePhoto} from "../models/vehiculePhoto";
 
 @Injectable()
 export class VehiculeService {
