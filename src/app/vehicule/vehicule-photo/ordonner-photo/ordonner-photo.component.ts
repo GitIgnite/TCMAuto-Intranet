@@ -57,8 +57,6 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   getPhotosVehicule(idVehicule: string) {
     this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photoById: any[]) => {
 
-      photoById.forEach((photo: VehiculePhoto) => this.vehiculePhotoService.convertImgToUrl(photo));
-
       photoById.forEach((photoId: any) => {
         this.photoListEnBase.set(photoId.id, photoId.ordre);
       })

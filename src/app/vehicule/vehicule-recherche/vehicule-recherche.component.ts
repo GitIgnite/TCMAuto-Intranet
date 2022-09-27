@@ -18,6 +18,7 @@ import {Energie} from "../../api/models/Energie";
 import {EnergieService} from "../../api/services/energie.service";
 import {BoiteVitesseEnum} from "../../common/enum/VehiculeEnum";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
+import {VehiculePhoto} from "../../api/models/vehiculePhoto";
 
 @Component({
   selector: 'app-vehicule-recherche',
@@ -111,16 +112,11 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
 
     this.vehiculeService.getVehiculeByRecherche(vehiculeSearchFormData, this.sortBy, this.pageSize, this.pageIndex).pipe().subscribe(data => {
       this.vehicules = data.content;
-      this.vehicules.forEach((vehicule:Vehicule) => {
-        console.log("Test first image")
-        if(vehicule.vehiculePhotos) {
-          this.vehiculePhotoService.convertImgToUrl(vehicule.vehiculePhotos[0]);
-        }
-      })
 
       if(!this.paginator) {
         this.paginator = data.pageable;
       }
+
       this.paginator.length = data.totalElements;
       this.paginator.pageIndex = data.pageable.pageNumber;
       this.paginator.pageSize = data.pageable.pageSize;

@@ -24,6 +24,11 @@ export class VehiculePhotoService {
     return this.http.post<any>(url,file,{params:param});
   }
 
+  public getFirstByVehiculeId(idVehicule: string) : Observable<any>{
+    let url = `${this.urlVehiculePhoto}/firstImage` ;
+    return this.httpCustom.get<VehiculePhoto[]>(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
+  }
+
   public getPhotoByIdVehicule(idVehicule: string) : Observable<any>{
     let url = `${this.urlVehiculePhoto}/all` ;
     return this.httpCustom.get<VehiculePhoto[]>(GenericRequest.buildSearchRequest(url, undefined, undefined, {'vehiculeId': idVehicule}));
@@ -38,14 +43,4 @@ export class VehiculePhotoService {
     return new Observable<any>();
   }
 
-  /**
-   * Converti l'image en Url pour être lu dans une balise Img
-   * @param photo
-   */
-  public convertImgToUrl(photo: VehiculePhoto) {
-    if(photo && photo.data) {
-      let objectURL = 'data:image/png;base64,' + photo.data;
-      photo.url = this.sanitizer.bypassSecurityTrustUrl(objectURL);
-    }
-  }
 }
