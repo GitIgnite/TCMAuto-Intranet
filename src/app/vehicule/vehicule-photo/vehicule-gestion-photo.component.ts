@@ -20,7 +20,6 @@ export class VehiculeGestionPhotoComponent implements OnInit {
               private vehiculePhotoService: VehiculePhotoService) { }
 
   ngOnInit(): void {
-    console.log("ouverture popup gestion photo")
     if(this.data && this.data.photos) {
       this.vehiculeId = this.data.vehiculeId;
       this.photos = this.data.photos;

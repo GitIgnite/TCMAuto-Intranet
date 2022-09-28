@@ -13,28 +13,28 @@ export class VehiculeService {
 
   private readonly urlVehicule = ApiUrlConst.VEHICULE;
 
-  constructor(private readonly http: HttpService) {
+  constructor(private readonly httpCustom: HttpService) {
   }
 
   public getAll(): Observable<any>{
     const url = `${this.urlVehicule}/all`;
-    return this.http.get(GenericRequest.buildSearchRequest(url));
+    return this.httpCustom.get(GenericRequest.buildSearchRequest(url));
   }
 
   public createVehicule(vehicule: Vehicule): Observable<Vehicule> {
     const url = `${this.urlVehicule}/create`;
-    return this.http.post<Vehicule>(GenericRequest.buildSendRequest(url,vehicule));
+    return this.httpCustom.post<Vehicule>(GenericRequest.buildSendRequest(url,vehicule));
   }
 
   public getVehiculeByRecherche(vehiculeSearchFormDatas: any, sort: Sort, pageSize: number, pageIndex: number): Observable<any>{
     const url = `${this.urlVehicule}/recherche`;
-    return this.http.get(GenericRequest.buildSearchRequest(url, pageIndex, pageSize, vehiculeSearchFormDatas, sort));
+    return this.httpCustom.get(GenericRequest.buildSearchRequest(url, pageIndex, pageSize, vehiculeSearchFormDatas, sort));
   }
 
   public updateVehicule(id: string | undefined, mapUpdate: any): Observable<Vehicule> {
     if(id) {
       const url = `${this.urlVehicule}/${id}`;
-      return this.http.patch<Vehicule>(GenericRequest.buildSendRequest(url,mapUpdate));
+      return this.httpCustom.patch<Vehicule>(GenericRequest.buildSendRequest(url,mapUpdate));
     }
     return new Observable<Vehicule>();
   }

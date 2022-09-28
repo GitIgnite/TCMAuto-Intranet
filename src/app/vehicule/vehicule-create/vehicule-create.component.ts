@@ -66,7 +66,6 @@ export class VehiculeCreateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if(this.data && this.data.vehicule) {
       this.vehiculeToEdit = this.data.vehicule;
-      console.log("init edit vehicule")
       if(this.vehiculeToEdit && this.vehiculeToEdit.id) {
         this.$mandatObs =  this.mandatService.getMandatByVehicule(this.vehiculeToEdit.id);
       }

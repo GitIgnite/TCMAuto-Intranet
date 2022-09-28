@@ -14,6 +14,7 @@ import {MatSort, Sort} from "@angular/material/sort";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 import Swiper from "swiper";
 import { VehiculePhoto } from 'src/app/api/models/vehiculePhoto';
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -101,7 +102,12 @@ export class VehiculeDetailComponent implements OnInit {
         photos: this.photos,
         vehiculeId: this.vehicule.id
       }
-    }).afterClosed();
+    }).afterClosed().pipe(take(1)).subscribe(result => {
+      if(this.vehicule && this.vehicule.id) {
+        this.getPhotosVehicule(this.vehicule.id)
+      }
+    })
+
   }
 
   generateContratPdf() {

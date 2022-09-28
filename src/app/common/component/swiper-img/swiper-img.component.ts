@@ -45,7 +45,6 @@ export class SwiperImgComponent implements OnInit {
   }
 
   slideTo(index: number) {
-    console.log("Slide To : " + index);
     if(this.swiper) {
       this.selectedIndex = index;
       this.swiper.swiper.slideTo(index, 0)
