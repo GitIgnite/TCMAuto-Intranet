@@ -1,0 +1,5 @@
+<gridster [options]="options">
+  <gridster-item *ngFor="let item of photos" [item]="item" (itemChange)="checkChange($event)">
+    <img [src]="item.url" class="photo" />
+  </gridster-item>
+</gridster>

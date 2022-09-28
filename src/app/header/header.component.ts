@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.tokenService.userConnected.subscribe(value => {
       this.userConnected = value;
-      console.log("Login : " +value)
     } );
   }
 

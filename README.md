@@ -61,8 +61,6 @@ const app = express();
 const port = process.env.PORT || 8080
 
 // ---- SERVE STATIC FILES ---- //
-console.log("server : "+app)
-console.log("server.server : "+app.server)
 
 // On lance le serveur grace au build (dossier dist/TCMAuto-INTRANET)
 app.use('/', express.static(_app_folder));
@@ -139,7 +137,6 @@ En mode prod, le lancement du serveur est différent du mode dev. Il lance l'app
   constructor(private http: HttpClient) {}
 
   public upload(fileImage: FileImage): Observable<any>{
-    console.log("Service upload image")
     let url = `${environment.backendServer}/tcmauto${this.urlVehiculePhoto}/upload` ;
     var file = new FormData();
     var image: File = fileImage.file;

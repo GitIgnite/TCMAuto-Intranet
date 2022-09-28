@@ -27,7 +27,7 @@
                 color="primary"
                 type="submit"
                 class="d-flex align-items-center"
-                [disabled]="rechercheClientForm?.invalid">
+                [disabled]="!rechercheClientForm || rechercheClientForm.invalid">
           Rechercher
           <mat-icon class="button-icon ml-1" matSuffix>search</mat-icon>
         </button>

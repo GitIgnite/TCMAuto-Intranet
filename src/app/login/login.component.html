@@ -1,4 +1,3 @@
-<div class="col-md-12">
   <div class="card card-container">
     <form class="container" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
@@ -20,10 +19,9 @@
                 color="primary"
                 type="submit"
                 class="d-flex align-items-center"
-                [disabled]="loginForm?.invalid">
+                [disabled]="!loginForm || loginForm.invalid">
           Se connecter
         </button>
       </div>
     </form>
   </div>
-</div>

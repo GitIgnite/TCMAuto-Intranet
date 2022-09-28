@@ -274,7 +274,6 @@ export class HttpService {
      * @returns {string} - URL de destination de la requête
      */
     private static buildUrl(request: CustomRequest): string {
-      console.log(`${environment.backendServer}${environment.apiRoot}${request.url}`);
         return `${environment.backendServer}${environment.apiRoot}${request.url}`;
     }
 

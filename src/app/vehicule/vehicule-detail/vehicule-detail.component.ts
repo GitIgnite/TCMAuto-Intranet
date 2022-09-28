@@ -7,10 +7,14 @@ import {MessageKeys} from "../../common/form/keys/message-keys";
 import {VehiculeCreateComponent} from "../vehicule-create/vehicule-create.component";
 import {NoteComponent} from "../../common/component/note/note.component";
 import {CommonFormKey} from "../../common/form/keys/common-form-key";
-import {VehiculePhotoComponent} from '../vehicule-photo/vehicule-photo.component';
+import {VehiculeGestionPhotoComponent} from '../vehicule-photo/vehicule-gestion-photo.component';
 import {DocumentService} from "../../api/services/document.service";
 import {ClientService} from "../../api/services/client.service";
 import {MatSort, Sort} from "@angular/material/sort";
+import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
+import Swiper from "swiper";
+import { VehiculePhoto } from 'src/app/api/models/vehiculePhoto';
+import {take} from "rxjs";
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -21,16 +25,21 @@ export class VehiculeDetailComponent implements OnInit {
 
   @Output() cacherDetailEmit = new EventEmitter();
   @Input() vehicule!: Vehicule;
+  public photos: any = [];
+
   messageFormKeys = MessageKeys;
 
   constructor(private readonly dialog: MatDialog,
               private readonly _snackBar: MatSnackBar,
               private readonly documentService: DocumentService,
-              private readonly clientService: ClientService) {
+              private readonly clientService: ClientService,
+              private vehiculePhotoService: VehiculePhotoService) {
   }
 
   ngOnInit(): void {
-
+    if (this.vehicule && this.vehicule.id) {
+      this.getPhotosVehicule(this.vehicule.id);
+    }
   }
 
   openEquipementDialog() {
@@ -61,9 +70,9 @@ export class VehiculeDetailComponent implements OnInit {
     let nbMain = "";
     if (this.vehicule && this.vehicule.nbMain) {
       if (this.vehicule.nbMain > 1) {
-        nbMain = this.vehicule.nbMain+"ème main";
+        nbMain = this.vehicule.nbMain + "ème main";
       } else {
-        nbMain = this.vehicule.nbMain+"ère main";
+        nbMain = this.vehicule.nbMain + "ère main";
       }
     }
 
@@ -75,11 +84,11 @@ export class VehiculeDetailComponent implements OnInit {
       width: '1000px',
       disableClose: false,
       data: {
-        clientOrVehicule : CommonFormKey.VEHICULE,
+        clientOrVehicule: CommonFormKey.VEHICULE,
         clientOrVehiculeObject: this.vehicule
       }
-    }).afterClosed().subscribe(result => {
-      if(result && result.object) {
+    }).afterClosed().subscribe((result: any) => {
+      if (result && result.object) {
         this.vehicule = result.object;
         this._snackBar.open(this.messageFormKeys.NOTE_VEHICULE, 'OK');
       }
@@ -87,23 +96,36 @@ export class VehiculeDetailComponent implements OnInit {
   }
 
   openPictureDialog() {
-    return this.dialog.open(VehiculePhotoComponent, {
-      width: '1000px',
+    return this.dialog.open(VehiculeGestionPhotoComponent, {
+      width: 'auto',
       data: {
-        vehiculeCourrant: this.vehicule
+        photos: this.photos,
+        vehiculeId: this.vehicule.id
       }
-    }).afterClosed();
+    }).afterClosed().pipe(take(1)).subscribe(result => {
+      if(this.vehicule && this.vehicule.id) {
+        this.getPhotosVehicule(this.vehicule.id)
+      }
+    })
+
   }
 
   generateContratPdf() {
     // this.documentService.generateContratPdf(this.vehicule?.id);
     this.documentService.generateContratPdf(this.vehicule?.id).subscribe(
       (response) => {
-        let file = new Blob([response], { type: 'application/pdf' });
+        let file = new Blob([response], {type: 'application/pdf'});
         var fileURL = URL.createObjectURL(file);
         window.open(fileURL);
 
-        }
+      }
     );
   }
+
+  getPhotosVehicule(idVehicule: string) {
+    this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photos: VehiculePhoto[]) => {
+      this.photos = photos;
+    })
+  }
+
 }

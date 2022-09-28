@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {CommonFormKey} from "../../form/keys/common-form-key";
 import {VehiculeService} from "../../../api/services/vehicule.service";
 import {ClientService} from "../../../api/services/client.service";
@@ -17,13 +17,13 @@ import {Mandat} from "../../../api/models/Mandat";
 })
 export class NoteComponent implements OnInit {
 
-  noteForm!: FormGroup;
+  noteForm!: UntypedFormGroup;
   commonFormKeys = CommonFormKey;
   clientOrVehicule = this.commonFormKeys.VEHICULE;
   clientOrVehiculeObject: Client | Vehicule | null = null;
   $noteObs: Observable<Client|Vehicule> = new Subject();
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<NoteComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private vehiculeService: VehiculeService, private clientService: ClientService) {

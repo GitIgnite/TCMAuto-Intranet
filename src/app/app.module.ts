@@ -46,29 +46,27 @@ import {CategorieService} from "./api/services/categorie.service";
 import {EnergieService} from "./api/services/energie.service";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {EquipementsComponent} from './vehicule/gestion-equipement/equipements/equipements.component';
-import {
-  EquipementAdditionnelsComponent
-} from './vehicule/gestion-equipement/equipement-additionnels/equipement-additionnels.component';
+import {EquipementAdditionnelsComponent} from './vehicule/gestion-equipement/equipement-additionnels/equipement-additionnels.component';
 import {EquipementService} from './api/services/equipement.service';
 import {NotificationComponent} from "./common/component/notification/notification.component";
 import {HttpService} from "./api/services/http/http.service";
 import {VehiculeDetailComponent} from './vehicule/vehicule-detail/vehicule-detail.component';
-import {
-  VehiculeResultatRechercheComponent
-} from './vehicule/vehicule-resultat-recherche/vehicule-resultat-recherche.component';
+import {VehiculeResultatRechercheComponent} from './vehicule/vehicule-resultat-recherche/vehicule-resultat-recherche.component';
 import {VehiculeEquipementService} from './api/services/vehiculeEquipement.service';
 import {MandatService} from "./api/services/mandat.service";
 import {VariablesGlobales} from './variablesGlobales';
 import {NoteComponent} from './common/component/note/note.component';
-import {VehiculePhotoComponent} from './vehicule/vehicule-photo/vehicule-photo.component';
+import {VehiculeGestionPhotoComponent} from './vehicule/vehicule-photo/vehicule-gestion-photo.component';
 import {DocumentService} from "./api/services/document.service";
 import {LoginComponent} from './login/login.component';
 import {authInterceptorProviders} from "./authentification/auth.interceptor";
 import {AuthGuardService} from "./authentification/auth-guard.service";
-import {
-  TelechargementPhotoComponent
-} from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
-import {ImageService} from './api/services/image.service';
+import {TelechargementPhotoComponent} from './vehicule/vehicule-photo/telechargement-photo/telechargement-photo.component';
+import {VehiculePhotoService} from './api/services/vehiculePhoto.service';
+import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/ordonner-photo.component';
+import {SwiperImgComponent} from './common/component/swiper-img/swiper-img.component';
+import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
+import {GridsterModule} from 'angular-gridster2';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -91,9 +89,11 @@ const appearance: MatFormFieldDefaultOptions = {
     VehiculeDetailComponent,
     VehiculeResultatRechercheComponent,
     NoteComponent,
-    VehiculePhotoComponent,
+    VehiculeGestionPhotoComponent,
     LoginComponent,
-    TelechargementPhotoComponent
+    TelechargementPhotoComponent,
+    OrdonnerPhotoComponent,
+    SwiperImgComponent
   ],
   imports: [
     BrowserModule,
@@ -121,9 +121,11 @@ const appearance: MatFormFieldDefaultOptions = {
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonToggleModule,
-    MatCardModule
+    MatCardModule,
+    NgxUsefulSwiperModule,
+    GridsterModule,
   ],
-    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, ImageService, {
+    providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
     useValue: appearance
   },

@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {ClientFormKeys} from "../../common/form/keys/client-form-keys";
 import {ClientService} from "../../api/services/client.service";
 import {Client} from "../../api/models/Client";
@@ -17,13 +17,13 @@ import {DatePipe} from "@angular/common";
 })
 export class ClientCreateComponent implements OnInit {
 
-  createClientForm! : FormGroup;
+  createClientForm! : UntypedFormGroup;
   clientFormKeys = ClientFormKeys;
   messageErrorKeys = MessageErrorKeys;
   listAdresse: Adresse[] = [];
   clientToEdit! : Client;
   // filteredOptions: Observable<Adresse[]> | undefined;
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<ClientCreateComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private clientService: ClientService,

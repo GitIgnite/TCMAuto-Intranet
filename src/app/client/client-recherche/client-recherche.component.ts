@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
 import {ClientFormKeys} from "../../common/form/keys/client-form-keys";
 import {ClientService} from "../../api/services/client.service";
 import {ClientCreateComponent} from "../client-create/client-create.component";
@@ -20,7 +20,7 @@ import {CommonFormKey} from "../../common/form/keys/common-form-key";
 })
 export class ClientRechercheComponent implements OnInit, AfterViewInit {
 
-  rechercheClientForm! : FormGroup;
+  rechercheClientForm! : UntypedFormGroup;
   clientFormKeys = ClientFormKeys;
   displayedColumns: string[] = ['nom', 'telephone', 'email', 'actions'];
   clients : any [] = [];
@@ -44,7 +44,7 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
   }
 
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               private clientService: ClientService,
               private readonly dialog: MatDialog,
               private readonly _snackBar: MatSnackBar) { }

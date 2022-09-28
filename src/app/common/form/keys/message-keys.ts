@@ -8,4 +8,5 @@ export class MessageKeys {
   public static readonly EDIT_VEHICULE = 'Le véhicule a été modifié';
   public static readonly DELETE_VEHICULE = 'Le véhicule a été supprimé';
   public static readonly NOTE_VEHICULE = 'La note du véhicule a bien été mise à jour';
+  public static readonly SUCCES_UPLOAD = 'Fichier(s) téléchargé(s) avec succès';
 }

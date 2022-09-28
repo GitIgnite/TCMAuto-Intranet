@@ -3,6 +3,7 @@ import { Marque } from "./Marque";
 import { Modele } from "./Modele";
 import {Categorie} from "./Categorie";
 import {Energie} from "./Energie";
+import {VehiculePhoto} from "./vehiculePhoto";
 
 export class Vehicule {
   	id?: string;
@@ -36,6 +37,7 @@ export class Vehicule {
     clientFacture?: string;
     nbPlace?: number;
     note?: string;
+    vehiculePhotos?: VehiculePhoto[];
 
 
     constructor(id?: string, modele?: Modele, marque?: Marque, client?: Client, versionVehicule?: string, categorie?: Categorie,

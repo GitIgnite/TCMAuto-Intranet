@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {UntypedFormBuilder, UntypedFormGroup} from '@angular/forms';
 import {VehiculeFormKey} from 'src/app/common/form/keys/vehicule-form-key';
 import {Marque} from 'src/app/api/models/Marque';
 import {ModeleService} from '../../api/services/modele.service';
@@ -17,6 +17,8 @@ import {CategorieService} from "../../api/services/categorie.service";
 import {Energie} from "../../api/models/Energie";
 import {EnergieService} from "../../api/services/energie.service";
 import {BoiteVitesseEnum} from "../../common/enum/VehiculeEnum";
+import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
+import {VehiculePhoto} from "../../api/models/vehiculePhoto";
 
 @Component({
   selector: 'app-vehicule-recherche',
@@ -25,7 +27,7 @@ import {BoiteVitesseEnum} from "../../common/enum/VehiculeEnum";
 })
 export class VehiculeRechercheComponent implements OnInit, OnDestroy {
 
-  rechercheVehiculeForm!: FormGroup;
+  rechercheVehiculeForm!: UntypedFormGroup;
   vehiculeFormKey = VehiculeFormKey;
   marques: Marque[] = [];
   modeles: Modele[] = [];
@@ -53,13 +55,14 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
   afficherDetail: boolean = false;
   vehiculeDetail!: Vehicule;
 
-  constructor(private readonly fb: FormBuilder,
+  constructor(private readonly fb: UntypedFormBuilder,
               private modeleService: ModeleService,
               private categorieService: CategorieService,
               private energieService: EnergieService,
               private vehiculeService: VehiculeService,
               private readonly dialog: MatDialog,
-              private readonly _snackBar: MatSnackBar) {
+              private readonly _snackBar: MatSnackBar,
+              private readonly vehiculePhotoService: VehiculePhotoService) {
   }
 
   ngOnInit(): void {
@@ -109,9 +112,11 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
 
     this.vehiculeService.getVehiculeByRecherche(vehiculeSearchFormData, this.sortBy, this.pageSize, this.pageIndex).pipe().subscribe(data => {
       this.vehicules = data.content;
+
       if(!this.paginator) {
         this.paginator = data.pageable;
       }
+
       this.paginator.length = data.totalElements;
       this.paginator.pageIndex = data.pageable.pageNumber;
       this.paginator.pageSize = data.pageable.pageSize;
