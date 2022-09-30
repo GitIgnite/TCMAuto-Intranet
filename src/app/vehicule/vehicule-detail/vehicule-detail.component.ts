@@ -10,10 +10,8 @@ import {CommonFormKey} from "../../common/form/keys/common-form-key";
 import {VehiculeGestionPhotoComponent} from '../vehicule-photo/vehicule-gestion-photo.component';
 import {DocumentService} from "../../api/services/document.service";
 import {ClientService} from "../../api/services/client.service";
-import {MatSort, Sort} from "@angular/material/sort";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
-import Swiper from "swiper";
-import { VehiculePhoto } from 'src/app/api/models/vehiculePhoto';
+import {VehiculePhoto} from 'src/app/api/models/vehiculePhoto';
 import {take} from "rxjs";
 
 @Component({
