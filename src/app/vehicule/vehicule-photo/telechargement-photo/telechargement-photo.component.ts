@@ -1,11 +1,10 @@
-import { HttpResponse } from '@angular/common/http';
-import {Component, Input} from '@angular/core';
-import { Observable } from 'rxjs';
-import { FileImage } from 'src/app/api/models/FileImage';
-import { VehiculePhotoService } from 'src/app/api/services/vehiculePhoto.service';
+import {HttpResponse} from '@angular/common/http';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {VehiculePhotoService} from 'src/app/api/services/vehiculePhoto.service';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageErrorKeys} from "../../../common/form/keys/message-error-keys";
-import { MessageKeys } from 'src/app/common/form/keys/message-keys';
+import {MessageKeys} from 'src/app/common/form/keys/message-keys';
+import {VehiculePhoto} from "../../../api/models/vehiculePhoto";
 
 class ImageSnippet {
   constructor(public src: string, public file: File) {}
@@ -21,6 +20,8 @@ export class TelechargementPhotoComponent {
 
   @Input()
   vehiculeId :string = '';
+
+  @Output() addImageEmitter = new EventEmitter<VehiculePhoto>();
 
   selectedFiles!: FileList;
   photoLenght: number = 0;
@@ -59,15 +60,13 @@ export class TelechargementPhotoComponent {
       this.progressInfos[idx] = { value: 0, fileName: file.name };
         if (file && this.vehiculeId) {
           this.imageService.upload(file, this.vehiculeId, this.photoLenght+idx).subscribe(
-            (event: any) => {
-              if (event.message) {
-                this.progressInfos[idx] = {value: Math.round(100 * event.loaded / event.total)};
+            (vehiculePhoto: VehiculePhoto) => {
+              if (vehiculePhoto) {
+                this.progressInfos[idx] = {value: 100};
                 this._snackBar.open(this.messageKeys.SUCCES_UPLOAD, 'succes', {
                   duration: 1500
                 });
-              } else if (event instanceof HttpResponse) {
-                this.message = event.body.message;
-                //this.imageService.getPhotoByIdVehicule(this.vehiculeId)
+                this.addImageEmitter.emit(vehiculePhoto);
               }
             },
             (err: any) => {

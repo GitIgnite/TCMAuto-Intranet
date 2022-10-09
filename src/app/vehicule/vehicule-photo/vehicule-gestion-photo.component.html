@@ -12,18 +12,18 @@
   </div>
   <mat-divider class="mt-2 mb-2"></mat-divider>
   <mat-dialog-content>
-    <app-ordonner-photo  *ngIf="showOrderPicture" [vehiculeId]="vehiculeId"></app-ordonner-photo>
+    <app-ordonner-photo  *ngIf="showOrderPicture" [photos]="photos" [vehiculeId]="vehiculeId" (changeImageList)="changeImageListEvent($event)"></app-ordonner-photo>
   </mat-dialog-content>
   <mat-dialog-content>
-    <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId"></app-telechargement-photo>
+    <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId" (addImageEmitter)="addImage($event)"></app-telechargement-photo>
   </mat-dialog-content>
-  <!-- <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
+  <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
     <button mat-raised-button color="secondary" type="button" class="d-flex align-items-center btn-cancel"
-      (click)="fermerEquipementDialog()">
-      Fermer
+      (click)="close()">
+      Annuler
     </button>
-    <button mat-raised-button color="primary" (click)="saveVehiculeEquipement()" type="submit" class="d-flex align-items-center" [disabled]="">
+    <button mat-raised-button color="primary" (click)="enregistrerOrdonnerImage()" type="button" class="d-flex align-items-center" [disabled]="">
       Enregistrer
     </button>
-  </mat-dialog-actions> -->
+  </mat-dialog-actions>
 </form>

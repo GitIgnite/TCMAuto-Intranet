@@ -101,9 +101,13 @@ export class VehiculeDetailComponent implements OnInit {
         vehiculeId: this.vehicule.id
       }
     }).afterClosed().pipe(take(1)).subscribe(result => {
-      if(this.vehicule && this.vehicule.id) {
-        this.getPhotosVehicule(this.vehicule.id)
+      console.log("test close dialog save photos")
+      if(result) {
+        this.photos = result;
       }
+      /*if(this.vehicule && this.vehicule.id) {
+        this.getPhotosVehicule(this.vehicule.id)
+      }*/
     })
 
   }

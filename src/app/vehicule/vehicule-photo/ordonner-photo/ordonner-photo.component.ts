@@ -1,4 +1,4 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {DomSanitizer} from "@angular/platform-browser";
 import {CompactType, DisplayGrid, GridsterConfig, GridType} from 'angular-gridster2';
 import {VehiculePhotoService} from 'src/app/api/services/vehiculePhoto.service';
@@ -16,9 +16,13 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
 
   @Input()
   vehiculeId: string = '';
+  @Input()
+  photos: any[] = [];
+
+  @Output() changeImageList = new EventEmitter<any[]>();
 
   dropId!: string;
-  photos: any[] = [];
+
   photoListEnBase = new Map<string, number>();
 
   options: GridsterConfig = {
@@ -41,20 +45,20 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
   };
 
   ngOnInit(): void {
-    this.getPhotosVehicule(this.vehiculeId);
+    //this.getPhotosVehicule(this.vehiculeId);
   }
 
   ngOnDestroy(): void {
-    this.photos.forEach((photo) => {
+    /*this.photos.forEach((photo) => {
       this.photoListEnBase.forEach((value, key) => {
         if (photo.ordre && photo.id == key && photo.ordre != value) {
           this.vehiculePhotoService.updateVehiculePhoto(key, photo.ordre).subscribe({})
         }
       })
-    })
+    })*/
   }
 
-  getPhotosVehicule(idVehicule: string) {
+/*  getPhotosVehicule(idVehicule: string) {
     this.vehiculePhotoService.getPhotoByIdVehicule(idVehicule).subscribe((photoById: any[]) => {
 
       photoById.forEach((photoId: any) => {
@@ -64,7 +68,7 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
       this.photos = photoById;
       this.photos = this.photos.sort((a, b) => a.ordre && b.ordre ? a.ordre - b.ordre : 0);
     })
-  }
+  }*/
 
   checkChange(event: any) {
     if (event.itemComponent.drag.swap) {
