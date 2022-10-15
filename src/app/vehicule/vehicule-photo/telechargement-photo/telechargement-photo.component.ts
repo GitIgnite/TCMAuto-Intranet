@@ -66,6 +66,7 @@ export class TelechargementPhotoComponent {
                 this._snackBar.open(this.messageKeys.SUCCES_UPLOAD, 'succes', {
                   duration: 1500
                 });
+                console.log("vehicule uplaod emit new vehicule")
                 this.addImageEmitter.emit(vehiculePhoto);
               }
             },
