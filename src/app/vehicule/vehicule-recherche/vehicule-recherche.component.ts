@@ -181,4 +181,12 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
     this.afficherDetail = true;
   }
 
+  public cacherDetail(vehiculeReturned: Vehicule) {
+    this.afficherDetail = false;
+    let vehiculeToUpdate = this.vehicules.find((vehicule: Vehicule) => vehicule.id == vehiculeReturned.id)
+    if(vehiculeToUpdate) {
+      let index = this.vehicules.indexOf(vehiculeToUpdate);
+      this.vehicules[index] = vehiculeToUpdate;
+    }
+  }
 }

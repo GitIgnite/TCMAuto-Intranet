@@ -134,7 +134,7 @@
   <app-resultat-recherche *ngIf="!afficherDetail" [vehicules]=vehicules (afficherDetailEmit)="afficherDetailVehicule($event)">
   </app-resultat-recherche>
 
-  <app-vehicule-detail *ngIf="afficherDetail" [vehicule]="vehiculeDetail" (cacherDetailEmit)="afficherDetail = false">
+  <app-vehicule-detail *ngIf="afficherDetail" [vehicule]="vehiculeDetail" (cacherDetailEmit)="cacherDetail($event)">
   </app-vehicule-detail>
 </div>
 
