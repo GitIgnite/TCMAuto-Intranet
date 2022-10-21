@@ -17,12 +17,12 @@
           <mat-label>PRÉNOM</mat-label>
           <input matInput formControlName="{{clientFormKeys.PRENOM}}" type="text">
         </mat-form-field>
-        <mat-form-field class="col-4" appearance="fill">
-          <mat-label>Date de naissance</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="{{clientFormKeys.DATE_NAISSANCE}}">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
+        <div class="col-4" appearance="fill">
+          <mat-form-field>
+            <mat-label>Date de naissance</mat-label>
+            <input matInput formControlName="{{clientFormKeys.DATE_NAISSANCE}}" type="date">
+          </mat-form-field>
+        </div>
       </div>
 
       <!-- COORDONNEES -->
