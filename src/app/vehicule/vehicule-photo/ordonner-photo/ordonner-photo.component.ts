@@ -90,4 +90,8 @@ export class OrdonnerPhotoComponent implements OnInit, OnDestroy {
       this.photos[indexItemPhoto].ordre = newOrderItem;
     }
   }
+
+  deleteImage(event: any) {
+    console.log("delete image")
+  }
 }

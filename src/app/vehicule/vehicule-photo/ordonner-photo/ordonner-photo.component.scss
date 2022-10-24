@@ -4,6 +4,19 @@
   width: 100%;
 }
 
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: $is-white;
+  background-color: $primary-color;
+  font-size: 13px;
+  height: auto;
+  width: auto;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
 :host {
   gridster {
     display: flex;
