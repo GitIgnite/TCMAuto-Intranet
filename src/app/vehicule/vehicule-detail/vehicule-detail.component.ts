@@ -21,7 +21,7 @@ import {take} from "rxjs";
 })
 export class VehiculeDetailComponent implements OnInit {
 
-  @Output() cacherDetailEmit = new EventEmitter();
+  @Output()  cacherDetailEmit = new EventEmitter();
   @Input() vehicule!: Vehicule;
   public photos: any = [];
 
@@ -104,10 +104,8 @@ export class VehiculeDetailComponent implements OnInit {
       console.log("test close dialog save photos")
       if(result) {
         this.photos = result;
+        this.vehicule.vehiculePhotos = this.photos;
       }
-      /*if(this.vehicule && this.vehicule.id) {
-        this.getPhotosVehicule(this.vehicule.id)
-      }*/
     })
 
   }
