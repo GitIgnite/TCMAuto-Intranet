@@ -8,6 +8,7 @@ export class VehiculePhoto {
   typeImage?: string;
   ordre?: number;
   url?: SafeUrl;
+  deleted?: boolean = false;
 
   constructor(data: Blob[], id: string, vehiculeId: string, nom: string, typeImage: string, ordre: number) {
     this.data = data;

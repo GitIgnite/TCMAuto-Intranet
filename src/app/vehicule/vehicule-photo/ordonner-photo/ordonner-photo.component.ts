@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {DomSanitizer} from "@angular/platform-browser";
 import {CompactType, DisplayGrid, GridsterConfig, GridType} from 'angular-gridster2';
 import {VehiculePhotoService} from 'src/app/api/services/vehiculePhoto.service';
+import {VehiculePhoto} from "../../../api/models/vehiculePhoto";
 
 @Component({
   selector: 'app-ordonner-photo',
@@ -47,7 +48,7 @@ export class OrdonnerPhotoComponent implements OnInit {
   }
 
   checkChange(event: any) {
-    if (event.itemComponent.drag.swap) {
+    if (event.itemComponent.drag.swap && event.itemComponent.drag.swap.swapedItem) {
       this.changeOrderPhotoAfterSwap(event.item.id, event.itemComponent.drag.swap.swapedItem.item.ordre, event.itemComponent.drag.swap.swapedItem.item.id, event.item.ordre)
     }
   }
@@ -67,7 +68,7 @@ export class OrdonnerPhotoComponent implements OnInit {
     }
   }
 
-  deleteImage(event: any) {
-    console.log("delete image")
+  deleteImage(img: VehiculePhoto) {
+    img.deleted = !img.deleted;
   }
 }

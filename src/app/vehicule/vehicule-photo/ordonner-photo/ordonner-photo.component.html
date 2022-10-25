@@ -1,7 +1,8 @@
 <gridster [options]="options">
   <gridster-item *ngFor="let item of photos" [item]="item" (itemChange)="checkChange($event)">
     <img [src]="item.url" class="photo" />
-    <button (click)="deleteImage($event)" type="button">
+    <img *ngIf="item.deleted" class="deleted" alt="TCM Logo" src="/assets/images/supprimer.png">
+    <button (click)="deleteImage(item)" type="button">
       <mat-icon class="delete">highlight_off</mat-icon>
     </button>
   </gridster-item>
