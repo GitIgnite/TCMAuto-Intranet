@@ -28,7 +28,7 @@ html, body { height: 100%; width: 100%;}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: $is-white;}
 
 span > a:hover {
-  color : $primary-color !important;
+  color : $primary-color;
   border-bottom: 1px solid $primary-color;
   border-radius: 33px;
 }
