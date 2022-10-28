@@ -7,9 +7,14 @@ swiper {
   background-color: white;
 }
 .big-img {
-  height: 500px;
+  max-height: 100%;
   display: flex;
   margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 .div-small-img{
   width: 700px;
