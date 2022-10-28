@@ -1,4 +1,4 @@
-<div *ngFor="let vehicule of vehicules" class="col-lg-6 col-md-12 col-sm-12 pb-2 d-inline-flex">
+<div *ngFor="let vehicule of vehicules" class="col-lg-6 col-md-12 col-sm-12 pb-2 displayCard">
   <mat-card class="mat-card-result" (click)="afficherDetailVehicule(vehicule)">
     <div class="container">
       <div class="row pt-2">
@@ -13,7 +13,7 @@
             <div class="sous-titre-vehicule col-12">
               {{vehicule?.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span *ngIf="vehicule?.puissanceFiscale">Ch</span>
             </div>
-            <div class="row mt-lg-4 text-center fw-bold">
+            <div class="row m-auto mt-lg-4 text-center fw-bold">
               <span class="primary-color prix-vehicule col-12">{{ vehicule?.prixVenteMarche }} €</span>
             </div>
           </div>
@@ -21,7 +21,7 @@
       </div>
       <div class="container primary-color fw-bold">
         <div class="info row justify-content-around p-lg-2">
-          <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.kilometrage }} KM</span>
+          <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.kilometrage ? vehicule?.kilometrage : '?' }} KM</span>
           <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.dateMiseCirculation | date :'YYYY' }}</span>
         </div>
         <div class="info row justify-content-around p-lg-2">

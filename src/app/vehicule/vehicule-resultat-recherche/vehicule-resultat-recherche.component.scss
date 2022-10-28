@@ -1,5 +1,19 @@
 @import "/src/styles/variables";
 
+//Taille inférieur à 992 px
+@media (max-width: 62rem) {
+  .displayCard {
+    display: block;
+  }
+}
+
+//Taille supérieur à 1200 px
+@media (min-width: 62rem) {
+  .displayCard {
+    display: inline-flex;
+  }
+}
+
 .mat-card-result {
   background-color: white;
   border-top: solid 0.2rem $primary-color;
@@ -58,6 +72,7 @@ img {
 .prix-vehicule {
   font-size: 1.2rem;
   border: 1px solid $primary-color;
+  border-radius: 4px;
   padding: 1rem;
 }
 .info {
