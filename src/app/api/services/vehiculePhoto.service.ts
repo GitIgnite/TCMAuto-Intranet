@@ -42,4 +42,13 @@ export class VehiculePhotoService {
     return new Observable<any>();
   }
 
+  public deleteVehiculePhotos(vehiculePhotos: VehiculePhoto[]): Observable<boolean> {
+    if(vehiculePhotos) {
+      console.log("delete service")
+      const url = `${this.urlVehiculePhoto}/delete`;
+      return this.httpCustom.post<boolean>(GenericRequest.buildSendRequest(url,vehiculePhotos));
+    }
+    return new Observable<any>();
+  }
+
 }

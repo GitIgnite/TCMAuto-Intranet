@@ -15,6 +15,7 @@ export class VehiculeGestionPhotoComponent implements OnInit {
   public showAddpicture: boolean = false;
   public image: any;
   public photos: VehiculePhoto[] = [];
+  public photosToDelete: VehiculePhoto[] = [];
   public photosEnBase: VehiculePhoto[] = [];
   public vehiculeId :string = "";
 
@@ -44,18 +45,42 @@ export class VehiculeGestionPhotoComponent implements OnInit {
     this.photos = photos;
   }
 
+  changeImagesToDeleteEvent(photosToDelete: any[]) {
+    this.photosToDelete = photosToDelete;
+  }
+
   close() {
     this.dialogRef.close(null);
   }
 
   enregistrerOrdonnerImage() {
-    new Observable().pipe(() => this.save()).subscribe(() => {
-      console.log("test passage apres save")
-      this.photos = this.photos.sort((a, b) => a.ordre && b.ordre ? a.ordre - b.ordre : 0);
-      this.dialogRef.close(this.photos);
-    })
+    let confirmSaveAndClose: boolean = true;
+    // Si des éléments sont à supprimer alors on demande validation à l'utilsateur
+    // S'il accepte, alors on supprime les photos et on sauvegarde l'odre
+    // Sinon on sauvegarde l'ordre
+    if(this.photosToDelete.length > 0) {
+      confirmSaveAndClose = window.confirm("Vous avez " + this.photosToDelete.length + " élément(s) prêt à être supprimé(s). " +
+        "Etes-vous sûr de vouloir continuer ?")
+      console.log("confirmation dialog")
+      if (confirmSaveAndClose) {
+        this.vehiculePhotoService.deleteVehiculePhotos(this.photosToDelete).pipe(() => {
+          this.deleteListTemporaire();
+          return this.save();
+        }).subscribe(() => this.dialogRef.close(this.photos));
+
+      }
+    } else {
+      new Observable().pipe(() => this.save()).subscribe(() => {
+        this.sortAndClose(this.photos);
+        this.dialogRef.close(this.photos);
+      })
+
+    }
   }
 
+  /**
+   * Sauvegarde de l'ordre des photos une par une
+   */
   save(){
     this.photos.forEach((photo) => {
       this.photosEnBase.forEach((photoEnBase: VehiculePhoto) => {
@@ -67,7 +92,44 @@ export class VehiculeGestionPhotoComponent implements OnInit {
       })
     })
 
-    console.log("test save")
     return scheduled(this.photos, asyncScheduler);
+  }
+
+  /**
+   * Mise à jour de l'ordre des photos
+   * @param photos
+   */
+  sortAndClose(photos: VehiculePhoto[]) {
+    this.photos = photos.sort((a, b) => a.ordre && b.ordre ? a.ordre - b.ordre : 0);
+  }
+
+  /**
+   * On supprime coté front les photos et on vient changer l'ordre de chacune des photos.
+   */
+  deleteListTemporaire() {
+    let newListPhoto: VehiculePhoto[] = Object.assign(this.photos);
+    this.photosToDelete.forEach((vehiculePhotoToDelete: VehiculePhoto) => {
+      let vehiculePhotoFound = newListPhoto.findIndex(vehiculePhoto => vehiculePhoto.id = vehiculePhotoToDelete.id);
+      if(vehiculePhotoFound != undefined) {
+        newListPhoto.splice(vehiculePhotoFound,1);
+      }
+    })
+    this.sortAndClose(newListPhoto);
+    this.changeSortAfterDelete(newListPhoto);
+  }
+
+  /**
+   * Lorsqu'on supprime des photos de la liste. la donnée ordre ne se met pas automatiquement à jour
+   * (cad - si le Deuxième élément est supprimé alors le troisième à un ordre = à 3 mais devra être à 2 après la suppression)
+   * @param vehiculePhotos
+   */
+  changeSortAfterDelete(vehiculePhotos: VehiculePhoto[]) {
+    let index = 1;
+    vehiculePhotos.forEach(vehiculePhotos => {
+      vehiculePhotos.ordre = index;
+      vehiculePhotos.deleted = false;
+      index++;
+    })
+    this.photos = Object.assign(vehiculePhotos);
   }
 }

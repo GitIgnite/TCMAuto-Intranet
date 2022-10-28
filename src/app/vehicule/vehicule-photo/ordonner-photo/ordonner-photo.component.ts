@@ -18,8 +18,10 @@ export class OrdonnerPhotoComponent implements OnInit {
   vehiculeId: string = '';
   @Input()
   photos: any[] = [];
+  photosDelete: any[] = [];
 
   @Output() changeImageList = new EventEmitter<any[]>();
+  @Output() changeImagesToDelete = new EventEmitter<any[]>();
 
   dropId!: string;
 
@@ -68,7 +70,14 @@ export class OrdonnerPhotoComponent implements OnInit {
     }
   }
 
-  deleteImage(img: VehiculePhoto) {
+  addImageTodeleteList(img: VehiculePhoto) {
     img.deleted = !img.deleted;
+    let photoFound = this.photosDelete.find(photo => photo.id == img.id);
+    if(photoFound) {
+      this.photosDelete.splice(photoFound,1);
+    } else {
+      this.photosDelete.push(img);
+    }
+    this.changeImagesToDelete.emit(this.photosDelete);
   }
 }
