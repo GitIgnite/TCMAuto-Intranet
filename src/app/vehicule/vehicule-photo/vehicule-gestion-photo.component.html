@@ -12,7 +12,8 @@
   </div>
   <mat-divider class="mt-2 mb-2"></mat-divider>
   <mat-dialog-content>
-    <app-ordonner-photo  *ngIf="showOrderPicture" [photos]="photos" [vehiculeId]="vehiculeId" (changeImageList)="changeImageListEvent($event)"></app-ordonner-photo>
+    <app-ordonner-photo *ngIf="showOrderPicture" [photos]="photos" [vehiculeId]="vehiculeId" (changeImageList)="changeImageListEvent($event)"
+                        (changeImagesToDelete)="changeImagesToDeleteEvent($event)"></app-ordonner-photo>
   </mat-dialog-content>
   <mat-dialog-content>
     <app-telechargement-photo *ngIf="showAddpicture" [vehiculeId]="vehiculeId" (addImageEmitter)="addImage($event)"></app-telechargement-photo>
