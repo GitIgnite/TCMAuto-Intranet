@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 import {VehiculePhoto} from "../../api/models/vehiculePhoto";
-import {asyncScheduler, Observable, of, scheduled} from "rxjs";
+import {asyncScheduler, flatMap, mergeMap, Observable, of, scheduled} from "rxjs";
 
 @Component({
   selector: 'app-vehicule-photo',
@@ -63,11 +63,13 @@ export class VehiculeGestionPhotoComponent implements OnInit {
         "Etes-vous sûr de vouloir continuer ?")
       console.log("confirmation dialog")
       if (confirmSaveAndClose) {
-        this.vehiculePhotoService.deleteVehiculePhotos(this.photosToDelete).pipe(() => {
-          this.deleteListTemporaire();
+        this.vehiculePhotoService.deleteVehiculePhotos(this.photosToDelete).pipe(mergeMap(isDeleted => {
+          console.log("mergeMap");
+          if (isDeleted) {
+            this.deleteListTemporaire();
+          }
           return this.save();
-        }).subscribe(() => this.dialogRef.close(this.photos));
-
+        })).subscribe(() => this.dialogRef.close(this.photos));
       }
     } else {
       new Observable().pipe(() => this.save()).subscribe(() => {
