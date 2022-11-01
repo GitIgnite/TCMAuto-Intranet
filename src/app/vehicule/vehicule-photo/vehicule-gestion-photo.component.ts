@@ -34,8 +34,8 @@ export class VehiculeGestionPhotoComponent implements OnInit {
   }
 
   titreSelectionne(value: number) {
-    this.showOrderPicture = value == 1 ? true : false;
-    this.showAddpicture = value == 2 ? true : false;
+    this.showOrderPicture = value == 1;
+    this.showAddpicture = value == 2;
   }
 
   addImage(photo: VehiculePhoto) {
@@ -50,10 +50,15 @@ export class VehiculeGestionPhotoComponent implements OnInit {
   }
 
   close() {
+    this.photos.forEach(photo => photo.deleted = false);
     this.dialogRef.close(null);
   }
 
-  enregistrerOrdonnerImage() {
+  /**
+   * Sauvegarde de la liste des photos du vehicule
+   * Ordonner et Supprimer des images
+   */
+  saveDeleteAndSortPhotos() {
     let confirmSaveAndClose: boolean = true;
     // Si des éléments sont à supprimer alors on demande validation à l'utilsateur
     // S'il accepte, alors on supprime les photos et on sauvegarde l'odre
@@ -61,7 +66,6 @@ export class VehiculeGestionPhotoComponent implements OnInit {
     if(this.photosToDelete.length > 0) {
       confirmSaveAndClose = window.confirm("Vous avez " + this.photosToDelete.length + " élément(s) prêt à être supprimé(s). " +
         "Etes-vous sûr de vouloir continuer ?")
-      console.log("confirmation dialog")
       if (confirmSaveAndClose) {
         this.vehiculePhotoService.deleteVehiculePhotos(this.photosToDelete).pipe(mergeMap(isDeleted => {
           console.log("mergeMap");

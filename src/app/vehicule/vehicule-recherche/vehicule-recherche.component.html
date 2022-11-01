@@ -89,24 +89,20 @@
             <input matInput formControlName="{{vehiculeFormKey.KILOMETRAGE_MAX}}" type="number">
           </mat-form-field>
         </div>
-        <div class="row d-flex justify-content-end mb-1">
-          <div class="col-2">
-            <button mat-raised-button
-                    color="secondary"
-                    class="w-100 reset-button" (click)="reinitialiserChamps()" type="button">
-              Réinitialiser
-              <mat-icon class="" matSuffix>delete</mat-icon>
-            </button>
-          </div>
-          <div class="col-2">
-            <button mat-raised-button
-                    color="primary"
-                    type="submit"
-                    class="w-100">
-              Rechercher
-              <mat-icon class="text-white" matSuffix>search</mat-icon>
-            </button>
-          </div>
+        <div class="d-flex justify-content-end mb-1">
+          <button mat-raised-button
+                  color="secondary"
+                  class="bouton-reinitaliser w-100 reset-button d-flex align-items-center" (click)="reinitialiserChamps()" type="button">
+            Réinitialiser
+            <mat-icon class="" matSuffix>delete</mat-icon>
+          </button>
+          <button mat-raised-button
+                  color="primary"
+                  type="submit"
+                  class="bouton-recherche w-100 d-flex align-items-center">
+            Rechercher
+            <mat-icon class="text-white" matSuffix>search</mat-icon>
+          </button>
         </div>
       </form>
     </mat-card-content>
