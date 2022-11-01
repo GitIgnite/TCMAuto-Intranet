@@ -6,6 +6,7 @@ import {MessageKeys} from "../common/form/keys/message-keys";
 import {VehiculeCreateComponent} from '../vehicule/vehicule-create/vehicule-create.component';
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../authentification/token.service";
+import {ClientRechercheComponent} from "../client/client-recherche/client-recherche.component";
 
 @Component({
   selector: 'app-header',

@@ -52,9 +52,9 @@ export class NoteComponent implements OnInit {
         this.$noteObs = this.clientService.updateClient(this.clientOrVehiculeObject.id, {note: noteUpdated});
       }
 
-      this.$noteObs.pipe().subscribe((object: Vehicule) => {
+      this.$noteObs.pipe().subscribe((object: Vehicule | Client) => {
           this.dialogRef.close({
-            object: object
+            objet: object
           })
         }
       );

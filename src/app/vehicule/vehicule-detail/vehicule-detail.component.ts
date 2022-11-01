@@ -86,8 +86,8 @@ export class VehiculeDetailComponent implements OnInit {
         clientOrVehiculeObject: this.vehicule
       }
     }).afterClosed().subscribe((result: any) => {
-      if (result && result.object) {
-        this.vehicule = result.object;
+      if (result && result.objet) {
+        this.vehicule = result.objet;
         this._snackBar.open(this.messageFormKeys.NOTE_VEHICULE, 'OK');
       }
     });

@@ -78,6 +78,7 @@ export class ClientCreateComponent implements OnInit {
     // Cas de modification d'un client
     if(this.clientToEdit) {
       client.id = this.clientToEdit.id;
+      client.note = this.clientToEdit.note;
       type = 'EDIT';
     } else {
       type = 'SAVE';

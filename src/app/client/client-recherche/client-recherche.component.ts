@@ -100,10 +100,12 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
         client: client
       }
     }).afterClosed().subscribe(result => {
-      if (result && result.type && result.type === 'EDIT') {
-        this._snackBar.open(this.messageFormKeys.EDIT_CLIENT, 'OK');
-        // TODO Voir s'il est nécessaire de recharcher les clients
-        this.getClients();
+      if (result && result.type) {
+        if (result.type === 'EDIT') {
+          this._snackBar.open(this.messageFormKeys.EDIT_CLIENT, 'OK');
+          client = result.objet;
+          this.updateClients(client);
+        }
       }
     });
   }
@@ -129,9 +131,20 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
         clientOrVehiculeObject: client
       }
     }).afterClosed().subscribe(result => {
-      if(result && result.object) {
+      if(result && result.objet) {
+        client = result.objet;
+        this.updateClients(client);
         this._snackBar.open(this.messageFormKeys.NOTE_CLIENT, 'OK');
       }
     });
+  }
+
+  updateClients(clientUpdated: Client) {
+    let clientFound: Client = this.clients.find(client => client.id == clientUpdated.id);
+    if(clientFound) {
+      var indexClient = this.clients.indexOf(clientFound);
+      this.clients[indexClient] = clientUpdated;
+      this.dataSource.data = this.clients;
+    }
   }
 }
