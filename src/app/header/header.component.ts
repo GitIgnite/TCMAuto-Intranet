@@ -6,7 +6,7 @@ import {MessageKeys} from "../common/form/keys/message-keys";
 import {VehiculeCreateComponent} from '../vehicule/vehicule-create/vehicule-create.component';
 import {Router} from "@angular/router";
 import {TokenStorageService} from "../authentification/token.service";
-import {ClientRechercheComponent} from "../client/client-recherche/client-recherche.component";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
   menuList = [];
   messageFormKeys = MessageKeys;
   userConnected: any;
+
   constructor(private readonly dialog: MatDialog,
               private readonly _snackBar: MatSnackBar,
               private readonly tokenService: TokenStorageService,
@@ -38,7 +39,8 @@ export class HeaderComponent implements OnInit {
       }
     }).afterClosed().subscribe(result => {
       if(result && result.type && result.type === 'SAVE') {
-        this._snackBar.open(this.messageFormKeys.SAVE_CLIENT, 'OK');
+        window.location.reload();
+        // this._snackBar.open(this.messageFormKeys.SAVE_CLIENT, 'OK');
       }
     });
   }
@@ -46,7 +48,12 @@ export class HeaderComponent implements OnInit {
   openCreateVehiculeDialog() {
     return this.dialog.open(VehiculeCreateComponent, {
       width: '1000px'
-    }).afterClosed();
+    }).afterClosed().subscribe(result => {
+      if(result && result.type && result.type === 'SAVE') {
+        window.location.reload();
+        // this._snackBar.open(this.messageFormKeys.SAVE_VEHICULE, 'OK');
+      }
+    });
   }
 
   isConnected() {

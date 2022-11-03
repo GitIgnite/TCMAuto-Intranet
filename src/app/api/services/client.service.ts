@@ -35,4 +35,9 @@ export class ClientService {
     return this.http.patch<Client>(GenericRequest.buildSendRequest(url,mapUpdate));
   }
 
+  public deleteClient(id: string): Observable<Client> {
+    const url = `${this.urlClient}/${id}`;
+    return this.http.delete<Client>(GenericRequest.buildSendRequest(url));
+  }
+
 }

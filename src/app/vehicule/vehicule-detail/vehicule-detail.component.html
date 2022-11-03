@@ -5,9 +5,9 @@
     </span>
     <span class="col-3 lien-retour" (click)="cacherDetailEmit.emit(vehicule)"> Retour à la recherche
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short"
-        viewBox="0 0 16 16">
+           viewBox="0 0 16 16">
         <path fill-rule="evenodd"
-          d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
       </svg>
     </span>
   </div>
@@ -18,7 +18,7 @@
       <div class="row">
         <div class="d-inline-block position-relative col-6 p-0">
           <!--          <img class="image-vehicule w-100" alt="TCM voiture" src="/assets/images/voiture.png">-->
-           <div class="barre-icone">
+          <div class="barre-icone">
             <button mat-button class="bouton-icone" (click)="openEquipementDialog()">
               <span class="material-icons">
                 car_repair
@@ -38,17 +38,24 @@
               </span>
             </button>
           </div>
-          <app-swiper-img [images]="photos"> </app-swiper-img>
+          <app-swiper-img [images]="photos"></app-swiper-img>
         </div>
         <div class="d-inline-block position-relative col-6 p-0" *ngIf="vehicule">
           <div class="mat-card-titre text-left container">
-            <div class="row justify-content-around">
+            <div class="row justify-content-between">
               <h1
                 class="fw-bold primary-color titre-vehicule col-6 m-0">{{ vehicule.marque?.libelle }} {{ vehicule.modele?.libelle }}</h1>
-              <button  mat-raised-button (click)="editVehicule()" type="button" color="primary" class="col-1"> EDIT </button>
+              <div class="w-auto">
+                <button mat-raised-button (click)="editVehicule()" type="button" color="primary" class="m-1"> Mettre
+                  en ligne
+                </button>
+                <button mat-raised-button (click)="editVehicule()" type="button" color="primary" class="m-1"> EDIT
+                </button>
+              </div>
             </div>
             <div class="sous-titre-vehicule col-12 mt-2">
-              {{vehicule.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span *ngIf="vehicule.puissanceFiscale">Ch</span>
+              {{vehicule.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span
+              *ngIf="vehicule.puissanceFiscale">Ch</span>
             </div>
             <div class="row mt-lg-4 text-center fw-bold">
               <span class="primary-color prix-vehicule col-12">{{ vehicule.prixVenteMarche }} €</span>
@@ -123,8 +130,10 @@
       Détail du véhicule
     </span>
     <span class="col-3 lien-retour" (click)="cacherDetailEmit.emit(vehicule)"> Retour à la recherche
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short"
+           viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+              d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
       </svg>
     </span>
   </div>

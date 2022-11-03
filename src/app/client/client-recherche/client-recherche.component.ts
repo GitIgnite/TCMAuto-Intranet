@@ -139,12 +139,26 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateClients(clientUpdated: Client) {
+  public updateClients(clientUpdated: Client) {
+    console.log("update");
     let clientFound: Client = this.clients.find(client => client.id == clientUpdated.id);
     if(clientFound) {
       var indexClient = this.clients.indexOf(clientFound);
       this.clients[indexClient] = clientUpdated;
       this.dataSource.data = this.clients;
+    }
+  }
+
+  deleteClient(clientToDelete: Client) {
+    if(clientToDelete && clientToDelete.id) {
+      this.clientService.deleteClient(clientToDelete.id).subscribe( () =>{
+        let clientFound = this.clients.findIndex(client => client.id == clientToDelete.id);
+        if(clientFound) {
+          this.clients.splice(clientFound, 1);
+          this.dataSource.data = this.clients;
+          this._snackBar.open(this.messageFormKeys.DELETE_CLIENT, 'OK');
+        }
+      });
     }
   }
 }
