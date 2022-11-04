@@ -80,17 +80,23 @@ img {
 .info {
   text-align: center;
 }
-
-.delete {
+.div-delete {
   position: absolute;
   z-index: 999;
-  color:$primary-color;
+  box-shadow: 0 0px 5px 2px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+  background-color: white;
+  top: -11px;
+  right: -7px;
+  &:hover {
+    background-color: $primary-color;
+  }
   cursor: pointer;
   border-radius: 12px;
-  box-shadow: 0 0px 5px 2px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
-  top: -11px;
-  background-color: white;
-  right: -7px;
+  width: 24px;
+  height: 24px;
+}
+.delete {
+  transform: scale(0.8);
   &:hover {
     background-color: $primary-color;
     color: white;

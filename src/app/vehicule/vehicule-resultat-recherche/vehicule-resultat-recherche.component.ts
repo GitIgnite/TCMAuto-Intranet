@@ -3,7 +3,6 @@ import {Vehicule} from "../../api/models/Vehicule";
 import {VehiculeService} from "../../api/services/vehicule.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MessageKeys} from "../../common/form/keys/message-keys";
-import {VehiculePhoto} from "../../api/models/vehiculePhoto";
 
 @Component({
   selector: 'app-resultat-recherche',
@@ -23,7 +22,8 @@ export class VehiculeResultatRechercheComponent implements OnInit {
   messageFormKeys = MessageKeys;
 
   constructor(private vehiculeService: VehiculeService,
-              private readonly _snackBar: MatSnackBar) { }
+              private readonly _snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
   }
@@ -33,15 +33,17 @@ export class VehiculeResultatRechercheComponent implements OnInit {
   }
 
   public deleteVehicule(vehiculeToDelete: Vehicule) {
-    if(vehiculeToDelete && vehiculeToDelete.id) {
-      this.vehiculeService.deleteVehicule(vehiculeToDelete.id).subscribe(() => {
-        console.log("Suppression coté frontss")
-        let vehiculeFound = this.vehicules.findIndex(vehicule => vehicule.id == vehiculeToDelete.id);
-        if(vehiculeFound) {
-          this.vehicules.splice(vehiculeFound,1);
-        }
-        this._snackBar.open(this.messageFormKeys.DELETE_VEHICULE, 'OK');
-      });
+    if (vehiculeToDelete && vehiculeToDelete.id) {
+      let confirmSupprimer = window.confirm("Etes-vous sûr de vouloir supprimer le véhicule?");
+      if (confirmSupprimer) {
+        this.vehiculeService.deleteVehicule(vehiculeToDelete.id).subscribe(() => {
+          let vehiculeFound = this.vehicules.findIndex(vehicule => vehicule.id == vehiculeToDelete.id);
+          if (vehiculeFound) {
+            this.vehicules.splice(vehiculeFound, 1);
+          }
+          this._snackBar.open(this.messageFormKeys.DELETE_VEHICULE, 'OK');
+        });
+      }
     }
   }
 }
