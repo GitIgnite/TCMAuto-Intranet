@@ -46,8 +46,11 @@
               <h1
                 class="fw-bold primary-color titre-vehicule col-6 m-0">{{ vehicule.marque?.libelle }} {{ vehicule.modele?.libelle }}</h1>
               <div class="w-auto">
-                <button mat-raised-button (click)="editVehicule()" type="button" color="primary" class="m-1"> Mettre
+                <button *ngIf="!this.vehicule.enLigne" mat-raised-button (click)="miseEnLigneOuHorsLigne()" type="button" class="btn btn-success m-1"> Mettre
                   en ligne
+                </button>
+                <button *ngIf="this.vehicule.enLigne" mat-raised-button (click)="miseEnLigneOuHorsLigne()" type="button" class="btn btn-danger m-1"> Mettre
+                  hors ligne
                 </button>
                 <button mat-raised-button (click)="editVehicule()" type="button" color="primary" class="m-1"> EDIT
                 </button>

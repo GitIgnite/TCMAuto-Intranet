@@ -13,6 +13,7 @@ import {ClientService} from "../../api/services/client.service";
 import {VehiculePhotoService} from "../../api/services/vehiculePhoto.service";
 import {VehiculePhoto} from 'src/app/api/models/vehiculePhoto';
 import {take} from "rxjs";
+import {VehiculeService} from "../../api/services/vehicule.service";
 
 @Component({
   selector: 'app-vehicule-detail',
@@ -31,7 +32,8 @@ export class VehiculeDetailComponent implements OnInit {
               private readonly _snackBar: MatSnackBar,
               private readonly documentService: DocumentService,
               private readonly clientService: ClientService,
-              private vehiculePhotoService: VehiculePhotoService) {
+              private vehiculePhotoService: VehiculePhotoService,
+              private vehiculeService: VehiculeService) {
   }
 
   ngOnInit(): void {
@@ -128,4 +130,15 @@ export class VehiculeDetailComponent implements OnInit {
     })
   }
 
+  miseEnLigneOuHorsLigne() {
+    this.vehiculeService.updateVehicule(this.vehicule.id, {enLigne: !this.vehicule.enLigne}).subscribe(() => {
+
+      this.vehicule.enLigne = !this.vehicule.enLigne;
+      if(this.vehicule.enLigne) {
+        this._snackBar.open(this.messageFormKeys.VEHICULE_MIS_EN_LIGNE, 'OK');
+      } else {
+        this._snackBar.open(this.messageFormKeys.VEHICULE_MIS_HORS_LIGNE, 'OK');
+      }
+    })
+  }
 }

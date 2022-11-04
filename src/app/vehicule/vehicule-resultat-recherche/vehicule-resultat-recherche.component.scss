@@ -24,6 +24,8 @@
   padding: 0;
   &:hover {
     background-color: $is-grey-white;
+  }
+  & > .container:hover {
     cursor: pointer;
   }
 }

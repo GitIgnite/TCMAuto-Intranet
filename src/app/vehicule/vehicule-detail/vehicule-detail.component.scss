@@ -11,3 +11,21 @@
 }
 
 .note { white-space: pre-wrap;}
+
+.btn-success {
+  color: green;
+  border: solid 1px green;
+  &:hover {
+    color: white;
+    border: none;
+  }
+}
+
+.btn-danger {
+  color: red;
+  border: solid 1px red;
+  &:hover {
+    color: white;
+    border: none;
+  }
+}

@@ -5,8 +5,7 @@ import {Vehicule} from "../models/Vehicule";
 import {HttpService} from "./http/http.service";
 import {GenericRequest} from "./http/generic-request.service";
 import {Sort} from "@angular/material/sort";
-import {HttpParams} from "@angular/common/http";
-import {VehiculePhoto} from "../models/vehiculePhoto";
+import {Client} from "../models/Client";
 
 @Injectable()
 export class VehiculeService {
@@ -38,4 +37,10 @@ export class VehiculeService {
     }
     return new Observable<Vehicule>();
   }
+
+  public deleteVehicule(id: string): Observable<Vehicule> {
+    const url = `${this.urlVehicule}/${id}`;
+    return this.httpCustom.delete<Client>(GenericRequest.buildSendRequest(url));
+  }
+
 }

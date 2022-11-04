@@ -37,6 +37,7 @@ export class Vehicule {
     clientFacture?: string;
     nbPlace?: number;
     note?: string;
+    enLigne?: boolean;
     vehiculePhotos?: VehiculePhoto[];
 
 
@@ -44,7 +45,7 @@ export class Vehicule {
       boiteVitesse?: string, nbVitesse?: number, contrat?: string, prixVente?: number, prixVenteMarche?: number,  baremePrixIntermediation?: number,
       energie?: Energie, immatriculation?: string, numeroSerie?: string, dateMiseCirculation?: Date, kilometrage?: number,
       couleurInt?: string, couleurIntDetail?: string, couleurExt?: string, couleurExtDetail?: string, co2?: number,
-      nbPorte?: number, nbMain?: number, pneu?: string, origine?: string, puissanceFiscale?: number, puissanceReel?: number, clientFacture?: string, nbPlace?: number, note ?: string) {
+      nbPorte?: number, nbMain?: number, pneu?: string, origine?: string, puissanceFiscale?: number, puissanceReel?: number, clientFacture?: string, nbPlace?: number, note ?: string, enLigne ?: boolean) {
         this.id = id;
         this.modele = modele;
         this.marque = marque;
@@ -75,5 +76,6 @@ export class Vehicule {
         this.puissanceReel = puissanceReel;
         this.nbPlace = nbPlace;
         this.note = note;
+        this.enLigne = enLigne;
     }
 }
