@@ -20,8 +20,6 @@ export class VehiculeResultatRechercheComponent implements OnInit {
 
   @Output() afficherDetailEmit = new EventEmitter<Vehicule>();
 
-  @Output() deleteVehiculeEmitter = new EventEmitter<Vehicule>();
-
   messageFormKeys = MessageKeys;
 
   constructor(private vehiculeService: VehiculeService,
@@ -34,10 +32,14 @@ export class VehiculeResultatRechercheComponent implements OnInit {
     this.afficherDetailEmit.emit(vehicule);
   }
 
-  public deleteVehicule(vehicule: Vehicule) {
-    if(vehicule && vehicule.id) {
-      this.vehiculeService.deleteVehicule(vehicule.id).subscribe(vehicule => {
-        this.deleteVehiculeEmitter.emit(vehicule);
+  public deleteVehicule(vehiculeToDelete: Vehicule) {
+    if(vehiculeToDelete && vehiculeToDelete.id) {
+      this.vehiculeService.deleteVehicule(vehiculeToDelete.id).subscribe(() => {
+        console.log("Suppression coté frontss")
+        let vehiculeFound = this.vehicules.findIndex(vehicule => vehicule.id == vehiculeToDelete.id);
+        if(vehiculeFound) {
+          this.vehicules.splice(vehiculeFound,1);
+        }
         this._snackBar.open(this.messageFormKeys.DELETE_VEHICULE, 'OK');
       });
     }

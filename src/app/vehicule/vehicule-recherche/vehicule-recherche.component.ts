@@ -181,13 +181,6 @@ export class VehiculeRechercheComponent implements OnInit, OnDestroy {
     this.afficherDetail = true;
   }
 
-  public deleteVehicule(vehiculeToDelete:Vehicule) {
-    let vehiculeFound = this.vehicules.findIndex(vehicule => vehicule.id == vehiculeToDelete.id);
-    if(vehiculeFound) {
-      this.vehicules.splice(vehiculeFound,1);
-    }
-  }
-
   public cacherDetail(vehiculeReturned: Vehicule) {
     this.afficherDetail = false;
     let vehiculeToUpdate = this.vehicules.find((vehicule: Vehicule) => vehicule.id == vehiculeReturned.id)

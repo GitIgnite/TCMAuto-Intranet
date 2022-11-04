@@ -1,20 +1,21 @@
 <div *ngFor="let vehicule of vehicules" class="col-lg-6 col-md-12 col-sm-12 pb-2 displayCard">
-  <mat-card class="mat-card-result" >
-    <button mat-icon-button aria-label="Supprimer" (click)="deleteVehicule(vehicule)">
-      <mat-icon class="button-icon ml-1" matSuffix>delete</mat-icon>
-    </button>
+  <mat-card class="mat-card-result">
+    <mat-icon class="delete button-icon ml-1 btn-light" (click)="deleteVehicule(vehicule)" matSuffix>delete_outline</mat-icon>
     <div class="container" (click)="afficherDetailVehicule(vehicule)">
       <div class="row pt-2">
         <div class="row_bloc d-inline-block position-relative col-6 p-0">
-          <img *ngIf="vehicule && vehicule.vehiculePhotos && vehicule.vehiculePhotos[0]" [src]="vehicule.vehiculePhotos[0].url" [alt]="" />
-          <img *ngIf="!vehicule || !vehicule.vehiculePhotos || !vehicule.vehiculePhotos[0]" class="w-100"  src="assets/images/pas-image.png" [alt]="" />
+          <img *ngIf="vehicule && vehicule.vehiculePhotos && vehicule.vehiculePhotos[0]"
+               [src]="vehicule.vehiculePhotos[0].url" [alt]=""/>
+          <img *ngIf="!vehicule || !vehicule.vehiculePhotos || !vehicule.vehiculePhotos[0]" class="w-100"
+               src="assets/images/pas-image.png" [alt]=""/>
         </div>
         <div class="row_bloc d-inline-block position-relative col-6 p-0">
           <div class="mat-card-titre text-left container">
               <span
                 class="primary-color titre-vehicule col-12">{{ vehicule?.marque?.libelle }} {{ vehicule?.modele?.libelle }}</span>
             <div class="sous-titre-vehicule col-12">
-              {{vehicule?.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span *ngIf="vehicule?.puissanceFiscale">Ch</span>
+              {{vehicule?.categorie?.libelle}} {{vehicule.versionVehicule}} {{vehicule.puissanceFiscale}}<span
+              *ngIf="vehicule?.puissanceFiscale">Ch</span>
             </div>
             <div class="row m-auto mt-lg-4 text-center fw-bold">
               <span class="primary-color prix-vehicule col-12">{{ vehicule?.prixVenteMarche }} €</span>
@@ -24,7 +25,8 @@
       </div>
       <div class="container primary-color fw-bold">
         <div class="info row justify-content-around p-lg-2">
-          <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.kilometrage ? vehicule?.kilometrage : '?' }} KM</span>
+          <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.kilometrage ? vehicule?.kilometrage : '?' }}
+            KM</span>
           <span class="col-lg-5 col-md-5 col-sm-5 col-5">{{ vehicule?.dateMiseCirculation | date :'YYYY' }}</span>
         </div>
         <div class="info row justify-content-around p-lg-2">

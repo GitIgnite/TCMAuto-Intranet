@@ -127,7 +127,7 @@
       </mat-paginator>
   </div>
 
-  <app-resultat-recherche *ngIf="!afficherDetail" [vehicules]=vehicules (afficherDetailEmit)="afficherDetailVehicule($event)" (deleteVehiculeEmitter)="deleteVehicule($event)">
+  <app-resultat-recherche *ngIf="!afficherDetail" [vehicules]=vehicules (afficherDetailEmit)="afficherDetailVehicule($event)">
   </app-resultat-recherche>
 
   <app-vehicule-detail *ngIf="afficherDetail" [vehicule]="vehiculeDetail" (cacherDetailEmit)="cacherDetail($event)">
