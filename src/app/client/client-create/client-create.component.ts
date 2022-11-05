@@ -66,7 +66,8 @@ export class ClientCreateComponent implements OnInit {
       [this.clientFormKeys.EMAIL] : [this.clientToEdit ? this.clientToEdit.email : null,[Validators.pattern(PATTERN_EMAIL)]],
       [this.clientFormKeys.ADRESSE] : [this.clientToEdit ? this.clientToEdit.adresse : null],
       [this.clientFormKeys.CODEPOSTAL] : [this.clientToEdit ? this.clientToEdit.codePostal : null,Validators.pattern(PATTERN_CP)],
-      [this.clientFormKeys.VILLE] : [this.clientToEdit ? this.clientToEdit.ville : null]
+      [this.clientFormKeys.VILLE] : [this.clientToEdit ? this.clientToEdit.ville : null],
+      [this.clientFormKeys.NUM_PIECE_IDENTITE] : [this.clientToEdit ? this.clientToEdit.numPieceIdentite : null]
     })
   }
 

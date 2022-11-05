@@ -8,4 +8,5 @@ export class ClientFormKeys {
   public static readonly ADRESSE = 'adresse';
   public static readonly CODEPOSTAL = 'codePostal';
   public static readonly VILLE = 'ville';
+  public static readonly NUM_PIECE_IDENTITE = 'numPieceIdentite';
 }

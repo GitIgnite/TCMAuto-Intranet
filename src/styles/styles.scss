@@ -133,3 +133,7 @@ mat-paginator {
 .material-icons {
   color: $primary-color;
 }
+
+mat-option:hover {
+  background-color: $is-grey-white;
+}
