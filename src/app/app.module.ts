@@ -67,6 +67,9 @@ import {OrdonnerPhotoComponent} from './vehicule/vehicule-photo/ordonner-photo/o
 import {SwiperImgComponent} from './common/component/swiper-img/swiper-img.component';
 import {NgxUsefulSwiperModule} from "ngx-useful-swiper";
 import {GridsterModule} from 'angular-gridster2';
+import { UtilisateurProfilComponent } from './utilisateur/utilisateur-profil/utilisateur-profil.component';
+import { ListeUtilisateurComponent } from './utilisateur/liste-utilisateur/liste-utilisateur.component';
+import { UtilisateurCreateComponent } from './utilisateur/utilisateur-create/utilisateur-create.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -93,7 +96,10 @@ const appearance: MatFormFieldDefaultOptions = {
     LoginComponent,
     TelechargementPhotoComponent,
     OrdonnerPhotoComponent,
-    SwiperImgComponent
+    SwiperImgComponent,
+    UtilisateurProfilComponent,
+    ListeUtilisateurComponent,
+    UtilisateurCreateComponent
   ],
   imports: [
     BrowserModule,

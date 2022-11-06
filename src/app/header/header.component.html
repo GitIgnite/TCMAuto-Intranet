@@ -79,7 +79,7 @@
       Se connecter
     </button>
     <button *ngIf="this.userConnected?.username" mat-menu-item >
-      {{ this.userConnected?.username }}
+      <span><a [routerLink]="'/utilisateur-profil'">{{ this.userConnected?.username }}</a></span>
     </button>
     <button *ngIf="this.userConnected?.username" mat-menu-item (click)="deconnexion()">
       Se déconnecter
