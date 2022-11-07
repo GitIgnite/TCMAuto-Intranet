@@ -22,4 +22,7 @@ export class AuthService {
     return this.http.post<any>(GenericRequest.buildSendRequest(ApiUrlConst.AUTH + '/login',login));
   }
 
+  listeUtilisateur(): Observable<any> {
+    return this.http.get<any>(GenericRequest.buildSearchRequest(ApiUrlConst.AUTH + '/liste'))
+  }
 }

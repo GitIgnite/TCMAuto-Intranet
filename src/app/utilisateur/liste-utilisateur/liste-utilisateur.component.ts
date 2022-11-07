@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Utilisateur} from "../../api/models/Utilisateur";
+import {MatTableDataSource} from "@angular/material/table";
+import {AuthService} from "../../authentification/auth.service";
 
 @Component({
   selector: 'app-liste-utilisateur',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListeUtilisateurComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  utilisateurs?: Utilisateur[] = [];
+
+  dataSource = new MatTableDataSource<Utilisateur>();
+
+  displayedColumns: string[] = ['username', 'email', 'roles', 'actions'];
+
+  constructor(private readonly authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.listeUtilisateur().subscribe(utilisateurs => {
+      this.utilisateurs = utilisateurs;
+      this.dataSource.data = utilisateurs;
+    })
   }
 
 }

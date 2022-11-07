@@ -1,1 +1,33 @@
-<p>liste-utilisateur works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 w-100" matSort>
+  <ng-container matColumnDef="username">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom d'utilisateur </th>
+    <td mat-cell *matCellDef="let element"> {{element.username}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+  <ng-container matColumnDef="roles">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Roles </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element">
+<!--      <button mat-icon-button aria-label="Modifier" (click) = "editClient(element)">-->
+<!--        <mat-icon class="button-icon ml-1" matSuffix>edit</mat-icon>-->
+<!--      </button>-->
+<!--      <button mat-button (click)="openUpdateNote(element)">-->
+<!--        <span class="material-icons">sticky_note_2</span>-->
+<!--      </button>-->
+<!--      <button mat-icon-button aria-label="Supprimer" (click)="deleteClient(element)">-->
+<!--        <mat-icon class="button-icon ml-1" matSuffix>delete</mat-icon>-->
+<!--      </button>-->
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

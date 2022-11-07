@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Utilisateur} from "../../api/models/Utilisateur";
 import {TokenStorageService} from "../../authentification/token.service";
+import {AuthService} from "../../authentification/auth.service";
 
 @Component({
   selector: 'app-utilisateur-profil',
@@ -10,10 +11,13 @@ import {TokenStorageService} from "../../authentification/token.service";
 export class UtilisateurProfilComponent implements OnInit {
 
   utilisateur?: Utilisateur;
+  utilisateurs?: Utilisateur[] = [];
   constructor(private readonly tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.utilisateur = this.tokenService.getUser();
+    console.log("appel liste utilisateurs")
+
   }
 
 }
