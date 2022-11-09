@@ -26,4 +26,15 @@ export class ListeUtilisateurComponent implements OnInit {
     })
   }
 
+  deleteUtilisateur(utilisateur: Utilisateur): void {
+
+  }
+
+  modifierRoles(utilisateur: Utilisateur): void {
+
+  }
+
+  editClient(utilisateur: Utilisateur): void {
+
+  }
 }

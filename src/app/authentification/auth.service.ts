@@ -4,6 +4,7 @@ import {ApiUrlConst} from "../../environments/path/api-url-const";
 import {GenericRequest} from "../api/services/http/generic-request.service";
 import {Observable} from "rxjs";
 import {TokenStorageService} from "./token.service";
+import {Client} from "../api/models/Client";
 
 @Injectable({
   providedIn: 'root'
@@ -25,4 +26,10 @@ export class AuthService {
   listeUtilisateur(): Observable<any> {
     return this.http.get<any>(GenericRequest.buildSearchRequest(ApiUrlConst.AUTH + '/liste'))
   }
+
+  updatePassword(mapUpdate: any): Observable<any> {
+    const url = ApiUrlConst.AUTH+'/updatePassword';
+    return this.http.patch<Client>(GenericRequest.buildSendRequest(url,mapUpdate));
+  }
+
 }

@@ -17,6 +17,13 @@ export class UtilisateurProfilComponent implements OnInit {
   ngOnInit(): void {
     this.utilisateur = this.tokenService.getUser();
     console.log("appel liste utilisateurs")
+  }
+
+  modifierEmail() {
+
+  }
+
+  modifierMdp() {
 
   }
 
