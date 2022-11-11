@@ -1,42 +1,39 @@
 import {Component, OnInit} from '@angular/core';
 import {UtilisateurFormKeys} from "../../form/keys/utilisateur-form-keys";
+import {MessageKeys} from "../../form/keys/message-keys";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
-import {confirmedValidator} from "../../form/validators/confirmed.validator";
+import {Utilisateur} from "../../../api/models/Utilisateur";
 import {MatDialogRef} from "@angular/material/dialog";
 import {AuthService} from "../../../authentification/auth.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Utilisateur} from "../../../api/models/Utilisateur";
 import {TokenStorageService} from "../../../authentification/token.service";
-import {MessageKeys} from "../../form/keys/message-keys";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {confirmedValidator} from "../../form/validators/confirmed.validator";
 
 @Component({
-  selector: 'app-update-password',
-  templateUrl: './update-password.component.html',
-  styleUrls: ['./update-password.component.scss']
+  selector: 'app-update-email',
+  templateUrl: './update-email.component.html',
+  styleUrls: ['./update-email.component.scss']
 })
-export class UpdatePasswordComponent implements OnInit {
+export class UpdateEmailComponent implements OnInit {
 
   utilisateurFormKeys = UtilisateurFormKeys;
   messageKeys = MessageKeys;
-  updatePasswordForm!: UntypedFormGroup;
+  updateEmailForm!: UntypedFormGroup;
   connectedUser?: Utilisateur;
+
   constructor(private readonly fb: UntypedFormBuilder,
-              public dialogRef: MatDialogRef<UpdatePasswordComponent>,
+              public dialogRef: MatDialogRef<UpdateEmailComponent>,
               private readonly authService: AuthService,
               private readonly tokenStorageService: TokenStorageService,
               private readonly _snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.initBuildUpdatePasswordForm();
-    this.connectedUser = this.tokenStorageService.getUser();
   }
 
   initBuildUpdatePasswordForm(): void {
-    this.updatePasswordForm = this.fb.group({
-      [this.utilisateurFormKeys.OLD_PASSWORD]: [null, [Validators.required]],
-      [this.utilisateurFormKeys.NEW_PASSWORD]: [null, [Validators.required, confirmedValidator(this.utilisateurFormKeys.NEW_PASSWORD_CONFIRM, true)]],
-      [this.utilisateurFormKeys.NEW_PASSWORD_CONFIRM]: [null, [Validators.required, confirmedValidator(this.utilisateurFormKeys.NEW_PASSWORD)]]
+    this.updateEmailForm = this.fb.group({
+      [this.utilisateurFormKeys.NEW_EMAIL]: [null, [Validators.required]],
     });
   }
 
@@ -44,12 +41,12 @@ export class UpdatePasswordComponent implements OnInit {
     let passworUpdate = this.updatePasswordForm.value;
     passworUpdate.username = this.connectedUser?.username;
     this.authService.updatePassword(this.updatePasswordForm.value).subscribe(() => {
-      console.log("retour update password", 'OK')
+        console.log("retour update password", 'OK')
         this._snackBar.open(this.messageKeys.UTILISATEUR_PASSWORD_UPDATED, 'OK')
         this.dialogRef.close(null);
       },
       error => {
-      console.log("erreur")
+        console.log("erreur")
         this._snackBar.open(error, 'Erreur')
       })
   }
@@ -57,4 +54,5 @@ export class UpdatePasswordComponent implements OnInit {
   cancelAndCloseComponent() {
     this.dialogRef.close(null);
   }
+
 }

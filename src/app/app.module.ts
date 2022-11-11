@@ -71,6 +71,7 @@ import { UtilisateurProfilComponent } from './utilisateur/utilisateur-profil/uti
 import { ListeUtilisateurComponent } from './utilisateur/liste-utilisateur/liste-utilisateur.component';
 import { UtilisateurCreateComponent } from './utilisateur/utilisateur-create/utilisateur-create.component';
 import { UpdatePasswordComponent } from './common/component/update-password/update-password.component';
+import { UpdateEmailComponent } from './common/component/update-email/update-email.component';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -101,7 +102,8 @@ const appearance: MatFormFieldDefaultOptions = {
     UtilisateurProfilComponent,
     ListeUtilisateurComponent,
     UtilisateurCreateComponent,
-    UpdatePasswordComponent
+    UpdatePasswordComponent,
+    UpdateEmailComponent
   ],
   imports: [
     BrowserModule,
