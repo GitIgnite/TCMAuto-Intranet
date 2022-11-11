@@ -1,14 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormGroup} from "@angular/forms";
 import {CommonFormKey} from "../../form/keys/common-form-key";
 import {VehiculeService} from "../../../api/services/vehicule.service";
 import {ClientService} from "../../../api/services/client.service";
 import {Vehicule} from "../../../api/models/Vehicule";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {PATTERN_CP, PATTERN_EMAIL, PATTERN_TEL} from "../../form/validators/patterns";
 import {Client} from "../../../api/models/Client";
 import {Observable, Subject} from "rxjs";
-import {Mandat} from "../../../api/models/Mandat";
 
 @Component({
   selector: 'app-note',

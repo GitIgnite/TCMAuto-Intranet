@@ -28,6 +28,7 @@ export class AuthService {
   }
 
   updatePassword(mapUpdate: any): Observable<any> {
+    console.log("service update")
     const url = ApiUrlConst.AUTH+'/updatePassword';
     return this.http.patch<Client>(GenericRequest.buildSendRequest(url,mapUpdate));
   }
