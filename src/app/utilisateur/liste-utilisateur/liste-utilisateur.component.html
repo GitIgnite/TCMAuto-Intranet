@@ -16,7 +16,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button aria-label="Modifier email" (click) = "modifierEmail(element.username)">
+      <button mat-icon-button aria-label="Modifier email" (click) = "modifierEmail(element)">
         <mat-icon>alternate_email</mat-icon>
       </button>
       <button mat-icon-button aria-label="Modifier mot de passe" (click) = "modifierMdp(element.username)">

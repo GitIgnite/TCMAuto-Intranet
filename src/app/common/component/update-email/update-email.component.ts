@@ -20,7 +20,7 @@ export class UpdateEmailComponent implements OnInit {
   messageKeys = MessageKeys;
   updateEmailForm!: UntypedFormGroup;
   connectedUser?: Utilisateur;
-  usernameToUpdate?: string;
+  userToUpdate?: Utilisateur;
 
   constructor(private readonly fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<UpdateEmailComponent>,
@@ -28,8 +28,8 @@ export class UpdateEmailComponent implements OnInit {
               private readonly tokenStorageService: TokenStorageService,
               @Inject(MAT_DIALOG_DATA) public data: any,
               private readonly _snackBar: MatSnackBar) {
-    if(data && data.username) {
-      this.usernameToUpdate = data.username;
+    if(data && data.user) {
+      this.userToUpdate = data.user;
     }
   }
 
@@ -40,17 +40,17 @@ export class UpdateEmailComponent implements OnInit {
 
   initBuildUpdateEmailForm(): void {
     this.updateEmailForm = this.fb.group({
-      [this.utilisateurFormKeys.NEW_EMAIL]: [null, [Validators.required, Validators.pattern(PATTERN_EMAIL)]],
+      [this.utilisateurFormKeys.NEW_EMAIL]: [this.userToUpdate?.email, [Validators.required, Validators.pattern(PATTERN_EMAIL)]],
     });
   }
 
   updateEmail() {
     let emailUpdate = this.updateEmailForm.value;
 
-    emailUpdate.username = this.usernameToUpdate ? this.usernameToUpdate : this.connectedUser?.username;
-    this.authService.updateEmail(this.updateEmailForm.value).subscribe(() => {
+    emailUpdate.username = this.userToUpdate?.username ? this.userToUpdate.username : this.connectedUser?.username;
+    this.authService.updateEmail(this.updateEmailForm.value).subscribe(user => {
         this._snackBar.open(this.messageKeys.UTILISATEUR_PASSWORD_UPDATED, 'OK')
-        this.dialogRef.close(null);
+        this.dialogRef.close({userUpdated: user});
       },
       error => {
         this._snackBar.open(error, 'Erreur')

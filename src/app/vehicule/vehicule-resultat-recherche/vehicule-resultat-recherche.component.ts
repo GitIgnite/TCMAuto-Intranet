@@ -38,7 +38,7 @@ export class VehiculeResultatRechercheComponent implements OnInit {
       if (confirmSupprimer) {
         this.vehiculeService.deleteVehicule(vehiculeToDelete.id).subscribe(() => {
           let vehiculeFound = this.vehicules.findIndex(vehicule => vehicule.id == vehiculeToDelete.id);
-          if (vehiculeFound) {
+          if (vehiculeFound != undefined) {
             this.vehicules.splice(vehiculeFound, 1);
           }
           this._snackBar.open(this.messageFormKeys.DELETE_VEHICULE, 'OK');

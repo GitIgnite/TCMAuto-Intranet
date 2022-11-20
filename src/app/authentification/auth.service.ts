@@ -43,7 +43,6 @@ export class AuthService {
 
   public deleteUser(id: string): Observable<any> {
     const url = `${ApiUrlConst.AUTH}/delete/${id}`;
-    console.log("service delete")
     return this.http.delete<any>(GenericRequest.buildSendRequest(url));
   }
 
