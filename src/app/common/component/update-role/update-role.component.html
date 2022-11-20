@@ -1,17 +1,21 @@
-<form class="container" [formGroup]="updateEmailForm" (ngSubmit)="updateEmail()">
+<form class="container" [formGroup]="updateRoleForm" (ngSubmit)="updateRoles()">
   <mat-card class="p-0">
     <h4 class="col-12 d-flex align-items-center px-2">
       <span>
-        Modification de l'adresse email
+        Modification des roles
       </span>
     </h4>
     <mat-divider></mat-divider>
     <mat-card-content class="pt-4 px-4 pb-2">
       <div class="row">
-        <mat-form-field class="col-12">
-          <mat-label>Nouvelle adresse email</mat-label>
-          <input matInput formControlName="{{utilisateurFormKeys.NEW_EMAIL}}" type="text">
-        </mat-form-field>
+        <div *ngFor="let role of roles">
+          <section class="example-section">
+          <mat-checkbox formControlName="{{role.name}}" class="example-margin"
+                        [value]="role.id" [checked]="true" [disabled]="role.name == 'UTILISATEUR'">
+            {{role.name}}
+          </mat-checkbox>
+          </section>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
@@ -25,7 +29,7 @@
     <button mat-raised-button
             color="primary"
             type="submit"
-            class="d-flex align-items-center" [disabled]="!updateEmailForm || updateEmailForm.invalid">
+            class="d-flex align-items-center" [disabled]="updateRoleForm.pristine">
       Sauvegarder
       <mat-icon class="button-icon ml-1 mat-icon-button-enable" matSuffix>save</mat-icon>
     </button>

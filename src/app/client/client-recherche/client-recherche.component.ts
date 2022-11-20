@@ -104,7 +104,7 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
         if (result.type === 'EDIT') {
           this._snackBar.open(this.messageFormKeys.EDIT_CLIENT, 'OK');
           client = result.objet;
-          this.updateClients(client);
+          this.updateClientInsideList(client);
         }
       }
     });
@@ -133,14 +133,17 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
     }).afterClosed().subscribe(result => {
       if(result && result.objet) {
         client = result.objet;
-        this.updateClients(client);
+        this.updateClientInsideList(client);
         this._snackBar.open(this.messageFormKeys.NOTE_CLIENT, 'OK');
       }
     });
   }
 
-  public updateClients(clientUpdated: Client) {
-    console.log("update");
+  /**
+   * Modifie le client qui est défini dans la liste sans actualiser la page
+   * @param clientUpdated
+   */
+  public updateClientInsideList(clientUpdated: Client) {
     let clientFound: Client = this.clients.find(client => client.id == clientUpdated.id);
     if(clientFound) {
       var indexClient = this.clients.indexOf(clientFound);

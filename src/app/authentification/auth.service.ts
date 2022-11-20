@@ -4,7 +4,6 @@ import {ApiUrlConst} from "../../environments/path/api-url-const";
 import {GenericRequest} from "../api/services/http/generic-request.service";
 import {Observable} from "rxjs";
 import {TokenStorageService} from "./token.service";
-import {Client} from "../api/models/Client";
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +27,29 @@ export class AuthService {
   }
 
   updatePassword(mapUpdate: any): Observable<any> {
-    console.log("service update")
     const url = ApiUrlConst.AUTH+'/updatePassword';
-    return this.http.patch<Client>(GenericRequest.buildSendRequest(url,mapUpdate));
+    return this.http.patch<any>(GenericRequest.buildSendRequest(url,mapUpdate));
+  }
+
+  updateEmail(mapUpdate: any): Observable<any> {
+    const url = ApiUrlConst.AUTH+'/updateEmail';
+    return this.http.patch<any>(GenericRequest.buildSendRequest(url,mapUpdate));
+  }
+
+  updateRole(mapUpdate: any[], username: string): Observable<any> {
+    const url = ApiUrlConst.AUTH+'/updateRole';
+    return this.http.patch<any>(GenericRequest.buildSendRequest(url,mapUpdate,{'username': username}));
+  }
+
+  public deleteUser(id: string): Observable<any> {
+    const url = `${ApiUrlConst.AUTH}/delete/${id}`;
+    console.log("service delete")
+    return this.http.delete<any>(GenericRequest.buildSendRequest(url));
+  }
+
+  public getRoles(): Observable<any> {
+    const url = `${ApiUrlConst.AUTH}/roles`;
+    return this.http.get<any>(GenericRequest.buildSendRequest(url));
   }
 
 }

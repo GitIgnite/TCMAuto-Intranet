@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -72,6 +72,8 @@ import { ListeUtilisateurComponent } from './utilisateur/liste-utilisateur/liste
 import { UtilisateurCreateComponent } from './utilisateur/utilisateur-create/utilisateur-create.component';
 import { UpdatePasswordComponent } from './common/component/update-password/update-password.component';
 import { UpdateEmailComponent } from './common/component/update-email/update-email.component';
+import { UpdateRoleComponent } from './common/component/update-role/update-role.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -103,7 +105,8 @@ const appearance: MatFormFieldDefaultOptions = {
     ListeUtilisateurComponent,
     UtilisateurCreateComponent,
     UpdatePasswordComponent,
-    UpdateEmailComponent
+    UpdateEmailComponent,
+    UpdateRoleComponent
   ],
   imports: [
     BrowserModule,
@@ -134,6 +137,7 @@ const appearance: MatFormFieldDefaultOptions = {
     MatCardModule,
     NgxUsefulSwiperModule,
     GridsterModule,
+    MatCheckboxModule
   ],
     providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}, AuthGuardService, HttpService, HttpClient, ClientService, ModeleService, AdresseService, VehiculeService, CategorieService, EnergieService, EquipementService, VehiculeEquipementService, VariablesGlobales, MandatService, DocumentService, VehiculePhotoService, {
     provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
@@ -142,6 +146,9 @@ const appearance: MatFormFieldDefaultOptions = {
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     DatePipe, authInterceptorProviders
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule { }

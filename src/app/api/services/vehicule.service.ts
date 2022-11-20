@@ -38,9 +38,9 @@ export class VehiculeService {
     return new Observable<Vehicule>();
   }
 
-  public deleteVehicule(id: string): Observable<Vehicule> {
+  public deleteVehicule(id: string): Observable<any> {
     const url = `${this.urlVehicule}/${id}`;
-    return this.httpCustom.delete<Client>(GenericRequest.buildSendRequest(url));
+    return this.httpCustom.delete<any>(GenericRequest.buildSendRequest(url));
   }
 
 }

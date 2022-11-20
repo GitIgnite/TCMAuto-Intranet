@@ -14,4 +14,5 @@ export class MessageKeys {
   public static readonly VEHICULE_MIS_HORS_LIGNE = 'Le véhicule n\'est plus en ligne';
 
   public static readonly UTILISATEUR_PASSWORD_UPDATED = 'Le mot de passe a été mis à jour';
+  public static readonly UTILISATEUR_ROLE_UPDATED = 'Les roles ont été mis à jour';
 }

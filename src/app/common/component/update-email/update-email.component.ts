@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {UtilisateurFormKeys} from "../../form/keys/utilisateur-form-keys";
 import {MessageKeys} from "../../form/keys/message-keys";
 import {UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 import {Utilisateur} from "../../../api/models/Utilisateur";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {AuthService} from "../../../authentification/auth.service";
 import {TokenStorageService} from "../../../authentification/token.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {confirmedValidator} from "../../form/validators/confirmed.validator";
+import {PATTERN_EMAIL} from "../../form/validators/patterns";
 
 @Component({
   selector: 'app-update-email',
@@ -20,33 +20,39 @@ export class UpdateEmailComponent implements OnInit {
   messageKeys = MessageKeys;
   updateEmailForm!: UntypedFormGroup;
   connectedUser?: Utilisateur;
+  usernameToUpdate?: string;
 
   constructor(private readonly fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<UpdateEmailComponent>,
               private readonly authService: AuthService,
               private readonly tokenStorageService: TokenStorageService,
+              @Inject(MAT_DIALOG_DATA) public data: any,
               private readonly _snackBar: MatSnackBar) {
+    if(data && data.username) {
+      this.usernameToUpdate = data.username;
+    }
   }
 
   ngOnInit(): void {
+    this.initBuildUpdateEmailForm();
+    this.connectedUser = this.tokenStorageService.getUser();
   }
 
-  initBuildUpdatePasswordForm(): void {
+  initBuildUpdateEmailForm(): void {
     this.updateEmailForm = this.fb.group({
-      [this.utilisateurFormKeys.NEW_EMAIL]: [null, [Validators.required]],
+      [this.utilisateurFormKeys.NEW_EMAIL]: [null, [Validators.required, Validators.pattern(PATTERN_EMAIL)]],
     });
   }
 
-  updatePassword() {
-    let passworUpdate = this.updatePasswordForm.value;
-    passworUpdate.username = this.connectedUser?.username;
-    this.authService.updatePassword(this.updatePasswordForm.value).subscribe(() => {
-        console.log("retour update password", 'OK')
+  updateEmail() {
+    let emailUpdate = this.updateEmailForm.value;
+
+    emailUpdate.username = this.usernameToUpdate ? this.usernameToUpdate : this.connectedUser?.username;
+    this.authService.updateEmail(this.updateEmailForm.value).subscribe(() => {
         this._snackBar.open(this.messageKeys.UTILISATEUR_PASSWORD_UPDATED, 'OK')
         this.dialogRef.close(null);
       },
       error => {
-        console.log("erreur")
         this._snackBar.open(error, 'Erreur')
       })
   }
