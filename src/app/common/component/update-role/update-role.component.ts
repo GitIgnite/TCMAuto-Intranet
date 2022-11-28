@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Utilisateur} from "../../../api/models/Utilisateur";
 import {FormControl, UntypedFormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
@@ -20,6 +20,11 @@ export class UpdateRoleComponent implements OnInit {
   connectedUser?: Utilisateur;
   messageKeys = MessageKeys;
 
+  @Input()
+  isCreateUser: boolean = false;
+
+  @Output() updateRolesInCreateComponent = new EventEmitter<any>();
+
   constructor(private readonly fb: UntypedFormBuilder,
               public dialogRef: MatDialogRef<UpdateRoleComponent>,
               private readonly tokenStorageService: TokenStorageService,
@@ -38,25 +43,45 @@ export class UpdateRoleComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initBuildForm();
+    this.connectedUser = this.tokenStorageService.getUser();
+    this.onChange();
+  }
+
+  onChange() {
+    if(this.isCreateUser) {
+      this.updateRoleForm.statusChanges.subscribe(
+        result => this.updateRolesInCreateComponent.emit(this.updateRoleForm.value)
+      );
+    }
+  }
+
+  initBuildForm() {
     this.updateRoleForm = this.fb.group({});
     this.roles.forEach((role: any) => {
-      this.updateRoleForm.addControl(role.name, new FormControl(!!this.user?.roles?.find(roleUser => roleUser.name == role.name), Validators.required));
+      this.updateRoleForm.addControl(role.name, new FormControl(this.getDefaultValue(role), Validators.required));
     })
-    this.connectedUser = this.tokenStorageService.getUser();
+    this.updateRolesInCreateComponent.emit(this.updateRoleForm.value);
+  }
+
+  getDefaultValue(role: any) {
+    if(this.isCreateUser && role.name == 'UTILISATEUR') {
+      return true;
+    }
+    return !!this.user?.roles?.find(roleUser => roleUser.name == role.name);
   }
 
   updateRoles() {
     let rolesFormValues: any = this.updateRoleForm.value;
-    let updateUser: any = {};
-    updateUser.newRoles = [];
-    console.log("test update role")
-    let roles = this.roles.filter(role => rolesFormValues[role.name])
+
+    let roles = this.roles.filter(role => rolesFormValues[role.name]);
+
     let username = this.user && this.user.username ? this.user.username : this.connectedUser?.username;
 
     if (username) {
       this.authService.updateRole(roles, username).subscribe(userUpdated => {
           this.user = userUpdated;
-          this._snackBar.open(this.messageKeys.UTILISATEUR_ROLE_UPDATED, 'OK');
+          this._snackBar.open(this.messageKeys.USER_ROLE_UPDATED, 'OK');
           this.dialogRef.close({userUpdated: this.user});
         },
         error => {

@@ -13,7 +13,9 @@ export class MessageKeys {
   public static readonly VEHICULE_MIS_EN_LIGNE = 'Le véhicule a été mis en ligne';
   public static readonly VEHICULE_MIS_HORS_LIGNE = 'Le véhicule n\'est plus en ligne';
 
-  public static readonly UTILISATEUR_PASSWORD_UPDATED = 'Le mot de passe a été mis à jour';
-  public static readonly UTILISATEUR_ROLE_UPDATED = 'Les roles ont été mis à jour';
-  public static readonly UTILISATEUR_DELETED = 'L\'utilisateur a été supprimé';
+  public static readonly USER_PASSWORD_UPDATED = 'Le mot de passe a été mis à jour';
+  public static readonly USER_ROLE_UPDATED = 'Les roles ont été mis à jour';
+  public static readonly USER_EMAIL_UPDATED = 'L\'adresse email a été mise à jour';
+  public static readonly USER_DELETED = 'L\'utilisateur a été supprimé';
+  public static readonly USER_CREATED = 'L\'utilisateur a été créé';
 }

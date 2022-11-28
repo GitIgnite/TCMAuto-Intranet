@@ -19,7 +19,7 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <mat-dialog-actions class="button-row col-12 d-flex justify-content-end">
+  <mat-dialog-actions class="button-row col-12 d-flex justify-content-end" *ngIf="!isCreateUser">
     <button mat-raised-button
             color="secondary"
             type="button"

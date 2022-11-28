@@ -1,1 +1,57 @@
-<p>utilisateur-create works!</p>
+<form class="container" [formGroup]="createUserForm" (ngSubmit)="createUser()">
+  <mat-card class="p-0">
+    <h4 class="col-12 d-flex align-items-center px-2">
+      <span>
+        Création d'un utilisateur
+      </span>
+    </h4>
+    <mat-divider></mat-divider>
+    <mat-card-content class="pt-4 px-4 pb-2">
+      <div class="row">
+        <mat-form-field class="col-12">
+          <mat-label>nom d'utilisateur</mat-label>
+          <input matInput formControlName="{{utilisateurFormKeys.USERNAME}}" type="text" class="text-uppercase">
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="{{utilisateurFormKeys.EMAIL}}" type="text">
+        </mat-form-field>
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Mot de passe</mat-label>
+            <input matInput formControlName="{{utilisateurFormKeys.PASSWORD}}" type="text">
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field>
+            <mat-label>Confirmer le Mot de passe</mat-label>
+            <input matInput formControlName="{{utilisateurFormKeys.PASSWORD_CONFIRM}}" type="text">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <app-update-role [isCreateUser]="true" (updateRolesInCreateComponent)="updateRole($event)"></app-update-role>
+
+      <div class="button-row col-12 d-flex justify-content-end mb-1 pr-2">
+        <button mat-raised-button
+                color="secondary"
+                type="button"
+                class="d-flex align-items-center btn-cancel" (click)="cancelCreationUser()">
+          Annuler
+        </button>
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                class="d-flex align-items-center"
+                [disabled]="!createUserForm || createUserForm.invalid">
+          Sauvegarder
+          <mat-icon class="button-icon ml-1"
+                    [ngClass]="!createUserForm || createUserForm.invalid ? 'mat-icon-button-disabled' : 'mat-icon-button-enable'"
+                    matSuffix>save
+          </mat-icon>
+        </button>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</form>

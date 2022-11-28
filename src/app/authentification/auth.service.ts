@@ -2,8 +2,10 @@ import {Injectable} from "@angular/core";
 import {HttpService} from "../api/services/http/http.service";
 import {ApiUrlConst} from "../../environments/path/api-url-const";
 import {GenericRequest} from "../api/services/http/generic-request.service";
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {TokenStorageService} from "./token.service";
+import {Utilisateur} from "../api/models/Utilisateur";
+import {Client} from "../api/models/Client";
 
 @Injectable({
   providedIn: 'root'
@@ -51,4 +53,8 @@ export class AuthService {
     return this.http.get<any>(GenericRequest.buildSendRequest(url));
   }
 
+  public createUser(user: Utilisateur) {
+    const url = `${ApiUrlConst.AUTH}/create`;
+    return this.http.post<Utilisateur>(GenericRequest.buildSendRequest(url,user));
+  }
 }

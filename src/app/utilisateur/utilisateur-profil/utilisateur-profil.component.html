@@ -39,10 +39,18 @@
         <mat-icon>lock</mat-icon>
         Modifier le mot de passe
       </button>
+
+      <button mat-raised-button
+              color="secondary"
+              type="button"
+              class="d-flex align-items-center btn-cancel" (click)="createUser()">
+        <mat-icon>lock</mat-icon>
+        Créer un utilisateur
+      </button>
     </div>
   </mat-card-content>
 </mat-card>
 
-<app-liste-utilisateur [utilisateurs] = "utilisateurs">
+<app-liste-utilisateur [utilisateurs] = "utilisateurs" [roles]="roles">
 </app-liste-utilisateur>
 

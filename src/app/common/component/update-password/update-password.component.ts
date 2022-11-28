@@ -52,7 +52,7 @@ export class UpdatePasswordComponent implements OnInit {
      passworUpdate.username = this.usernameToUpdate ? this.usernameToUpdate : this.connectedUser?.username;
 
     this.authService.updatePassword(this.updatePasswordForm.value).subscribe(() => {
-        this._snackBar.open(this.messageKeys.UTILISATEUR_PASSWORD_UPDATED, 'OK')
+        this._snackBar.open(this.messageKeys.USER_PASSWORD_UPDATED, 'OK')
         this.dialogRef.close(null);
       },
       error => {

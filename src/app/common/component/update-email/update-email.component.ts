@@ -49,7 +49,7 @@ export class UpdateEmailComponent implements OnInit {
 
     emailUpdate.username = this.userToUpdate?.username ? this.userToUpdate.username : this.connectedUser?.username;
     this.authService.updateEmail(this.updateEmailForm.value).subscribe(user => {
-        this._snackBar.open(this.messageKeys.UTILISATEUR_PASSWORD_UPDATED, 'OK')
+        this._snackBar.open(this.messageKeys.USER_EMAIL_UPDATED, 'OK')
         this.dialogRef.close({userUpdated: user});
       },
       error => {

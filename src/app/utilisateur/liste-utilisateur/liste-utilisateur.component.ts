@@ -55,7 +55,7 @@ export class ListeUtilisateurComponent implements OnInit {
         user: user
       }
     }).afterClosed().subscribe(result => {
-      if (result.userUpdated) {
+      if (result && result.userUpdated) {
         this.updateUserInsideList(result.userUpdated);
       }
     });
@@ -78,7 +78,7 @@ export class ListeUtilisateurComponent implements OnInit {
     if (user && user.id) {
       let userId = user.id;
       this.authService.deleteUser(userId).subscribe(() => {
-        this._snackBar.open(this.messageKeys.UTILISATEUR_DELETED, 'OK');
+        this._snackBar.open(this.messageKeys.USER_DELETED, 'OK');
         this.deleteUserInsideList(userId);
       })
     }
@@ -93,7 +93,7 @@ export class ListeUtilisateurComponent implements OnInit {
         roles: this.roles
       }
     }).afterClosed().subscribe(result => {
-      if (result.userUpdated) {
+      if (result && result.userUpdated) {
         this.updateUserInsideList(result.userUpdated);
       }
     });
