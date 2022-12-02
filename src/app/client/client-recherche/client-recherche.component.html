@@ -71,7 +71,8 @@
         <button mat-button (click)="openUpdateNote(element)">
           <span class="material-icons">sticky_note_2</span>
         </button>
-        <button mat-icon-button aria-label="Supprimer" (click)="deleteClient(element)">
+        <button mat-icon-button aria-label="Supprimer" (click)="deleteClient(element)" hasPermissions
+                [hasRoles]="['ADMIN','CREATION']">
           <mat-icon class="button-icon ml-1" matSuffix>delete</mat-icon>
         </button>
       </td>

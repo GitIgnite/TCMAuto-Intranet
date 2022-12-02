@@ -57,4 +57,8 @@ export class AuthService {
     const url = `${ApiUrlConst.AUTH}/create`;
     return this.http.post<Utilisateur>(GenericRequest.buildSendRequest(url,user));
   }
+
+  hasRole() {
+    
+  }
 }

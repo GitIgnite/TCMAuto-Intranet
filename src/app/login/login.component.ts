@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authService.login(this.loginForm.value).subscribe(
       (data: any) => {
+        console.log("login : " + data )
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.router.navigate(['/vehicule']);

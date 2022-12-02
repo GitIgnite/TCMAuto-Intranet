@@ -74,6 +74,7 @@ import { UpdatePasswordComponent } from './common/component/update-password/upda
 import { UpdateEmailComponent } from './common/component/update-email/update-email.component';
 import { UpdateRoleComponent } from './common/component/update-role/update-role.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {HasRoleDirective} from "./common/directive/hasRoleDirective";
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -106,7 +107,7 @@ const appearance: MatFormFieldDefaultOptions = {
     UtilisateurCreateComponent,
     UpdatePasswordComponent,
     UpdateEmailComponent,
-    UpdateRoleComponent
+    UpdateRoleComponent,HasRoleDirective
   ],
   imports: [
     BrowserModule,
