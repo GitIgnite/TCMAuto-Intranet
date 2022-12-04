@@ -43,14 +43,16 @@
       <button mat-raised-button
               color="secondary"
               type="button"
-              class="d-flex align-items-center btn-cancel" (click)="createUser()">
-        <mat-icon>lock</mat-icon>
+              class="d-flex align-items-center btn-cancel" (click)="createUser()" hasPermissions
+              [hasRoles]="['ADMIN']">
+        <mat-icon>person_add</mat-icon>
         Créer un utilisateur
       </button>
     </div>
   </mat-card-content>
 </mat-card>
 
-<app-liste-utilisateur [utilisateurs] = "utilisateurs" [roles]="roles">
+<app-liste-utilisateur [utilisateurs] = "utilisateurs" [roles]="roles" hasPermissions
+                       [hasRoles]="['ADMIN']">
 </app-liste-utilisateur>
 

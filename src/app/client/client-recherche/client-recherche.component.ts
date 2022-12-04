@@ -12,6 +12,8 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatSort, Sort} from "@angular/material/sort";
 import {NoteComponent} from "../../common/component/note/note.component";
 import {CommonFormKey} from "../../common/form/keys/common-form-key";
+import {AuthService} from "../../authentification/auth.service";
+import {TokenStorageService} from "../../authentification/token.service";
 
 @Component({
   selector: 'app-client-recherche',
@@ -47,10 +49,12 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
   constructor(private readonly fb: UntypedFormBuilder,
               private clientService: ClientService,
               private readonly dialog: MatDialog,
-              private readonly _snackBar: MatSnackBar) { }
+              private readonly _snackBar: MatSnackBar,
+              private readonly tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.initBuildRechercheClientForm();
+    this.createColumns();
     this.getClientsByRecherche();
   }
 
@@ -162,6 +166,14 @@ export class ClientRechercheComponent implements OnInit, AfterViewInit {
           this._snackBar.open(this.messageFormKeys.DELETE_CLIENT, 'OK');
         }
       });
+    }
+  }
+
+  createColumns() {
+    if(this.tokenStorageService.hasRole(['ADMIN','CREATE','SUPPRESSION'])) {
+      this.displayedColumns = ['nom', 'telephone', 'email', 'actions'];
+    } else {
+      this.displayedColumns = ['nom', 'telephone', 'email'];
     }
   }
 }

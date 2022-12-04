@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject} from "rxjs";
+import {Utilisateur} from "../api/models/Utilisateur";
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -20,7 +21,6 @@ export class TokenStorageService {
   public getToken(): string | null {
     let token = window.sessionStorage.getItem(TOKEN_KEY);
     return token;
-
   }
 
   public saveUser(user: any): void {
@@ -39,5 +39,18 @@ export class TokenStorageService {
 
   public isConnected() : boolean {
     return this.getToken() != null;
+  }
+
+  public hasRole(rolesNeed: any[]) {
+    let userConnected: Utilisateur = this.getUser();
+    let hasRole: boolean = false;
+    if(userConnected && userConnected.roles) {
+      userConnected.roles.forEach(role => rolesNeed.find(roleNeed => {
+        if(roleNeed === role) {
+          hasRole = true;
+        }
+      }));
+    }
+    return hasRole;
   }
 }

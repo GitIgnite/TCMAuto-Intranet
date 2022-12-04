@@ -9,15 +9,17 @@
         <span><a [routerLink]="'/client'">Clients</a></span>
         <span><a [routerLink]="'/vehicule'">Véhicules</a></span>
         <span><a href="/">Factures</a></span>
-        <div>
-          <div class="icon-circle">
+        <div hasPermissions
+             [hasRoles]="['ADMIN','CREATION']">
+          <div class="icon-circle" >
             <button mat-icon-button [matMenuTriggerFor]="menuAjout" aria-label="Icon plus">
               <mat-icon>add_circle_outline</mat-icon>
               <mat-icon>expand_more</mat-icon>
             </button>
           </div>
 
-          <mat-menu class= "menu-ajout" #menuAjout="matMenu" [overlapTrigger]="false">
+          <mat-menu class= "menu-ajout" #menuAjout="matMenu" [overlapTrigger]="false" hasPermissions
+                    [hasRoles]="['ADMIN','CREATION']">
             <button mat-menu-item (click)="openCreateClientDialog()">
               Ajout d'un client
             </button>
@@ -33,7 +35,8 @@
     </div>
   </nav>
 
-  <div>
+  <div hasPermissions
+       [hasRoles]="['ADMIN','CREATION']">
     <button mat-icon-button [matMenuTriggerFor]="menu" class="burger" aria-label="Icon burger">
       <mat-icon>menu</mat-icon>
     </button>

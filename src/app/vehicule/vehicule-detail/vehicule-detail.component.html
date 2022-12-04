@@ -19,15 +19,18 @@
         <div class="d-inline-block position-relative col-6 p-0">
           <!--          <img class="image-vehicule w-100" alt="TCM voiture" src="/assets/images/voiture.png">-->
           <div class="barre-icone">
-            <button mat-button class="bouton-icone" (click)="openEquipementDialog()">
+            <button mat-button class="bouton-icone" (click)="openEquipementDialog()" hasPermissions
+                    [hasRoles]="['ADMIN','CREATION']">
               <span class="material-icons">
                 car_repair
               </span>
             </button>
-            <button mat-button (click)="openUpdateNote()">
+            <button mat-button (click)="openUpdateNote()" hasPermissions
+                    [hasRoles]="['ADMIN','CREATION']">
               <span class="material-icons">sticky_note_2</span>
             </button>
-            <button mat-button class="bouton-icone" (click)="openPictureDialog()">
+            <button mat-button class="bouton-icone" (click)="openPictureDialog()" hasPermissions
+                    [hasRoles]="['ADMIN','CREATION']">
               <span class="material-icons">
                 collections
               </span>
@@ -45,7 +48,8 @@
             <div class="row justify-content-between">
               <h1
                 class="fw-bold primary-color titre-vehicule col-6 m-0">{{ vehicule.marque?.libelle }} {{ vehicule.modele?.libelle }}</h1>
-              <div class="w-auto">
+              <div class="w-auto" hasPermissions
+                   [hasRoles]="['ADMIN','CREATION']">
                 <button *ngIf="!this.vehicule.enLigne" mat-raised-button (click)="miseEnLigneOuHorsLigne()" type="button" class="btn btn-success m-1"> Mettre
                   en ligne
                 </button>

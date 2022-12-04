@@ -1,6 +1,7 @@
 <div *ngFor="let vehicule of vehicules" class="col-lg-6 col-md-12 col-sm-12 pb-2 displayCard">
   <mat-card class="mat-card-result">
-    <div class="div-delete">
+    <div class="div-delete" hasPermissions
+         [hasRoles]="['ADMIN','SUPPRESSION']">
       <mat-icon class="delete button-icon ml-1 btn-light" (click)="deleteVehicule(vehicule)" matSuffix>delete_outline</mat-icon>
     </div>
     <div class="container" (click)="afficherDetailVehicule(vehicule)">
